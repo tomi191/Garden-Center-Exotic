@@ -119,16 +119,21 @@ export function InstagramFeed() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center"
         >
-          <Button
+          <a
             href="https://instagram.com/gardenexotic"
-            variant="primary"
-            size="lg"
-            className="inline-flex items-center gap-2"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Instagram className="w-5 h-5" />
-            Последвайте ни в Instagram
-            <ExternalLink className="w-4 h-4" />
-          </Button>
+            <Button
+              variant="primary"
+              size="lg"
+              className="inline-flex items-center gap-2"
+            >
+              <Instagram className="w-5 h-5" />
+              Последвайте ни в Instagram
+              <ExternalLink className="w-4 h-4" />
+            </Button>
+          </a>
           <p className="mt-4 text-sm text-[var(--color-gray-500)]">
             @gardenexotic - Ежедневни актуализации и специални оферти
           </p>
