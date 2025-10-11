@@ -136,9 +136,12 @@ export default function LocationsPage() {
               <div className="mt-6">
                 <h4 className="font-bold mb-4">Галерия</h4>
                 <div className="grid grid-cols-3 gap-4">
-                  {['/images/garden.jpg', '/images/garden.jpg', '/images/garden.jpg'].map((img, i) => (
+                  {[
+                    'https://images.unsplash.com/photo-1466781783364-36c955e42a7f?q=80&w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1591958911259-bee2173bdccc?q=80&w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+                  ].map((img, i) => (
                     <div key={i} className="aspect-square rounded-lg overflow-hidden shadow-lg">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={img}
                         alt={`Градински Център Екзотик Варна ${i + 1}`}
@@ -169,9 +172,12 @@ export default function LocationsPage() {
               <div className="mt-6">
                 <h4 className="font-bold mb-4">Галерия</h4>
                 <div className="grid grid-cols-3 gap-4">
-                  {['/images/garden.jpg', '/images/garden.jpg', '/images/garden.jpg'].map((img, i) => (
+                  {[
+                    'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=800&auto=format&fit=crop',
+                  ].map((img, i) => (
                     <div key={i} className="aspect-square rounded-lg overflow-hidden shadow-lg">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={img}
                         alt={`Градински Център Екзотик Нова Загора ${i + 1}`}

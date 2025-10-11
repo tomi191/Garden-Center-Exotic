@@ -5,6 +5,8 @@ import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { PageHero } from "@/components/sections/PageHero";
+import { ServiceShowcase } from "@/components/sections/ServiceShowcase";
+import { ServiceProcess } from "@/components/sections/ServiceProcess";
 
 export const metadata: Metadata = {
   title: "Услуги",
@@ -93,6 +95,12 @@ export default function ServicesPage() {
           </div>
         </Container>
       </Section>
+
+      {/* Детайлни услуги */}
+      <ServiceShowcase />
+
+      {/* Процес на работа */}
+      <ServiceProcess />
     </>
   );
 }

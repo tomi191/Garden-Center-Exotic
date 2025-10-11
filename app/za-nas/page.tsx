@@ -5,6 +5,10 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContentSection } from "@/components/sections/ContentSection";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { HowWeWork } from "@/components/sections/HowWeWork";
+import { CertificationBadges } from "@/components/sections/CertificationBadges";
+import { CompanyTimeline } from "@/components/sections/CompanyTimeline";
+import { CompanyStats } from "@/components/sections/CompanyStats";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -26,7 +30,7 @@ const ourValues = [
   {
     icon: Shield,
     title: "Качество",
-    description: "Работим само с проверени доставчици от Еквадор, Холандия и България. Всяко растение преминава строг контрол.",
+    description: "Работим само с проверени доставчици от Колумбия, Кения, Гърция, Нидерландия, Турция и България. Всяко растение преминава строг контрол.",
     color: "var(--color-primary)",
   },
   {
@@ -119,7 +123,7 @@ export default function AboutPage() {
         description={`${yearsInBusiness} години опит в предлагането на висококачествени цветя и растения за цяла България`}
       />
 
-      {/* Our Story */}
+      {/* Нашата История */}
       <ContentSection
         imageUrl="https://images.unsplash.com/photo-1466781783364-36c955e42a7f?q=80&w=2071&auto=format&fit=crop"
       >
@@ -147,7 +151,13 @@ export default function AboutPage() {
         </div>
       </ContentSection>
 
-      {/* Import Countries */}
+      {/* Timeline Хронология */}
+      <CompanyTimeline />
+
+      {/* Статистика */}
+      <CompanyStats />
+
+      {/* Държави Вносители */}
       <Section className="bg-white py-16">
         <Container>
           <div className="text-center mb-12">
@@ -191,7 +201,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Our Values */}
+      {/* Нашите Ценности */}
       <FeatureGrid
         variant="light"
         title="Нашите Ценности"
@@ -199,7 +209,7 @@ export default function AboutPage() {
         features={ourValues}
       />
 
-      {/* Our Facilities */}
+      {/* Нашите Съоръжения */}
       <Section className="bg-white py-16">
         <Container>
           <div className="text-center mb-12">
@@ -231,7 +241,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Quality Standards */}
+      {/* Стандарти за Качество */}
       <ContentSection
         variant="light"
         reverse
@@ -262,7 +272,13 @@ export default function AboutPage() {
         </div>
       </ContentSection>
 
-      {/* Team Section */}
+      {/* Сертификати и Стандарти */}
+      <CertificationBadges />
+
+      {/* Как Работим */}
+      <HowWeWork />
+
+      {/* Нашият Екип */}
       <Section className="bg-white py-16">
         <Container>
           <div className="text-center mb-12">

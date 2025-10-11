@@ -1,8 +1,9 @@
 import { Metadata } from "next";
-import { Calendar, Tag, User } from "lucide-react";
+import { Calendar, Tag, User, Clock } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
 import { PageHero } from "@/components/sections/PageHero";
+import { blogPosts, getBlogCategories } from "@/data/blog";
 
 export const metadata: Metadata = {
   title: "Блог",
@@ -10,33 +11,7 @@ export const metadata: Metadata = {
   keywords: ["блог", "статии", "съвети", "градинарство", "растения", "сезонни"],
 };
 
-// Example blog posts
-const examplePosts = [
-  {
-    title: "Пролетни цветя за градината: Кога и как да засадим",
-    excerpt: "Подготовката за пролетта започва още през зимата. Научете кои цветя да засадите и кога...",
-    date: "2025-03-01",
-    category: "Сезонни съвети",
-    author: "Експертен екип",
-    image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    title: "Грижи за розите през лятото",
-    excerpt: "Розите са кралици на градината, но изискват специфични грижи през горещите месеци...",
-    date: "2025-06-15",
-    category: "Грижи",
-    author: "Експертен екип",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    title: "10-те най-лесни за отглеждане стайни растения",
-    excerpt: "Ако сте начинаещ, тези растения са перфектни за начало. Издържливи и красиви...",
-    date: "2025-02-20",
-    category: "Начинаещи",
-    author: "Експертен екип",
-    image: "https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=2070&auto=format&fit=crop",
-  },
-];
+const categories = getBlogCategories();
 
 export default function BlogPage() {
   return (
@@ -49,33 +24,62 @@ export default function BlogPage() {
       <Section className="bg-white py-16">
         <Container>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {examplePosts.map((post, index) => (
-              <Card key={index} hover className="h-full">
+            {blogPosts.map((post) => (
+              <Card key={post.id} hover className="h-full group">
                 <CardContent className="p-0">
-                  <div className="h-48 overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {/* Снимка */}
+                  <div className="h-56 overflow-hidden relative">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
+                    {post.featured && (
+                      <div className="absolute top-3 right-3">
+                        <span className="px-3 py-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white text-xs font-bold rounded-full shadow-lg">
+                          Препоръчано
+                        </span>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Съдържание */}
                   <div className="p-6">
-                    <div className="flex items-center gap-4 mb-3 text-sm text-[var(--color-gray-600)]">
+                    {/* Мета информация */}
+                    <div className="flex items-center flex-wrap gap-3 mb-3 text-xs text-[var(--color-gray-600)]">
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
+                        <Calendar className="w-3 h-3" />
                         <span>{new Date(post.date).toLocaleDateString("bg-BG")}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Tag className="w-4 h-4" />
+                        <Tag className="w-3 h-3" />
                         <span>{post.category}</span>
                       </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{post.readTime}</span>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">{post.title}</h3>
-                    <p className="text-[var(--color-gray-700)] mb-4">{post.excerpt}</p>
-                    <div className="flex items-center gap-2 text-sm text-[var(--color-gray-600)]">
-                      <User className="w-4 h-4" />
-                      <span>{post.author}</span>
+
+                    {/* Заглавие */}
+                    <h3 className="text-xl font-bold mb-3 text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-sm text-[var(--color-gray-700)] mb-4 line-clamp-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Автор */}
+                    <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border)]">
+                      <div className="flex items-center gap-2 text-sm text-[var(--color-gray-600)]">
+                        <User className="w-4 h-4" />
+                        <span>{post.author}</span>
+                      </div>
+                      <span className="text-[var(--color-primary)] font-semibold text-sm group-hover:gap-2 transition-all">
+                        Прочети →
+                      </span>
                     </div>
                   </div>
                 </CardContent>
@@ -85,29 +89,35 @@ export default function BlogPage() {
 
           <div className="mt-12 text-center">
             <p className="text-[var(--color-gray-600)]">
-              📝 Редовно публикуваме нови статии. Следете ни за актуална информация!
+              {blogPosts.length} статии налични. Редовно публикуваме ново съдържание!
             </p>
           </div>
         </Container>
       </Section>
 
-      {/* Categories */}
-      <Section className="bg-[var(--color-light)]">
+      {/* Категории */}
+      <Section className="bg-[var(--color-light)] py-12">
         <Container>
           <div className="text-center mb-8">
             <h2 className="mb-4">Категории</h2>
+            <p className="text-[var(--color-gray-600)]">
+              Разгледайте статиите по теми
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-4">
-            {["Сезонни съвети", "Грижи за растения", "Проекти", "Събития"].map(
-              (category, index) => (
-                <Card key={index} className="bg-white text-center cursor-pointer hover:shadow-lg transition-shadow">
-                  <CardContent className="py-6">
-                    <h3 className="font-bold text-[var(--color-primary)]">{category}</h3>
-                  </CardContent>
-                </Card>
-              )
-            )}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {categories.map((category, index) => (
+              <Card key={index} className="bg-white text-center cursor-pointer hover:shadow-xl transition-all group">
+                <CardContent className="py-8">
+                  <h3 className="font-bold text-lg text-[var(--color-primary)] group-hover:text-[var(--color-secondary)] transition-colors">
+                    {category}
+                  </h3>
+                  <p className="text-sm text-[var(--color-gray-600)] mt-2">
+                    {blogPosts.filter(p => p.category === category).length} статии
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </Container>
       </Section>

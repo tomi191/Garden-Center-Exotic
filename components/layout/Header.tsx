@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, MapPin, Leaf } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, Phone, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 
@@ -37,8 +38,14 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 bg-[var(--color-primary)] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
-              <Leaf className="w-6 h-6 text-white" />
+            <div className="relative w-12 h-12 group-hover:scale-105 transition-transform">
+              <Image
+                src="/images/logo.jpg"
+                alt={SITE_CONFIG.nameBg}
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
             <div>
               <div className="text-xl font-bold text-[var(--color-foreground)]">

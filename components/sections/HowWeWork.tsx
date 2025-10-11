@@ -54,7 +54,7 @@ export function HowWeWork() {
           className="text-center mb-16"
         >
           <h2 className="mb-4">Как работим</h2>
-          <p className="text-xl text-[var(--color-gray-600)] max-w-3xl mx-auto">
+          <p className="text-xl text-[var(--color-gray-600)] mx-auto">
             От избора до доставката - процес, създаден да гарантира качество и вашето удовлетворение
           </p>
         </motion.div>
