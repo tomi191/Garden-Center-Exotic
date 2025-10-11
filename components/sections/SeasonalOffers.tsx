@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, Heart, Sparkles, Gift, PartyPopper, Clock } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
@@ -145,12 +146,16 @@ export function SeasonalOffers() {
               Свържете се с нас за повече информация или предварителна резервация
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button href="/kontakti" variant="primary" size="lg">
-                Свържете се с нас
-              </Button>
-              <Button href="tel:+35952XXXXXX" variant="outline" size="lg">
-                Обадете се сега
-              </Button>
+              <Link href="/kontakti">
+                <Button variant="primary" size="lg">
+                  Свържете се с нас
+                </Button>
+              </Link>
+              <a href="tel:+35952XXXXXX">
+                <Button variant="outline" size="lg">
+                  Обадете се сега
+                </Button>
+              </a>
             </div>
           </div>
         </motion.div>
