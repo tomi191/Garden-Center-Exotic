@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, Calendar, ArrowRight, Leaf } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
@@ -124,11 +125,13 @@ export function LatestBlogPosts() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center"
         >
-          <Button href="/blog" variant="outline" size="lg" className="inline-flex items-center gap-2">
-            <Leaf className="w-5 h-5" />
-            Виж всички статии
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link href="/blog">
+            <Button variant="outline" size="lg" className="inline-flex items-center gap-2">
+              <Leaf className="w-5 h-5" />
+              Виж всички статии
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </motion.div>
       </Container>
     </Section>
