@@ -66,7 +66,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-6"
               >
                 Градински Център{" "}
                 <span className="gradient-text">Екзотик</span>
@@ -76,7 +76,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-xl md:text-2xl text-[var(--color-gray-600)] leading-relaxed"
+                className="text-lg md:text-xl text-[var(--color-gray-600)] leading-relaxed"
               >
                 Висококачествени цветя{" "}
                 <span className="font-bold text-[var(--color-primary)]">първо качество</span>{" "}
@@ -153,7 +153,7 @@ export function Hero() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 1, type: "spring", stiffness: 200 }}
-                      className="text-4xl font-bold gradient-text mb-2"
+                      className="text-3xl font-bold gradient-text mb-2"
                     >
                       27
                     </motion.div>
@@ -164,7 +164,7 @@ export function Hero() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 1.1, type: "spring", stiffness: 200 }}
-                      className="text-4xl font-bold gradient-text mb-2"
+                      className="text-3xl font-bold gradient-text mb-2"
                     >
                       2
                     </motion.div>
@@ -175,7 +175,7 @@ export function Hero() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
-                      className="text-4xl font-bold gradient-text mb-2"
+                      className="text-3xl font-bold gradient-text mb-2"
                     >
                       100%
                     </motion.div>

@@ -34,11 +34,11 @@ export function B2BCTA() {
               <span className="text-sm font-semibold">B2B УСЛУГИ</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
               Надежден партньор за вашия бизнес
             </h2>
 
-            <p className="text-xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
               Предлагаме специални B2B услуги за хотели, ресторанти, офиси,
               организатори на събития и цветарски магазини.
             </p>
@@ -93,7 +93,7 @@ export function B2BCTA() {
                 key={index}
                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 text-center hover:bg-white/15 transition-all"
               >
-                <div className="text-5xl font-bold text-white mb-2">
+                <div className="text-3xl font-bold text-white mb-2">
                   {stat.number}
                 </div>
                 <div className="text-white/80 text-sm font-medium">{stat.label}</div>
