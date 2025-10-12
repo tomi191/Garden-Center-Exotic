@@ -104,7 +104,7 @@ export function CompanyTimeline() {
                             {event.year}
                           </span>
                         )}
-                        <h3 className="text-2xl font-bold text-[var(--color-foreground)]">{event.title}</h3>
+                        <h3 className="text-xl font-bold text-[var(--color-foreground)]">{event.title}</h3>
                         {!isEven && (
                           <span className="hidden lg:inline-block px-4 py-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white font-bold rounded-full">
                             {event.year}
@@ -158,7 +158,7 @@ export function CompanyTimeline() {
         >
           <div className="inline-block bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] p-[2px] rounded-2xl">
             <div className="bg-white px-8 py-6 rounded-2xl">
-              <p className="text-2xl font-bold text-[var(--color-foreground)]">
+              <p className="text-xl font-bold text-[var(--color-foreground)]">
                 {new Date().getFullYear() - SITE_CONFIG.founded} години традиция и иновация
               </p>
               <p className="text-[var(--color-gray-600)] mt-2">

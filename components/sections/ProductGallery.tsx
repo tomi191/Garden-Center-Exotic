@@ -144,7 +144,7 @@ export function ProductGallery() {
             <div className="w-20 h-20 mx-auto mb-6 bg-[var(--color-light)] rounded-full flex items-center justify-center">
               <List className="w-10 h-10 text-[var(--color-gray-400)]" />
             </div>
-            <h3 className="text-2xl font-bold text-[var(--color-foreground)] mb-2">
+            <h3 className="text-xl font-bold text-[var(--color-foreground)] mb-2">
               Няма намерени продукти
             </h3>
             <p className="text-[var(--color-gray-600)]">

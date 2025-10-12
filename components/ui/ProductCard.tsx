@@ -85,7 +85,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             {/* Цена и CTA */}
             <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border)]">
               <div>
-                <div className="text-2xl font-bold text-[var(--color-primary)]">
+                <div className="text-xl font-bold text-[var(--color-primary)]">
                   {product.price.toFixed(2)} лв
                 </div>
                 <div className="text-xs text-[var(--color-gray-500)]">
