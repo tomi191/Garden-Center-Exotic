@@ -53,7 +53,7 @@ export function ProductGallery() {
           className="text-center mb-12"
         >
           <h2 className="mb-4">Нашата Продуктова Гама</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             {filteredProducts.length} {filteredProducts.length === 1 ? "продукт" : "продукта"} на разположение
           </p>
         </motion.div>

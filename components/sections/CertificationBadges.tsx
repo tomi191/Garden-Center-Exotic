@@ -62,7 +62,7 @@ export function CertificationBadges() {
           className="text-center mb-16"
         >
           <h2 className="mb-4">Нашите Сертификати и Стандарти</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             Гарантирано качество, подкрепено от международни стандарти и дългогодишен опит
           </p>
         </motion.div>

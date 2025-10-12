@@ -93,7 +93,7 @@ export function CompanyStats() {
           className="text-center mb-16"
         >
           <h2 className="mb-4">Нашите Постижения в Цифри</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             Факти и резултати от нашата дългогодишна работа
           </p>
         </motion.div>
@@ -120,7 +120,7 @@ export function CompanyStats() {
                   </div>
 
                   {/* Число */}
-                  <div className={`text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
+                  <div className={`text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
 

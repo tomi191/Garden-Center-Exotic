@@ -93,7 +93,7 @@ export function B2BCTA() {
                 key={index}
                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 text-center hover:bg-white/15 transition-all"
               >
-                <div className="text-3xl font-bold text-white mb-2">
+                <div className="text-2xl font-bold text-white mb-2">
                   {stat.number}
                 </div>
                 <div className="text-white/80 text-sm font-medium">{stat.label}</div>

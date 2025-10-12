@@ -50,7 +50,7 @@ export function LatestBlogPosts() {
             <span className="text-sm font-semibold">Нашият Блог</span>
           </div>
           <h2 className="mb-4">Полезни Съвети и Ръководства</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             Научете повече за грижите за растенията от нашите експерти
           </p>
         </motion.div>

@@ -69,7 +69,7 @@ export function CompanyTimeline() {
           className="text-center mb-16"
         >
           <h2 className="mb-4">Нашето Пътуване</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             От малък магазин до водещ доставчик на цветя в региона
           </p>
         </motion.div>

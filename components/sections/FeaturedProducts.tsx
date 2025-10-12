@@ -60,7 +60,7 @@ export function FeaturedProducts() {
           className="text-center mb-16"
         >
           <h2 className="mb-4">Нашите Продукти</h2>
-          <p className="text-xl text-[var(--color-gray-600)] mx-auto">
+          <p className="text-base text-[var(--color-gray-600)] mx-auto">
             Разнообразие от висококачествени растения и цветя за всеки вкус и нужда
           </p>
         </motion.div>

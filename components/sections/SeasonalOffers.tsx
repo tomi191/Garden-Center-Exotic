@@ -66,7 +66,7 @@ export function SeasonalOffers() {
             <span className="text-sm font-semibold">Сезонни Оферти</span>
           </div>
           <h2 className="mb-4">Специални Предложения за Всеки Сезон</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             Планирайте предварително и се възползвайте от ексклузивни отстъпки
           </p>
         </motion.div>

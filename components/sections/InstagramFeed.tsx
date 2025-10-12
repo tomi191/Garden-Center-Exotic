@@ -66,7 +66,7 @@ export function InstagramFeed() {
             <span className="text-sm font-semibold">Следете ни в Instagram</span>
           </div>
           <h2 className="mb-4">Вдъхновете се от нашата галерия</h2>
-          <p className="text-xl text-[var(--color-gray-600)]">
+          <p className="text-base text-[var(--color-gray-600)]">
             Ежедневни снимки на нови цветя, проекти и доволни клиенти
           </p>
         </motion.div>
