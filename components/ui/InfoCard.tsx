@@ -26,7 +26,7 @@ export function InfoCard({
   const isVertical = orientation === "vertical";
 
   return (
-    <Card hover={hover} className={cn("h-full", className)}>
+    <Card className={cn("h-full", hover && "hover:shadow-lg transition-shadow", className)}>
       <CardContent
         className={cn(
           isVertical ? "text-center" : "flex items-start gap-4",

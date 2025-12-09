@@ -7,6 +7,7 @@ interface ContentSectionProps {
   children: ReactNode;
   aside?: ReactNode;
   imageUrl?: string;
+  imageAlt?: string;
   imagePlaceholder?: { emoji: string; text: string };
   reverse?: boolean;
   variant?: "white" | "light";
@@ -18,6 +19,7 @@ export function ContentSection({
   children,
   aside,
   imageUrl,
+  imageAlt,
   imagePlaceholder,
   reverse = false,
   variant = "white",
@@ -60,7 +62,7 @@ export function ContentSection({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={imageUrl}
-                      alt=""
+                      alt={imageAlt || ""}
                       className="w-full h-full object-cover"
                     />
                   ) : (

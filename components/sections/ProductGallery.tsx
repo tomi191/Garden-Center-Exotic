@@ -1,175 +1,211 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Container, Section } from "@/components/ui/Container";
 import { ProductCard } from "@/components/ui/ProductCard";
-import { products, Product } from "@/data/products";
-import { Filter, Grid3x3, List } from "lucide-react";
+import { Filter, Search, X, Check } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
-const origins = ["Всички", "Колумбия", "Кения", "Гърция", "Нидерландия", "Турция", "България"] as const;
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  subcategory?: string | null;
+  origin: string;
+  price: number;
+  priceUnit: string;
+  description: string;
+  image: string;
+  inStock: boolean;
+  featured?: boolean;
+  characteristics?: string[];
+}
+
+interface ProductGalleryProps {
+  initialProducts: Product[];
+}
+
+const origins = [
+  { id: "all", label: "Всички" },
+  { id: "Колумбия", label: "Колумбия" },
+  { id: "Кения", label: "Кения" },
+  { id: "Гърция", label: "Гърция" },
+  { id: "Нидерландия", label: "Нидерландия" },
+  { id: "България", label: "България" },
+];
+
 const categories = [
-  { value: "all", label: "Всички" },
-  { value: "ryazan-tsvyat", label: "Рязан Цвят" },
-  { value: "saksiyni-rasteniya", label: "Саксийни" },
-  { value: "sezonni-tsvetya", label: "Сезонни" },
-  { value: "hrasti-darveta", label: "Храсти" },
-] as const;
+  { id: "all", label: "Всички Категории" },
+  { id: "ryazan-tsvyat", label: "Рязан Цвят" },
+  { id: "saksiyni-rasteniya", label: "Саксийни" },
+  { id: "sezonni-tsvetya", label: "Сезонни" },
+  { id: "hrasti-darveta", label: "Храсти & Дървета" },
+];
 
-export function ProductGallery() {
-  const [selectedOrigin, setSelectedOrigin] = useState<typeof origins[number]>("Всички");
+export function ProductGallery({ initialProducts }: ProductGalleryProps) {
+  const [selectedOrigin, setSelectedOrigin] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [showOnlyInStock, setShowOnlyInStock] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false); // Mobile toggle
+  const [isDesktop, setIsDesktop] = useState(true); // Default to true to show on desktop initially or handle via effect
 
-  // Филтриране на продуктите
-  const filteredProducts = products.filter((product) => {
-    // Филтър по произход
-    if (selectedOrigin !== "Всички" && product.origin !== selectedOrigin) {
-      return false;
-    }
+  // Handle window resize safely
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+    
+    // Set initial value
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-    // Филтър по категория
-    if (selectedCategory !== "all" && product.category !== selectedCategory) {
-      return false;
-    }
-
-    // Филтър по наличност
-    if (showOnlyInStock && !product.inStock) {
-      return false;
-    }
-
+  // Filter Logic
+  const filteredProducts = initialProducts.filter((product) => {
+    if (selectedOrigin !== "all" && product.origin !== selectedOrigin) return false;
+    if (selectedCategory !== "all" && product.category !== selectedCategory) return false;
+    if (showOnlyInStock && !product.inStock) return false;
+    if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
   });
 
+  const clearFilters = () => {
+    setSelectedOrigin("all");
+    setSelectedCategory("all");
+    setShowOnlyInStock(false);
+    setSearchQuery("");
+  };
+
   return (
-    <Section className="bg-white py-16">
-      <Container>
-        {/* Заглавие и описание */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="mb-4">Нашата Продуктова Гама</h2>
-          <p className="text-base text-[var(--color-gray-600)]">
-            {filteredProducts.length} {filteredProducts.length === 1 ? "продукт" : "продукта"} на разположение
-          </p>
-        </motion.div>
+    <div className="w-full">
+      {/* Search & Filter Bar - Sticky */}
+      <div className="sticky top-20 z-30 bg-[var(--color-background)]/95 backdrop-blur-md border-y border-[var(--color-gray-200)] py-4 mb-8">
+        <Container>
+           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+             {/* Search */}
+             <div className="relative w-full md:w-96">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-gray-400)]" />
+                <input 
+                  type="text"
+                  placeholder="Търсене на продукти..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-transparent focus:border-[var(--color-primary)] outline-none shadow-sm transition-all"
+                />
+             </div>
 
-        {/* Филтри */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-8"
-        >
-          {/* Филтър по категория */}
-          <div className="mb-6">
-            <div className="flex items-center gap-2 mb-3">
-              <Filter className="w-5 h-5 text-[var(--color-primary)]" />
-              <span className="font-semibold text-[var(--color-foreground)]">Категория:</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat.value}
-                  onClick={() => setSelectedCategory(cat.value)}
-                  className={`px-4 py-2 rounded-full font-medium transition-all ${
-                    selectedCategory === cat.value
-                      ? "bg-[var(--color-primary)] text-white shadow-lg"
-                      : "bg-[var(--color-light)] text-[var(--color-gray-700)] hover:bg-[var(--color-primary)]/10"
-                  }`}
+             {/* Filter Toggle (Mobile) */}
+             <div className="flex items-center gap-3 w-full md:w-auto">
+                <Button 
+                   variant="outline" 
+                   className="md:hidden w-full flex items-center justify-center gap-2 rounded-full"
+                   onClick={() => setIsFiltersOpen(!isFiltersOpen)}
                 >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-          </div>
+                   <Filter className="w-4 h-4" />
+                   Филтри
+                </Button>
+                
+                {/* Desktop Quick Filters */}
+                <div className="hidden md:flex items-center gap-2">
+                   {categories.map(cat => (
+                      <button
+                        key={cat.id}
+                        onClick={() => setSelectedCategory(cat.id)}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          selectedCategory === cat.id 
+                            ? "bg-[var(--color-primary-dark)] text-white shadow-md" 
+                            : "bg-white text-[var(--color-gray-600)] hover:bg-[var(--color-gray-100)]"
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                   ))}
+                </div>
+             </div>
+           </div>
 
-          {/* Филтър по произход */}
-          <div className="mb-6">
-            <div className="flex items-center gap-2 mb-3">
-              <Grid3x3 className="w-5 h-5 text-[var(--color-primary)]" />
-              <span className="font-semibold text-[var(--color-foreground)]">Произход:</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {origins.map((origin) => (
-                <button
-                  key={origin}
-                  onClick={() => setSelectedOrigin(origin)}
-                  className={`px-4 py-2 rounded-full font-medium transition-all ${
-                    selectedOrigin === origin
-                      ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white shadow-lg"
-                      : "bg-[var(--color-light)] text-[var(--color-gray-700)] hover:bg-[var(--color-primary)]/10"
-                  }`}
+           {/* Expanded Filters Area */}
+           <AnimatePresence>
+             {(isFiltersOpen || isDesktop) && (
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden md:block hidden pt-6 border-t border-[var(--color-gray-100)] mt-4"
                 >
-                  {origin}
-                </button>
-              ))}
-            </div>
-          </div>
+                  <div className="flex flex-wrap items-center gap-6">
+                     {/* Origin Filter */}
+                     <div className="flex items-center gap-3">
+                        <span className="text-sm font-bold text-[var(--color-gray-500)] uppercase tracking-wider">Произход:</span>
+                        <div className="flex flex-wrap gap-2">
+                          {origins.map(origin => (
+                            <button
+                              key={origin.id}
+                              onClick={() => setSelectedOrigin(origin.id)}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+                                selectedOrigin === origin.id
+                                  ? "bg-[var(--color-secondary-light)] text-[var(--color-secondary)] border-[var(--color-secondary)]"
+                                  : "bg-transparent border-[var(--color-gray-200)] text-[var(--color-gray-600)] hover:border-[var(--color-gray-400)]"
+                              }`}
+                            >
+                              {origin.label}
+                            </button>
+                          ))}
+                        </div>
+                     </div>
 
-          {/* Филтър само налични */}
-          <div className="flex items-center gap-3">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showOnlyInStock}
-                onChange={(e) => setShowOnlyInStock(e.target.checked)}
-                className="w-5 h-5 text-[var(--color-primary)] border-[var(--color-border)] rounded focus:ring-[var(--color-primary)]"
-              />
-              <span className="font-medium text-[var(--color-foreground)]">
-                Покажи само налични продукти
-              </span>
-            </label>
-          </div>
-        </motion.div>
+                     {/* Stock Filter */}
+                     <div className="flex items-center gap-2 ml-auto cursor-pointer" onClick={() => setShowOnlyInStock(!showOnlyInStock)}>
+                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${showOnlyInStock ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' : 'border-[var(--color-gray-300)] bg-white'}`}>
+                           {showOnlyInStock && <Check className="w-3.5 h-3.5 text-white" />}
+                        </div>
+                        <span className="text-sm font-medium text-[var(--color-gray-700)]">Само налични</span>
+                     </div>
+                  </div>
+                </motion.div>
+             )}
+           </AnimatePresence>
+        </Container>
+      </div>
 
-        {/* Продуктова решетка */}
-        {filteredProducts.length > 0 ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
-            ))}
-          </div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16"
-          >
-            <div className="w-20 h-20 mx-auto mb-6 bg-[var(--color-light)] rounded-full flex items-center justify-center">
-              <List className="w-10 h-10 text-[var(--color-gray-400)]" />
-            </div>
-            <h3 className="text-xl font-bold text-[var(--color-foreground)] mb-2">
-              Няма намерени продукти
-            </h3>
-            <p className="text-[var(--color-gray-600)]">
-              Опитайте да промените филтрите или да изчистите избора си.
-            </p>
-          </motion.div>
+      <Container className="pb-24">
+        {/* Results Info */}
+        <div className="flex items-center justify-between mb-8">
+           <h2 className="font-serif text-2xl font-bold text-[var(--color-primary-dark)]">
+             Резултати <span className="text-[var(--color-gray-400)] font-sans text-lg font-normal">({filteredProducts.length})</span>
+           </h2>
+           {(selectedCategory !== 'all' || selectedOrigin !== 'all' || searchQuery) && (
+              <button 
+                onClick={clearFilters}
+                className="text-sm text-red-500 hover:text-red-600 flex items-center gap-1 font-medium"
+              >
+                <X className="w-4 h-4" /> Изчисти филтрите
+              </button>
+           )}
+        </div>
+
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+           <AnimatePresence mode="popLayout">
+             {filteredProducts.map((product, index) => (
+               <ProductCard key={product.id} product={product} index={index} />
+             ))}
+           </AnimatePresence>
+        </div>
+
+        {filteredProducts.length === 0 && (
+           <div className="text-center py-20 bg-white rounded-[2rem] border border-dashed border-[var(--color-gray-300)]">
+              <div className="w-16 h-16 bg-[var(--color-gray-100)] rounded-full flex items-center justify-center mx-auto mb-4">
+                 <Search className="w-8 h-8 text-[var(--color-gray-400)]" />
+              </div>
+              <h3 className="text-xl font-bold text-[var(--color-gray-700)] mb-2">Няма намерени продукти</h3>
+              <p className="text-[var(--color-gray-500)]">Опитайте с други критерии за търсене.</p>
+              <Button variant="outline" className="mt-6" onClick={clearFilters}>Изчисти всички филтри</Button>
+           </div>
         )}
-
-        {/* Информационно съобщение */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 text-center"
-        >
-          <p className="text-[var(--color-gray-700)]">
-            Не намирате това, което търсите?{" "}
-            <a href="/kontakti" className="text-[var(--color-primary)] font-semibold hover:underline">
-              Свържете се с нас
-            </a>{" "}
-            за специални поръчки и консултация.
-          </p>
-        </motion.div>
       </Container>
-    </Section>
+    </div>
   );
 }

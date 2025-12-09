@@ -1,204 +1,124 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Leaf, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { GlassCard } from "@/components/ui/GlassCard";
 import Link from "next/link";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[var(--color-light)] via-white to-[var(--color-primary-light)]">
-      {/* Animated Background Elements */}
+    <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-[var(--color-background)]">
+      {/* Organic Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-[var(--color-accent)]/10 to-[var(--color-primary)]/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, -90, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -bottom-32 -left-32 w-96 h-96 bg-gradient-to-tr from-[var(--color-secondary)]/10 to-[var(--color-accent)]/10 rounded-full blur-3xl"
-        />
+        <div className="absolute top-0 right-0 w-[50%] h-[70%] bg-[var(--color-primary-light)]/40 rounded-bl-[10rem] blur-3xl opacity-60" />
+        <div className="absolute bottom-0 left-0 w-[40%] h-[50%] bg-[var(--color-secondary-light)]/30 rounded-tr-[12rem] blur-3xl opacity-50" />
       </div>
 
-      <Container>
-        <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[calc(100vh-140px)] py-20 relative z-10">
-          {/* Left Content */}
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          
+          {/* Left: Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="space-y-8"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-8 max-w-2xl"
           >
-            {/* Badge */}
+            {/* Top Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <Badge variant="gradient" pulse className="text-sm shadow-xl">
-                <Sparkles className="w-4 h-4" />
-                От 1998 година - 27 години опит
+              <Badge variant="glass" className="backdrop-blur-md border-[var(--color-primary)]/20 text-[var(--color-primary-dark)] px-4 py-2 rounded-full">
+                <span className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  Сезонен внос от Холандия
+                </span>
               </Badge>
             </motion.div>
 
-            {/* Main Heading */}
-            <div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-2xl md:text-3xl lg:text-4xl font-bold leading-[1.1] mb-6"
-              >
-                Градински Център{" "}
-                <span className="gradient-text">Екзотик</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-base md:text-lg text-[var(--color-gray-600)] leading-relaxed"
-              >
-                Висококачествени цветя{" "}
-                <span className="font-bold text-[var(--color-primary)]">първо качество</span>{" "}
-                от водещи световни производители
-              </motion.p>
+            {/* Headline */}
+            <div className="space-y-4">
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[var(--color-primary-dark)]">
+                Природата, <br />
+                <span className="italic text-[var(--color-secondary)]">избрана</span> за теб.
+              </h1>
+              <p className="text-lg md:text-xl text-[var(--color-gray-600)] leading-relaxed max-w-lg">
+                Пренасяме екзотиката от Колумбия, Еквадор и Холандия директно във вашия дом или бизнес. Качество без компромис от 1998 г.
+              </p>
             </div>
 
-            {/* Countries */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-3 py-6 px-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-white/60 shadow-lg"
-            >
-              <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center shadow-lg">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <div className="text-base text-[var(--color-gray-700)] font-medium flex-1">
-                Колумбия • Кения • Гърция • Нидерландия • Турция • България
-              </div>
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex items-center gap-4 pt-4"
-            >
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="/produkti">
-                <Button size="lg" variant="accent" className="shadow-2xl">
-                  Разгледай Продуктите
-                  <ArrowRight className="w-5 h-5" />
+                <Button size="lg" className="rounded-full px-8 text-lg shadow-xl shadow-[var(--color-primary)]/20 hover:shadow-[var(--color-primary)]/30 transition-all hover:-translate-y-1">
+                  Разгледай Каталога
+                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
-              <Link href="/za-nas">
-                <Button size="lg" variant="outline">
-                  Научи Повече
+              <Link href="/kontakti">
+                <Button variant="outline" size="lg" className="rounded-full px-8 text-lg border-2 hover:bg-[var(--color-primary-light)]/50">
+                  Свържи се с нас
                 </Button>
               </Link>
-            </motion.div>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="pt-8 border-t border-[var(--color-gray-200)] flex flex-wrap gap-8 text-sm font-medium text-[var(--color-gray-500)]">
+              <div className="flex items-center gap-2">
+                <Globe className="w-5 h-5 text-[var(--color-secondary)]" />
+                <span>Директен внос</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Leaf className="w-5 h-5 text-[var(--color-secondary)]" />
+                <span>Свежест гарантирана</span>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Right Image */}
+          {/* Right: Visual */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative h-[600px] hidden lg:block"
-            style={{ perspective: "1000px" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative lg:h-[700px] flex items-center justify-center"
           >
-            {/* Main Image Container */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+            {/* Main Image with Organic Shape */}
+            <div className="relative w-full h-[500px] lg:h-[650px] rounded-[3rem] overflow-hidden shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-700 ease-out">
+              <div className="absolute inset-0 bg-black/10 z-10" /> {/* Overlay */}
               <img
                 src="/images/garden.jpg"
-                alt="Цветя и растения в оранжерия - Градински Център Екзотик"
-                className="w-full h-full object-cover"
+                alt="Градински Център Екзотик"
+                className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-[2s]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              
+              {/* Floating Glass Card - Stats */}
+              <div className="absolute -bottom-6 -left-6 z-20">
+                 <div className="bg-white/80 backdrop-blur-xl border border-white/60 p-6 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)]">
+                   <div className="flex items-center gap-6 divide-x divide-gray-200/50">
+                     <div className="text-center px-2">
+                       <span className="block font-serif text-3xl font-bold text-[var(--color-primary)]">27+</span>
+                       <span className="text-xs uppercase tracking-wider text-[var(--color-gray-500)]">Години опит</span>
+                     </div>
+                     <div className="text-center px-4">
+                        <span className="block font-serif text-3xl font-bold text-[var(--color-primary)]">100%</span>
+                        <span className="text-xs uppercase tracking-wider text-[var(--color-gray-500)]">Свежест</span>
+                     </div>
+                   </div>
+                 </div>
+              </div>
             </div>
 
-            {/* Floating Stats Card with Glass Effect */}
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="absolute -left-8 bottom-12 z-20"
-            >
-              <GlassCard glow className="p-8 bg-white shadow-2xl">
-                <div className="grid grid-cols-3 gap-8">
-                  <div className="text-center">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 1, type: "spring", stiffness: 200 }}
-                      className="text-2xl font-bold gradient-text mb-2"
-                    >
-                      27
-                    </motion.div>
-                    <div className="text-sm text-[var(--color-gray-600)] font-semibold">Години</div>
-                  </div>
-                  <div className="text-center border-l border-r border-gray-200 px-4">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 1.1, type: "spring", stiffness: 200 }}
-                      className="text-2xl font-bold gradient-text mb-2"
-                    >
-                      2
-                    </motion.div>
-                    <div className="text-sm text-[var(--color-gray-600)] font-semibold">Локации</div>
-                  </div>
-                  <div className="text-center">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
-                      className="text-2xl font-bold gradient-text mb-2"
-                    >
-                      100%
-                    </motion.div>
-                    <div className="text-sm text-[var(--color-gray-600)] font-semibold">Качество</div>
-                  </div>
-                </div>
-              </GlassCard>
-            </motion.div>
-
-            {/* Floating Accent Elements */}
-            <motion.div
-              animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 w-24 h-24 gradient-accent rounded-2xl opacity-20 blur-xl"
-            />
-            <motion.div
-              animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-6 w-32 h-32 gradient-secondary rounded-2xl opacity-20 blur-xl"
-            />
+            {/* Decorative Elements */}
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[var(--color-secondary)]/10 rounded-full blur-2xl animate-pulse" />
           </motion.div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

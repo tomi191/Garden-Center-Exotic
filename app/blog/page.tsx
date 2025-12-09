@@ -25,7 +25,7 @@ export default function BlogPage() {
         <Container>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
-              <Card key={post.id} hover className="h-full group">
+              <Card key={post.id} className="h-full group hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
                   {/* Снимка */}
                   <div className="h-56 overflow-hidden relative">

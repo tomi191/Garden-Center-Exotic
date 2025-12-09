@@ -1,3 +1,4 @@
+
 # Typography Fix Report
 
 ## Текущи проблеми

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://exotic-garden.vercel.app
+
+# Sitemaps
+Sitemap: https://exotic-garden.vercel.app/sitemap.xml

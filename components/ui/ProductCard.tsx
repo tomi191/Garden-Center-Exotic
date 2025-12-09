@@ -1,120 +1,169 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, Check, MapPin, Info } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Product } from "@/data/products";
+import { MapPin, Phone, ShoppingBag } from "lucide-react";
+import { ProductRequestModal } from "@/components/catalog/ProductRequestModal";
+
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  subcategory?: string | null;
+  origin: string;
+  price: number;
+  priceUnit: string;
+  description: string;
+  image: string;
+  inStock: boolean;
+  featured?: boolean;
+  characteristics?: string[];
+}
 
 interface ProductCardProps {
   product: Product;
   index?: number;
+  eurRate?: number;
 }
 
-export function ProductCard({ product, index = 0 }: ProductCardProps) {
+const ORDER_PHONE = "+359 52 600 577";
+
+export function ProductCard({ product, index = 0, eurRate = 1.9558 }: ProductCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const priceEur = (product.price / eurRate).toFixed(2);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-    >
-      <Card className="h-full group overflow-hidden hover:shadow-2xl transition-all duration-300">
-        <CardContent className="p-0">
-          {/* Снимка на продукта */}
-          <div className="relative h-64 overflow-hidden">
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+        className="h-full"
+      >
+        <div className="group relative h-full flex flex-col">
+          {/* Background Card with Organic Shape/Border Radius */}
+          <div className="absolute inset-0 bg-white rounded-[2rem] shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:scale-[1.02]" />
+
+          {/* Image Container with Organic Clip Path or Soft Radius */}
+          <div className="relative aspect-[4/5] overflow-hidden rounded-t-[2rem] rounded-b-[1rem] mx-3 mt-3">
+            <div className="absolute inset-0 bg-gray-100 animate-pulse" /> {/* Placeholder */}
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              loading="lazy"
             />
 
-            {/* Badge за произход */}
-            <div className="absolute top-3 left-3">
-              <div className="flex items-center gap-1 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full shadow-lg">
+            {/* Overlay Gradient on Hover */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+
+            {/* Badges - Floating Glass Effect */}
+            <div className="absolute top-4 left-4 flex flex-col gap-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm border border-white/50">
                 <MapPin className="w-3 h-3 text-[var(--color-primary)]" />
-                <span className="text-xs font-semibold text-[var(--color-foreground)]">
+                <span className="text-xs font-bold tracking-wide text-[var(--color-primary)] uppercase">
                   {product.origin}
                 </span>
               </div>
             </div>
 
-            {/* Badge за наличност */}
             {!product.inStock && (
-              <div className="absolute top-3 right-3">
-                <span className="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full shadow-lg">
+              <div className="absolute top-4 right-4">
+                <span className="px-3 py-1.5 bg-[var(--color-secondary)]/90 backdrop-blur-md text-white text-xs font-bold rounded-full shadow-sm">
                   Изчерпан
                 </span>
               </div>
             )}
 
-            {/* Badge за featured продукти */}
-            {product.featured && (
-              <div className="absolute bottom-3 left-3">
-                <span className="px-3 py-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white text-xs font-bold rounded-full shadow-lg">
-                  Препоръчан
-                </span>
-              </div>
-            )}
+            {/* Quick Action Buttons - Appears on Hover */}
+            <div className="absolute bottom-4 right-4 flex gap-2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+              <a
+                href={`tel:${ORDER_PHONE.replace(/\s/g, "")}`}
+                className="flex items-center justify-center w-12 h-12 bg-white text-[var(--color-primary)] rounded-full shadow-lg hover:bg-[var(--color-primary)] hover:text-white transition-colors"
+                title="Обади се"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+              {product.inStock && (
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="flex items-center justify-center w-12 h-12 bg-[var(--color-primary)] text-white rounded-full shadow-lg hover:bg-[var(--color-primary-dark)] transition-colors"
+                  title="Изпрати заявка"
+                >
+                  <ShoppingBag className="w-5 h-5" />
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* Информация за продукта */}
-          <div className="p-5">
-            {/* Име на продукта */}
-            <h3 className="text-xl font-bold mb-2 text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors line-clamp-1">
+          {/* Content */}
+          <div className="relative p-6 flex-grow flex flex-col">
+            <div className="mb-1">
+               <span className="text-xs font-semibold text-[var(--color-secondary)] tracking-wider uppercase">
+                 {product.category === 'ryazan-tsvyat' ? 'Рязан Цвят' :
+                  product.category === 'saksiyni-rasteniya' ? 'Саксийни' : 'Градински'}
+               </span>
+            </div>
+
+            <h3 className="font-serif text-2xl font-semibold text-[var(--color-gray-900)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">
               {product.name}
             </h3>
 
-            {/* Описание */}
-            <p className="text-sm text-[var(--color-gray-600)] mb-4 line-clamp-2 leading-relaxed">
+            <p className="text-sm text-[var(--color-gray-600)] mb-4 line-clamp-2">
               {product.description}
             </p>
 
-            {/* Характеристики */}
-            {product.characteristics && product.characteristics.length > 0 && (
-              <div className="mb-4 space-y-1">
-                {product.characteristics.slice(0, 3).map((char, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[var(--color-gray-600)]">
-                    <Check className="w-3 h-3 text-[var(--color-primary)] flex-shrink-0" />
-                    <span className="line-clamp-1">{char}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* Divider */}
+            <div className="w-full h-px bg-[var(--color-gray-100)] mb-4" />
 
-            {/* Цена и CTA */}
-            <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border)]">
-              <div>
-                <div className="text-xl font-bold text-[var(--color-primary)]">
-                  {product.price.toFixed(2)} лв
+            <div className="mt-auto flex items-end justify-between">
+              <div className="flex flex-col">
+                <span className="text-xs text-[var(--color-gray-400)] font-medium uppercase tracking-wide">Цена</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="font-serif text-2xl font-bold text-[var(--color-primary)]">
+                    {product.price.toFixed(2)}
+                  </span>
+                  <span className="text-sm font-medium text-[var(--color-gray-500)]">
+                    лв
+                  </span>
                 </div>
-                <div className="text-xs text-[var(--color-gray-500)]">
-                  {product.priceUnit}
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="text-sm font-semibold text-gray-600">
+                    {priceEur}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    € / {product.priceUnit.replace('лв/', '')}
+                  </span>
                 </div>
               </div>
 
-              <Button
-                variant="primary"
-                size="sm"
-                className="inline-flex items-center gap-2"
-                disabled={!product.inStock}
-              >
-                {product.inStock ? (
-                  <>
-                    <ShoppingCart className="w-4 h-4" />
-                    <span className="hidden sm:inline">Запитване</span>
-                  </>
-                ) : (
-                  <>
-                    <Info className="w-4 h-4" />
-                    <span className="hidden sm:inline">Уведоми ме</span>
-                  </>
-                )}
-              </Button>
+              {/* Order Button */}
+              {product.inStock ? (
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-semibold rounded-full hover:bg-[var(--color-primary-dark)] transition-colors shadow-sm"
+                >
+                  Поръчай
+                </button>
+              ) : (
+                <span className="px-4 py-2 bg-gray-100 text-gray-500 text-sm font-medium rounded-full">
+                  Няма наличност
+                </span>
+              )}
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Request Modal */}
+      <ProductRequestModal
+        product={product}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        eurRate={eurRate}
+      />
+    </>
   );
 }

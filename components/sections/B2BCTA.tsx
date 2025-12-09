@@ -2,104 +2,91 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Building2, Truck, Phone, ArrowRight, Check } from "lucide-react";
+import { Building2, Truck, Phone, ArrowRight, ShieldCheck } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
 const benefits = [
-  { icon: Building2, title: "Обемни отстъпки", description: "Специални цени според обема" },
-  { icon: Truck, title: "Редовна доставка", description: "Абонаментни пакети" },
-  { icon: Phone, title: "Персонален мениджър", description: "Dedicated support 24/7" },
+  { 
+    icon: Building2, 
+    title: "За Хотели & Ресторанти", 
+    description: "Седмична доставка на свежи цветя и поддръжка на интериорно озеленяване." 
+  },
+  { 
+    icon: Truck, 
+    title: "Търговия на Едро", 
+    description: "Директен внос от борсите в Холандия. Конкурентни цени за магазини." 
+  },
+  { 
+    icon: ShieldCheck, 
+    title: "Гаранция за Качество", 
+    description: "Замяна на стока при проблем до 24 часа. Студена верига на доставка." 
+  },
 ];
 
 export function B2BCTA() {
   return (
-    <Section className="relative bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-white overflow-hidden py-24">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
-      </div>
+    <Section className="py-24 overflow-hidden">
+      <Container>
+        <div className="relative rounded-[3rem] bg-[var(--color-primary-dark)] text-white p-8 md:p-16 overflow-hidden">
+          {/* Decorative Pattern */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+          
+          <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6">
+                Партньор за вашия бизнес
+              </h2>
+              <p className="text-white/70 text-lg mb-10 leading-relaxed max-w-lg">
+                Работим успешно с над 50 корпоративни клиента. Предлагаме гъвкави условия и персонален акаунт мениджър.
+              </p>
 
-      <Container className="relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-              <Building2 className="w-4 h-4" />
-              <span className="text-sm font-semibold">B2B УСЛУГИ</span>
-            </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/uslugi/za-biznesa">
+                  <Button size="lg" className="bg-white text-[var(--color-primary-dark)] hover:bg-[var(--color-secondary)] hover:text-white rounded-full px-8 text-lg w-full sm:w-auto">
+                    Научете повече
+                  </Button>
+                </Link>
+                <Link href="/kontakti">
+                  <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 rounded-full px-8 text-lg w-full sm:w-auto">
+                    Заявка за оферта
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
 
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
-              Надежден партньор за вашия бизнес
-            </h2>
-
-            <p className="text-lg text-white/90 mb-8 leading-relaxed">
-              Предлагаме специални B2B услуги за хотели, ресторанти, офиси,
-              организатори на събития и цветарски магазини.
-            </p>
-
-            <div className="space-y-4 mb-10">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon;
+            {/* Right Benefits */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6"
+            >
+              {benefits.map((item, index) => {
+                const Icon = item.icon;
                 return (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-6 h-6" />
+                  <div key={index} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)]/20 flex items-center justify-center flex-shrink-0 text-[var(--color-secondary)]">
+                      <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">{benefit.title}</h4>
-                      <p className="text-white/80 text-sm">{benefit.description}</p>
+                      <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                      <p className="text-sm text-white/60 leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 );
               })}
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/uslugi/za-biznesa">
-                <Button size="lg" className="bg-white text-[var(--color-primary)] hover:bg-gray-100 w-full sm:w-auto">
-                  Научете повече
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/kontakti">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-[var(--color-primary)] w-full sm:w-auto">
-                  Заявка за оферта
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Right Stats */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 gap-6"
-          >
-            {[
-              { number: "50+", label: "B2B клиенти" },
-              { number: "100%", label: "Гаранция" },
-              { number: "24/7", label: "Студена камера" },
-              { number: "Net 30/60", label: "Плащане" },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 text-center hover:bg-white/15 transition-all"
-              >
-                <div className="text-2xl font-bold text-white mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-white/80 text-sm font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </Container>
     </Section>

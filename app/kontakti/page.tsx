@@ -1,15 +1,15 @@
 import { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Timer } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card } from "@/components/ui/Card";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { LOCATIONS, SOCIAL_LINKS } from "@/lib/constants";
+import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Контакти",
-  description: "Свържете се с Градински Център Екзотик. Телефон, email, адреси и работно време.",
-  keywords: ["контакти", "телефон", "email", "адрес Варна", "адрес Нова Загора"],
+  title: "Контакти | Екзотик",
+  description: "Свържете се с нас. Шоуруми във Варна и Нова Загора.",
 };
 
 export default function ContactPage() {
@@ -17,150 +17,90 @@ export default function ContactPage() {
     <>
       <PageHero
         title="Свържете се с нас"
-        description="Готови сме да отговорим на всички ваши въпроси. Очакваме вашето запитване!"
+        description="Нашите експерти са тук, за да ви помогнат с избора на идеалните растения."
       />
 
-      <Section className="bg-white py-16">
+      <Section className="relative z-10 -mt-20 pb-24">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Left - Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="mb-6">Информация за контакт</h2>
-                <p className="text-[var(--color-gray-700)] mb-8">
-                  Свържете се с нас по телефон, email или посетете нашите локации.
-                  Работим всеки ден с изключение на неделя.
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Contact Cards */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* Varna Card */}
+              <div className="bg-white rounded-[2rem] p-8 shadow-xl">
+                <div className="w-12 h-12 bg-[var(--color-primary-light)] rounded-2xl flex items-center justify-center mb-6 text-[var(--color-primary)]">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-2">Варна</h3>
+                <p className="text-[var(--color-gray-600)] mb-6 text-sm leading-relaxed">
+                  {LOCATIONS.varna.address}<br/>{LOCATIONS.varna.city}
                 </p>
+                <div className="space-y-3">
+                   <a href={`tel:${LOCATIONS.varna.phone}`} className="flex items-center gap-3 text-sm font-medium hover:text-[var(--color-primary)] transition-colors">
+                     <Phone className="w-4 h-4 text-[var(--color-secondary)]" />
+                     {LOCATIONS.varna.phone}
+                   </a>
+                   <a href={`mailto:${LOCATIONS.varna.email}`} className="flex items-center gap-3 text-sm font-medium hover:text-[var(--color-primary)] transition-colors">
+                     <Mail className="w-4 h-4 text-[var(--color-secondary)]" />
+                     {LOCATIONS.varna.email}
+                   </a>
+                   <div className="flex items-start gap-3 text-sm text-[var(--color-gray-500)] pt-2 border-t border-gray-100 mt-4">
+                     <Clock className="w-4 h-4 mt-0.5" />
+                     <div>
+                       <p>Пн-Пт: {LOCATIONS.varna.hours.weekdays}</p>
+                       <p>Съб: {LOCATIONS.varna.hours.saturday}</p>
+                     </div>
+                   </div>
+                </div>
               </div>
 
-              {/* Varna Location */}
-              <Card className="bg-[var(--color-light)] border-none">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3 mb-4">
-                    <MapPin className="w-6 h-6 text-[var(--color-primary)] flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Варна</h3>
-                      <p className="text-[var(--color-gray-700)]">
-                        {LOCATIONS.varna.address}
-                        <br />
-                        {LOCATIONS.varna.city} {LOCATIONS.varna.postalCode}
-                      </p>
-                    </div>
-                  </div>
+              {/* Nova Zagora Card */}
+              <div className="bg-white rounded-[2rem] p-8 shadow-xl">
+                <div className="w-12 h-12 bg-[var(--color-secondary-light)] rounded-2xl flex items-center justify-center mb-6 text-[var(--color-secondary)]">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-2">Нова Загора</h3>
+                <p className="text-[var(--color-gray-600)] mb-6 text-sm leading-relaxed">
+                  {LOCATIONS.novaZagora.address}<br/>{LOCATIONS.novaZagora.city}
+                </p>
+                <div className="space-y-3">
+                   <a href={`tel:${LOCATIONS.novaZagora.phone}`} className="flex items-center gap-3 text-sm font-medium hover:text-[var(--color-secondary)] transition-colors">
+                     <Phone className="w-4 h-4 text-[var(--color-primary)]" />
+                     {LOCATIONS.novaZagora.phone}
+                   </a>
+                   <a href={`mailto:${LOCATIONS.novaZagora.email}`} className="flex items-center gap-3 text-sm font-medium hover:text-[var(--color-secondary)] transition-colors">
+                     <Mail className="w-4 h-4 text-[var(--color-primary)]" />
+                     {LOCATIONS.novaZagora.email}
+                   </a>
+                </div>
+              </div>
 
-                  <div className="space-y-3 mt-4">
-                    <a
-                      href={`tel:${LOCATIONS.varna.phone}`}
-                      className="flex items-center gap-3 text-[var(--color-gray-700)] hover:text-[var(--color-primary)] transition-colors"
-                    >
-                      <Phone className="w-5 h-5 text-[var(--color-primary)]" />
-                      <span>{LOCATIONS.varna.phone}</span>
-                    </a>
-                    <a
-                      href={`mailto:${LOCATIONS.varna.email}`}
-                      className="flex items-center gap-3 text-[var(--color-gray-700)] hover:text-[var(--color-primary)] transition-colors"
-                    >
-                      <Mail className="w-5 h-5 text-[var(--color-primary)]" />
-                      <span>{LOCATIONS.varna.email}</span>
-                    </a>
-                    <div className="flex items-start gap-3 text-[var(--color-gray-700)]">
-                      <Clock className="w-5 h-5 text-[var(--color-primary)] flex-shrink-0 mt-0.5" />
-                      <div className="text-sm">
-                        <div>Пон-Пет: {LOCATIONS.varna.hours.weekdays}</div>
-                        <div>Съб: {LOCATIONS.varna.hours.saturday}</div>
-                        <div>Нед: {LOCATIONS.varna.hours.sunday}</div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Nova Zagora Location */}
-              <Card className="bg-[var(--color-light)] border-none">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3 mb-4">
-                    <MapPin className="w-6 h-6 text-[var(--color-secondary)] flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Нова Загора</h3>
-                      <p className="text-[var(--color-gray-700)]">
-                        {LOCATIONS.novaZagora.address}
-                        <br />
-                        {LOCATIONS.novaZagora.city}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 mt-4">
-                    <a
-                      href={`tel:${LOCATIONS.novaZagora.phone}`}
-                      className="flex items-center gap-3 text-[var(--color-gray-700)] hover:text-[var(--color-secondary)] transition-colors"
-                    >
-                      <Phone className="w-5 h-5 text-[var(--color-secondary)]" />
-                      <span>{LOCATIONS.novaZagora.phone}</span>
-                    </a>
-                    <a
-                      href={`mailto:${LOCATIONS.novaZagora.email}`}
-                      className="flex items-center gap-3 text-[var(--color-gray-700)] hover:text-[var(--color-secondary)] transition-colors"
-                    >
-                      <Mail className="w-5 h-5 text-[var(--color-secondary)]" />
-                      <span>{LOCATIONS.novaZagora.email}</span>
-                    </a>
-                    <div className="flex items-start gap-3 text-[var(--color-gray-700)]">
-                      <Clock className="w-5 h-5 text-[var(--color-secondary)] flex-shrink-0 mt-0.5" />
-                      <div className="text-sm">
-                        <div>Пон-Пет: {LOCATIONS.novaZagora.hours.weekdays}</div>
-                        <div>Съб: {LOCATIONS.novaZagora.hours.saturday}</div>
-                        <div>Нед: {LOCATIONS.novaZagora.hours.sunday}</div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* WhatsApp */}
-              <Card className="bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-hover)] border-none text-white">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold mb-1">WhatsApp</h4>
-                      <p className="text-sm opacity-90">
-                        Пишете ни директно за бързи отговори
-                      </p>
-                    </div>
-                    <a
-                      href={SOCIAL_LINKS.whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-white text-[var(--color-secondary)] rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                    >
-                      Напиши
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Response Time */}
-              <Card className="border-2 border-[var(--color-primary)]/20">
-                <CardContent className="p-6 text-center">
-                  <h4 className="font-bold mb-2 text-[var(--color-primary)] inline-flex items-center gap-2 justify-center">
-                    <Timer className="w-5 h-5" />
-                    Време за отговор
-                  </h4>
-                  <p className="text-[var(--color-gray-700)]">
-                    Отговаряме на всички запитвания в рамките на{" "}
-                    <strong>24 часа</strong> в работни дни
-                  </p>
-                </CardContent>
-              </Card>
+              {/* Quick Chat */}
+              <a 
+                href={SOCIAL_LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-[#25D366] text-white rounded-[2rem] p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <MessageCircle className="w-8 h-8" />
+                  <ArrowRight className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-lg">Чат в WhatsApp</h3>
+                <p className="text-white/80 text-sm">Отговаряме бързо</p>
+              </a>
             </div>
 
-            {/* Right - Contact Form */}
-            <div>
-              <h2 className="mb-6">Изпратете запитване</h2>
-              <ContactForm />
+            {/* Right Form */}
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl h-full border border-gray-100">
+                <div className="max-w-xl">
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Пишете ни</h2>
+                  <p className="text-[var(--color-gray-600)] mb-8">
+                    Имате въпроси за продукти или партньорство? Попълнете формата и ще се свържем с вас до 24 часа.
+                  </p>
+                </div>
+                <ContactForm />
+              </div>
             </div>
           </div>
         </Container>

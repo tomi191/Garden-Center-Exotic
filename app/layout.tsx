@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { ConditionalLayout } from "@/components/layout/ConditionalLayout";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/react";
@@ -10,14 +9,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const playfair = Playfair_Display({
+  variable: "--font-serif",
   subsets: ["latin", "latin-ext"],
   display: "swap",
 });
@@ -83,13 +82,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bg" className={`${inter.variable} ${plusJakarta.variable}`} suppressHydrationWarning>
-      <body className="antialiased">
+    <html lang="bg" className={`${dmSans.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <body className="antialiased font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <SmoothScrollProvider>
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
+            <ConditionalLayout>{children}</ConditionalLayout>
             <Toaster
               position="top-right"
               toastOptions={{

@@ -42,3 +42,5 @@ next-env.d.ts
 
 # Windows reserved names
 nul
+
+/lib/generated/prisma

@@ -1,63 +1,65 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Leaf } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
-import { Card, CardContent } from "@/components/ui/Card";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
+import { getProducts } from "@/lib/products";
+import { products as staticProducts } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "Продукти",
-  description: "Богат избор от саксийни растения, рязан цвят, сезонни цветя, храсти и дървета.",
-  keywords: ["саксийни растения", "рязан цвят", "сезонни цветя", "храсти", "дървета"],
+  title: "Продукти | Екзотик",
+  description: "Ексклузивна селекция от растения и цветя. Внос от Колумбия, Кения и Холандия.",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  let products;
+  try {
+    const dbProducts = await getProducts();
+    products = dbProducts.length > 0 ? dbProducts : staticProducts;
+  } catch {
+    products = staticProducts;
+  }
+
   return (
     <>
       <PageHero
-        title="Нашите Продукти"
-        description="Разнообразие от висококачествени растения и цветя първо качество от Колумбия, Кения, Гърция, Нидерландия, Турция и България"
+        title="Колекция Природа"
+        description="Разгледайте нашия каталог с премиум растения, селектирани от най-добрите ферми в света."
       />
 
-      {/* Категории */}
-      <Section className="bg-[var(--color-light)] py-12">
+      {/* Visual Categories Navigation */}
+      <Section className="py-12 bg-white">
         <Container>
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-2">Категории Продукти</h2>
-            <p className="text-[var(--color-gray-600)]">
-              Разгледайте нашите основни категории
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {PRODUCT_CATEGORIES.map((category, index) => (
               <Link
                 key={index}
                 href={`/produkti/${category.slug}`}
-                className="block group"
+                className="group relative h-40 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
               >
-                <Card hover className="h-full">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 mx-auto mb-3 bg-[var(--color-primary)]/10 rounded-full flex items-center justify-center">
-                      <Leaf className="w-6 h-6 text-[var(--color-primary)]" />
-                    </div>
-                    <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">
-                      {category.name}
-                    </h3>
-                    <p className="text-sm text-[var(--color-gray-600)]">
-                      {category.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                {/* Background Image (Placeholder gradient if no image) */}
+                <div className={`absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] opacity-10 group-hover:opacity-20 transition-opacity`} />
+                
+                <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
+                  <h3 className="font-serif text-xl font-bold text-[var(--color-primary-dark)] mb-1 group-hover:-translate-y-1 transition-transform">
+                    {category.name}
+                  </h3>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-[var(--color-secondary)] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                    Разгледай <ArrowRight className="w-3 h-3" />
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* Продуктова Галерия */}
-      <ProductGallery />
+      {/* Main Gallery */}
+      <div className="bg-[var(--color-background)] min-h-screen">
+         <ProductGallery initialProducts={products} />
+      </div>
     </>
   );
 }

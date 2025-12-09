@@ -4,12 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { TextArea } from "@/components/ui/TextArea";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Името трябва да е поне 2 символа"),
@@ -41,27 +40,14 @@ export function ContactForm() {
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
-
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     console.log("Form data:", data);
-
-    // TODO: Replace with actual API endpoint
-    // await fetch("/api/contact", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // });
-
+    
     setIsSubmitting(false);
     setIsSuccess(true);
     reset();
-
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 5000);
+    setTimeout(() => setIsSuccess(false), 5000);
   };
 
   const locationOptions = [
@@ -74,102 +60,97 @@ export function ContactForm() {
     { value: "b2b", label: "B2B услуги" },
     { value: "delivery", label: "Доставка" },
     { value: "plant-care", label: "Грижи за растения" },
-    { value: "complaint", label: "Оплакване" },
   ];
 
   return (
-    <Card>
-      <CardContent className="p-8">
-        {isSuccess && (
-          <div className="mb-6 p-4 bg-[var(--color-success)]/10 border border-[var(--color-success)]/20 rounded-lg flex items-center gap-3 text-[var(--color-success)] animate-slide-down">
-            <CheckCircle className="w-5 h-5" />
-            <p className="font-medium">
-              Съобщението е изпратено успешно! Ще се свържем с вас скоро.
+    <div className="relative">
+      {isSuccess && (
+        <div className="mb-8 p-6 bg-green-50 border border-green-100 rounded-2xl flex items-start gap-4 animate-in fade-in slide-in-from-top-4">
+          <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 text-green-600">
+             <CheckCircle2 className="w-6 h-6" />
+          </div>
+          <div>
+            <h4 className="font-bold text-green-900 text-lg mb-1">Успешно изпратено!</h4>
+            <p className="text-green-700">
+              Благодарим ви за запитването. Ще се свържем с вас в рамките на 24 часа.
             </p>
           </div>
-        )}
+        </div>
+      )}
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Name */}
-          <Input
-            label="Име"
-            placeholder="Вашето име"
-            {...register("name")}
-            error={errors.name?.message}
-            required
-          />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <Input
+          label="Име"
+          placeholder="Вашето име"
+          {...register("name")}
+          error={errors.name?.message}
+          required
+        />
 
-          {/* Email */}
+        <div className="grid md:grid-cols-2 gap-6">
           <Input
             label="Email"
             type="email"
-            placeholder="your@email.com"
+            placeholder="name@example.com"
             {...register("email")}
             error={errors.email?.message}
             required
           />
-
-          {/* Phone */}
           <Input
             label="Телефон"
             type="tel"
-            placeholder="+359 XXX XXX XXX"
+            placeholder="+359..."
             {...register("phone")}
             error={errors.phone?.message}
           />
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Location */}
-            <Select
-              label="Локация"
-              options={locationOptions}
-              {...register("location")}
-              error={errors.location?.message}
-              required
-            />
-
-            {/* Inquiry Type */}
-            <Select
-              label="Тип запитване"
-              options={inquiryTypeOptions}
-              {...register("inquiryType")}
-              error={errors.inquiryType?.message}
-              required
-            />
-          </div>
-
-          {/* Message */}
-          <TextArea
-            label="Съобщение"
-            placeholder="Вашето съобщение..."
-            {...register("message")}
-            error={errors.message?.message}
-            rows={6}
+        <div className="grid md:grid-cols-2 gap-6">
+          <Select
+            label="Локация"
+            options={locationOptions}
+            {...register("location")}
+            error={errors.location?.message}
             required
           />
+          <Select
+            label="Тема"
+            options={inquiryTypeOptions}
+            {...register("inquiryType")}
+            error={errors.inquiryType?.message}
+            required
+          />
+        </div>
 
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            size="lg"
-            className="w-full group"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              "Изпращане..."
-            ) : (
-              <>
-                Изпрати съобщение
-                <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </>
-            )}
-          </Button>
+        <TextArea
+          label="Съобщение"
+          placeholder="Как можем да ви помогнем?"
+          {...register("message")}
+          error={errors.message?.message}
+          rows={5}
+          required
+        />
 
-          <p className="text-sm text-[var(--color-gray-600)] text-center">
-            * Задължителни полета
-          </p>
-        </form>
-      </CardContent>
-    </Card>
+        <Button
+          type="submit"
+          size="lg"
+          fullWidth
+          disabled={isSubmitting}
+          className="rounded-xl text-lg h-14"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+              Изпращане...
+            </>
+          ) : (
+            <>
+              Изпрати Запитване
+              <Send className="ml-2 w-5 h-5" />
+            </>
+          )}
+        </Button>
+      </form>
+    </div>
   );
 }

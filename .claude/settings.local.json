@@ -1,7 +1,37 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebSearch",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(npm view:*)",
+      "Bash(npx @next/codemod@canary upgrade:*)",
+      "Bash(dir:*)",
+      "Bash(npx prisma init)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npm run build:*)",
+      "mcp__supabase__apply_migration",
+      "mcp__supabase__execute_sql",
+      "mcp__supabase__get_project_url",
+      "mcp__supabase__get_publishable_keys",
+      "mcp__supabase__get_project",
+      "mcp__supabase__search_docs",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_snapshot",
+      "Bash(node -e:*)",
+      "Bash(taskkill:*)",
+      "Bash(npm run dev:*)",
+      "mcp__playwright__browser_close",
+      "Bash(del \"D:\\Ai Builder Website\\Exotic Center\\Garden-Center-Exotic\\app\\(admin)\\layout.tsx\" \"D:\\Ai Builder Website\\Exotic Center\\Garden-Center-Exotic\\app\\(admin-auth)\\layout.tsx\")",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__list_projects",
+      "Bash(timeout /t 2)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd admin panel, product catalog, and database integration\n\n- Add admin dashboard with product management (CRUD operations)\n- Implement Prisma ORM with PostgreSQL/Supabase integration\n- Add NextAuth.js authentication for admin access\n- Create dynamic product pages with [slug] routing\n- Add product catalog components and category filtering\n- Include privacy policy and terms of service pages\n- Add SEO improvements (robots.txt, sitemap.xml)\n- Update UI components with enhanced styling\n- Add ConditionalLayout for admin/public separation\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
