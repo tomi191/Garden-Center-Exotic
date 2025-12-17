@@ -41,10 +41,26 @@ export const metadata: Metadata = {
     "рязан цвят",
     "саксийни растения",
     "озеленяване",
+    "екзотични цветя",
+    "рози Еквадор",
+    "орхидеи",
+    "сватбена декорация",
+    "корпоративни цветя",
   ],
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.url),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/logos/exotic-logo.jpg", type: "image/jpeg" },
+    ],
+    apple: [
+      { url: "/images/logos/exotic-logo.jpg", sizes: "180x180", type: "image/jpeg" },
+    ],
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "bg_BG",
@@ -54,7 +70,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.nameBg,
     images: [
       {
-        url: SITE_CONFIG.ogImage,
+        url: `${SITE_CONFIG.url}/images/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.nameBg,
@@ -65,7 +81,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_CONFIG.nameBg,
     description: SITE_CONFIG.description,
-    images: [SITE_CONFIG.ogImage],
+    images: [`${SITE_CONFIG.url}/images/og-image.jpg`],
   },
   robots: {
     index: true,
@@ -77,6 +93,12 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  alternates: {
+    canonical: SITE_CONFIG.url,
+  },
+  verification: {
+    google: "G-JTL50Q3BJG",
   },
 };
 

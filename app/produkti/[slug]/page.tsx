@@ -18,6 +18,7 @@ const CATEGORY_DATA: Record<string, {
   heroImage: string;
   cardImage: string;
   seoKeywords: string[];
+  icon: string;
 }> = {
   "ryazan-tsvyat": {
     title: "Рязани Цветя",
@@ -26,6 +27,7 @@ const CATEGORY_DATA: Record<string, {
     heroImage: "/images/categories/ryazani-cvetya-hero.png",
     cardImage: "https://images.unsplash.com/photo-1596043286045-8f553229b433?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["рязан цвят", "рози на едро", "лалета", "букети", "внос цветя"],
+    icon: "🌹",
   },
   "saksiyni-rasteniya": {
     title: "Саксийни Растения",
@@ -34,6 +36,7 @@ const CATEGORY_DATA: Record<string, {
     heroImage: "/images/categories/saksiyni-rasteniya-hero.png",
     cardImage: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["саксийни цветя", "орхидеи", "стайни растения", "палми", "озеленяване"],
+    icon: "🪴",
   },
   "hrasti-darveta": {
     title: "Храсти и Дървета",
@@ -42,6 +45,7 @@ const CATEGORY_DATA: Record<string, {
     heroImage: "/images/categories/hrasti-darveta-hero.png",
     cardImage: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["градински храсти", "туи", "дървета за градина", "озеленяване двор"],
+    icon: "🌳",
   },
   "gradinski": {
     title: "Градински Растения",
@@ -50,6 +54,7 @@ const CATEGORY_DATA: Record<string, {
     heroImage: "/images/categories/gradinski-hero.png",
     cardImage: "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["градински растения", "храсти", "дървета", "разсади", "озеленяване"],
+    icon: "🌿",
   },
   "aksessoari": {
     title: "Аксесоари",
@@ -58,6 +63,7 @@ const CATEGORY_DATA: Record<string, {
     heroImage: "/images/categories/aksessoari-hero.png",
     cardImage: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["градински аксесоари", "почви", "торове", "саксии", "инструменти"],
+    icon: "🧰",
   }
 };
 

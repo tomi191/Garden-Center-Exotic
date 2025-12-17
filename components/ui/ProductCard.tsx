@@ -13,12 +13,12 @@ interface Product {
   slug?: string;
   category: string;
   subcategory?: string | null;
-  origin: string;
+  origin?: string;
   price: number;
-  priceUnit: string;
-  description: string;
+  priceUnit?: string;
+  description?: string;
   image: string;
-  inStock: boolean;
+  inStock?: boolean;
   featured?: boolean;
   characteristics?: string[];
 }
@@ -74,16 +74,18 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
 
             {/* Badges - Floating Glass Effect */}
-            <div className="absolute top-4 left-4 flex flex-col gap-2">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm border border-white/50">
-                <MapPin className="w-3 h-3 text-[var(--color-primary)]" />
-                <span className="text-xs font-bold tracking-wide text-[var(--color-primary)] uppercase">
-                  {product.origin}
-                </span>
+            {product.origin && (
+              <div className="absolute top-4 left-4 flex flex-col gap-2">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm border border-white/50">
+                  <MapPin className="w-3 h-3 text-[var(--color-primary)]" />
+                  <span className="text-xs font-bold tracking-wide text-[var(--color-primary)] uppercase">
+                    {product.origin}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
 
-            {!product.inStock && (
+            {product.inStock === false && (
               <div className="absolute top-4 right-4">
                 <span className="px-3 py-1.5 bg-[var(--color-secondary)]/90 backdrop-blur-md text-white text-xs font-bold rounded-full shadow-sm">
                   Изчерпан
@@ -100,7 +102,7 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
               >
                 <Phone className="w-5 h-5" />
               </button>
-              {product.inStock && (
+              {product.inStock !== false && (
                 <button
                   onClick={(e) => { e.stopPropagation(); e.preventDefault(); setIsModalOpen(true); }}
                   className="flex items-center justify-center w-12 h-12 bg-[var(--color-primary)] text-white rounded-full shadow-lg hover:bg-[var(--color-primary-dark)] transition-colors"
@@ -125,9 +127,11 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
               {product.name}
             </h3>
 
-            <p className="text-sm text-[var(--color-gray-600)] mb-4 line-clamp-2">
-              {product.description}
-            </p>
+            {product.description && (
+              <p className="text-sm text-[var(--color-gray-600)] mb-4 line-clamp-2">
+                {product.description}
+              </p>
+            )}
 
             {/* Divider */}
             <div className="w-full h-px bg-[var(--color-gray-100)] mb-4" />
@@ -143,18 +147,20 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
                     лв
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-sm font-semibold text-gray-600">
-                    {priceEur}
-                  </span>
-                  <span className="text-xs text-gray-400">
-                    € / {product.priceUnit.replace('лв/', '')}
-                  </span>
-                </div>
+                {product.priceUnit && (
+                  <div className="flex items-baseline gap-1 mt-0.5">
+                    <span className="text-sm font-semibold text-gray-600">
+                      {priceEur}
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      € / {product.priceUnit.replace('лв/', '')}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Order Button */}
-              {product.inStock ? (
+              {product.inStock !== false ? (
                 <button
                   onClick={(e) => { e.stopPropagation(); e.preventDefault(); setIsModalOpen(true); }}
                   className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-semibold rounded-full hover:bg-[var(--color-primary-dark)] transition-colors shadow-sm"

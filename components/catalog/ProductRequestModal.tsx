@@ -12,7 +12,7 @@ interface Product {
   id: string;
   name: string;
   price: number;
-  priceUnit: string;
+  priceUnit?: string;
   image: string;
 }
 
@@ -52,8 +52,8 @@ export function ProductRequestModal({ product, isOpen, onClose, eurRate = 1.9558
           ...formData,
           productId: product.id,
           productName: product.name,
-          unit: product.priceUnit.includes("стрък") ? "стръка" :
-                product.priceUnit.includes("саксия") ? "саксия" : "бр.",
+          unit: product.priceUnit?.includes("стрък") ? "стръка" :
+                product.priceUnit?.includes("саксия") ? "саксия" : "бр.",
         }),
       });
 
@@ -128,9 +128,11 @@ export function ProductRequestModal({ product, isOpen, onClose, eurRate = 1.9558
                   <span className="text-sm text-gray-500">
                     ({priceEur} €)
                   </span>
-                  <span className="text-sm text-gray-400">
-                    / {product.priceUnit.replace("лв/", "")}
-                  </span>
+                  {product.priceUnit && (
+                    <span className="text-sm text-gray-400">
+                      / {product.priceUnit.replace("лв/", "")}
+                    </span>
+                  )}
                 </div>
               </div>
               <button
