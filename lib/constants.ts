@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Garden Center Exotic",
   nameBg: "Градински Център Екзотик",
   description: "Директен вносител на рязани цветя и растения от 1998 г. Премиум рози от Еквадор, орхидеи, екзотични растения. Студена верига за максимална свежест. Варна и Нова Загора.",
-  url: "https://gardenexotic.bg",
+  url: "https://www.exoticflowers.bg",
   founded: 1998,
   ogImage: "/images/og-image.jpg",
   yearsInBusiness: new Date().getFullYear() - 1998,

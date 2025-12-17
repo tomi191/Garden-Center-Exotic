@@ -1,9 +1,15 @@
-# *
+# Robots.txt for Градински Център Екзотик
+# https://www.exoticflowers.bg
+
 User-agent: *
 Allow: /
 
+# Disallow admin routes
+Disallow: /admin
+Disallow: /api
+
 # Host
-Host: https://exotic-garden.vercel.app
+Host: https://www.exoticflowers.bg
 
 # Sitemaps
-Sitemap: https://exotic-garden.vercel.app/sitemap.xml
+Sitemap: https://www.exoticflowers.bg/sitemap.xml
