@@ -43,11 +43,12 @@ const categoryOptions = [
 ];
 
 const originOptions = [
+  { value: "Еквадор", label: "Еквадор" },
   { value: "Колумбия", label: "Колумбия" },
   { value: "Кения", label: "Кения" },
-  { value: "Гърция", label: "Гърция" },
   { value: "Нидерландия", label: "Нидерландия" },
   { value: "Турция", label: "Турция" },
+  { value: "Гърция", label: "Гърция" },
   { value: "България", label: "България" },
 ];
 

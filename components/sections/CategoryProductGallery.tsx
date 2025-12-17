@@ -29,12 +29,13 @@ interface CategoryProductGalleryProps {
 
 const origins = [
   { id: "all", label: "Всички" },
+  { id: "Еквадор", label: "Еквадор" },
   { id: "Колумбия", label: "Колумбия" },
   { id: "Кения", label: "Кения" },
-  { id: "Гърция", label: "Гърция" },
   { id: "Нидерландия", label: "Нидерландия" },
+  { id: "Турция", label: "Турция" },
+  { id: "Гърция", label: "Гърция" },
   { id: "България", label: "България" },
-  { id: "Еквадор", label: "Еквадор" },
 ];
 
 const sortOptions = [
