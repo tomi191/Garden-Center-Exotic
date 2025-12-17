@@ -1,11 +1,12 @@
 import { supabaseAdmin } from "./supabase";
 
-// Fetch all products with optional filters
+// Fetch products for PUBLIC catalog (only in-stock by default)
 export async function getProducts(filters?: {
   category?: string;
   origin?: string;
   inStock?: boolean;
   featured?: boolean;
+  includeOutOfStock?: boolean; // For admin use only
 }) {
   let query = supabaseAdmin.from("Product").select("*");
 
@@ -15,9 +16,17 @@ export async function getProducts(filters?: {
   if (filters?.origin) {
     query = query.eq("origin", filters.origin);
   }
-  if (filters?.inStock !== undefined) {
-    query = query.eq("inStock", filters.inStock);
+
+  // By default, only show in-stock products (for public catalog)
+  // Use includeOutOfStock: true for admin panel
+  if (!filters?.includeOutOfStock) {
+    if (filters?.inStock !== undefined) {
+      query = query.eq("inStock", filters.inStock);
+    } else {
+      query = query.eq("inStock", true);
+    }
   }
+
   if (filters?.featured !== undefined) {
     query = query.eq("featured", filters.featured);
   }
@@ -66,13 +75,19 @@ export async function getProductBySlug(slug: string) {
   return data;
 }
 
-// Fetch products by category
-export async function getProductsByCategory(category: string) {
-  const { data, error } = await supabaseAdmin
+// Fetch products by category (only in-stock for public catalog)
+export async function getProductsByCategory(category: string, includeOutOfStock = false) {
+  let query = supabaseAdmin
     .from("Product")
     .select("*")
-    .eq("category", category)
-    .order("createdAt", { ascending: false });
+    .eq("category", category);
+
+  // Only show in-stock products for public catalog
+  if (!includeOutOfStock) {
+    query = query.eq("inStock", true);
+  }
+
+  const { data, error } = await query.order("createdAt", { ascending: false });
 
   if (error) {
     console.error("Error fetching products by category:", error);
@@ -82,11 +97,12 @@ export async function getProductsByCategory(category: string) {
   return data || [];
 }
 
-// Get product count by category
+// Get product count by category (only counts in-stock products)
 export async function getProductCountByCategory() {
   const { data, error } = await supabaseAdmin
     .from("Product")
-    .select("category");
+    .select("category, inStock")
+    .eq("inStock", true);
 
   if (error) {
     console.error("Error fetching product count:", error);
@@ -119,11 +135,12 @@ export async function getAllProductSlugs() {
   return (data || []).map((p) => p.slug).filter(Boolean);
 }
 
-// Get all products with slug and category for sitemap generation
+// Get all products with slug and category for sitemap generation (only in-stock)
 export async function getAllProductsForSitemap() {
   const { data, error } = await supabaseAdmin
     .from("Product")
-    .select("slug, category");
+    .select("slug, category, inStock")
+    .eq("inStock", true);
 
   if (error) {
     console.error("Error fetching products for sitemap:", error);
