@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Instagram } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { BeholdWidget } from "@behold/react";
+import BeholdWidget from "@behold/react";
 
 // Behold Feed ID - Replace with your actual feed ID from behold.so
 // Get your free feed at: https://behold.so
