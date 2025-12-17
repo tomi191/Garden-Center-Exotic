@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://exotic-garden.vercel.app',
-  generateRobotsTxt: true,
+  siteUrl: process.env.SITE_URL || 'https://www.exoticflowers.bg',
+  generateRobotsTxt: false,
   generateIndexSitemap: false,
   exclude: ['/api/*', '/server-sitemap.xml'],
   robotsTxtOptions: {
