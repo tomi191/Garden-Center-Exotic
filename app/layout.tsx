@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ConditionalLayout } from "@/components/layout/ConditionalLayout";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { SettingsProvider } from "@/components/providers/SettingsProvider";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -129,9 +130,10 @@ export default function RootLayout({
         <BackgroundAtmosphere />
         <BotanicalBranding />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <SmoothScrollProvider>
-            <ConditionalLayout>{children}</ConditionalLayout>
-            <Toaster
+          <SettingsProvider>
+            <SmoothScrollProvider>
+              <ConditionalLayout>{children}</ConditionalLayout>
+              <Toaster
               position="top-right"
               toastOptions={{
                 duration: 4000,
@@ -141,7 +143,8 @@ export default function RootLayout({
                 },
               }}
             />
-          </SmoothScrollProvider>
+            </SmoothScrollProvider>
+          </SettingsProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

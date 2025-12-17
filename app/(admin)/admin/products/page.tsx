@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { ProductsTable } from "@/components/admin/ProductsTable";
+import { PriceToggle } from "@/components/admin/PriceToggle";
 import { supabaseAdmin } from "@/lib/supabase";
 import { Plus } from "lucide-react";
 
@@ -26,12 +27,15 @@ export default async function AdminProductsPage() {
             {products?.length || 0} продукта в каталога
           </p>
         </div>
-        <Link href="/admin/products/new">
-          <Button className="flex items-center gap-2">
-            <Plus className="w-4 h-4" />
-            Добави Продукт
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3">
+          <PriceToggle />
+          <Link href="/admin/products/new">
+            <Button className="flex items-center gap-2">
+              <Plus className="w-4 h-4" />
+              Добави Продукт
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Products Table */}

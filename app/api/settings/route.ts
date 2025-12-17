@@ -18,6 +18,7 @@ export async function GET() {
         eurRate: 1.9558,
         storePhone: "+359 888 123 456",
         storeEmail: "info@gardenexotic.bg",
+        hidePrices: false,
       });
     }
 
@@ -52,6 +53,7 @@ export async function PUT(request: NextRequest) {
         eurRate: body.eurRate,
         storePhone: body.storePhone,
         storeEmail: body.storeEmail,
+        hidePrices: body.hidePrices ?? false,
         updatedAt: new Date().toISOString(),
       })
       .select()

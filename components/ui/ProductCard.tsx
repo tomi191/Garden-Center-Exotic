@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { MapPin, Phone, ShoppingBag } from "lucide-react";
+import { MapPin, Phone, ShoppingBag, MessageCircle } from "lucide-react";
 import { ProductRequestModal } from "@/components/catalog/ProductRequestModal";
 import { LOCATIONS } from "@/lib/constants";
+import { useSettings } from "@/components/providers/SettingsProvider";
 
 interface Product {
   id: string;
@@ -33,9 +34,11 @@ interface ProductCardProps {
 export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink = false }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+  const { settings } = useSettings();
 
   const priceEur = (product.price / eurRate).toFixed(2);
   const productUrl = product.slug ? `/produkti/produkt/${product.slug}` : null;
+  const hidePrices = settings.hidePrices;
 
   const handleCardClick = () => {
     if (!disableLink && productUrl) {
@@ -137,27 +140,41 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
             <div className="w-full h-px bg-[var(--color-gray-100)] mb-4" />
 
             <div className="mt-auto flex items-end justify-between">
-              <div className="flex flex-col">
-                <span className="text-xs text-[var(--color-gray-400)] font-medium uppercase tracking-wide">Цена</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-serif text-2xl font-bold text-[var(--color-primary)]">
-                    {product.price.toFixed(2)}
+              {hidePrices ? (
+                /* Hidden prices - show inquiry prompt */
+                <div className="flex flex-col">
+                  <span className="text-xs text-[var(--color-gray-400)] font-medium uppercase tracking-wide mb-1">
+                    Цена при запитване
                   </span>
-                  <span className="text-sm font-medium text-[var(--color-gray-500)]">
-                    лв
-                  </span>
+                  <div className="flex items-center gap-1.5 text-[var(--color-primary)]">
+                    <MessageCircle className="w-4 h-4" />
+                    <span className="text-sm font-medium">Свържете се с нас</span>
+                  </div>
                 </div>
-                {product.priceUnit && (
-                  <div className="flex items-baseline gap-1 mt-0.5">
-                    <span className="text-sm font-semibold text-gray-600">
-                      {priceEur}
+              ) : (
+                /* Visible prices */
+                <div className="flex flex-col">
+                  <span className="text-xs text-[var(--color-gray-400)] font-medium uppercase tracking-wide">Цена</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="font-serif text-2xl font-bold text-[var(--color-primary)]">
+                      {product.price.toFixed(2)}
                     </span>
-                    <span className="text-xs text-gray-400">
-                      € / {product.priceUnit.replace('лв/', '')}
+                    <span className="text-sm font-medium text-[var(--color-gray-500)]">
+                      лв
                     </span>
                   </div>
-                )}
-              </div>
+                  {product.priceUnit && (
+                    <div className="flex items-baseline gap-1 mt-0.5">
+                      <span className="text-sm font-semibold text-gray-600">
+                        {priceEur}
+                      </span>
+                      <span className="text-xs text-gray-400">
+                        € / {product.priceUnit.replace('лв/', '')}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Order Button */}
               {product.inStock !== false ? (
@@ -165,7 +182,7 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
                   onClick={(e) => { e.stopPropagation(); e.preventDefault(); setIsModalOpen(true); }}
                   className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-semibold rounded-full hover:bg-[var(--color-primary-dark)] transition-colors shadow-sm"
                 >
-                  Поръчай
+                  {hidePrices ? "Запитване" : "Поръчай"}
                 </button>
               ) : (
                 <span className="px-4 py-2 bg-gray-100 text-gray-500 text-sm font-medium rounded-full">
