@@ -18,7 +18,7 @@ const CATEGORY_SEO: Record<string, {
   idealFor: string;
 }> = {
   "ryazan-tsvyat": {
-    name: "Рязан цвят",
+    name: "Отрязан цвят",
     suitableFor: ["Букети", "Подаръци", "Сватби", "Събития", "Декорация"],
     careLevel: "Сменяйте водата на всеки 2 дни",
     idealFor: "Перфектен за букети и специални поводи",

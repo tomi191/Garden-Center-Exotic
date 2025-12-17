@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   name: "Garden Center Exotic",
   nameBg: "Градински Център Екзотик",
-  description: "Директен вносител на рязани цветя и растения от 1998 г. Премиум рози от Еквадор, орхидеи, екзотични растения. Студена верига за максимална свежест. Варна и Нова Загора.",
+  description: "Директен вносител на отрязани цветя и растения от 1998 г. Премиум рози от Еквадор, орхидеи, екзотични растения. Студена верига за максимална свежест. Варна и Нова Загора.",
   url: "https://www.exoticflowers.bg",
   founded: 1998,
   ogImage: "/images/og-image.jpg",
@@ -119,7 +119,7 @@ export const TRUST_SIGNALS = [
 export const PRODUCT_CATEGORIES = [
   {
     slug: "ryazan-tsvyat",
-    name: "Рязани Цветя",
+    name: "Отрязани Цветя",
     description: "Премиум качество, над 2 седмици свежест",
     image: "/images/categories/cut-flowers.png",
     subcategories: [

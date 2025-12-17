@@ -76,7 +76,7 @@ const jsonLd = {
     itemListElement: [
       {
         "@type": "OfferCatalog",
-        name: "Рязани цветя",
+        name: "Отрязани цветя",
         description: "Премиум рози, орхидеи и екзотични цветя от Еквадор и Холандия",
       },
       {

@@ -125,7 +125,7 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
           <div className="relative p-6 flex-grow flex flex-col">
             <div className="mb-1">
                <span className="text-xs font-semibold text-[var(--color-secondary)] tracking-wider uppercase">
-                 {product.category === 'ryazan-tsvyat' ? 'Рязан Цвят' :
+                 {product.category === 'ryazan-tsvyat' ? 'Отрязан Цвят' :
                   product.category === 'saksiyni-rasteniya' ? 'Саксийни' : 'Градински'}
                </span>
             </div>

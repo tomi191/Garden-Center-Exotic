@@ -14,7 +14,7 @@ const footerLinks = {
     { label: "За нас", href: "/za-nas" },
   ],
   services: [
-    { label: "Рязани цветя", href: "/produkti/ryazani-cvetya" },
+    { label: "Отрязани цветя", href: "/produkti/ryazan-tsvyat" },
     { label: "Саксийни растения", href: "/produkti/saksiyni-rasteniya" },
     { label: "Сватбена декорация", href: "/uslugi" },
     { label: "B2B доставки", href: "/kontakti" },

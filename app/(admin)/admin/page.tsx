@@ -82,7 +82,7 @@ export default async function AdminDashboard() {
     .limit(5);
 
   const categoryLabels: Record<string, string> = {
-    "ryazan-tsvyat": "Рязан цвят",
+    "ryazan-tsvyat": "Отрязан цвят",
     "saksiyni-rasteniya": "Саксийни растения",
     "sezonni-tsvetya": "Сезонни цветя",
     "hrasti-darveta": "Храсти и дървета",

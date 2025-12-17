@@ -36,7 +36,7 @@ interface ProductFormProps {
 }
 
 const categoryOptions = [
-  { value: "ryazan-tsvyat", label: "Рязан Цвят" },
+  { value: "ryazan-tsvyat", label: "Отрязан Цвят" },
   { value: "saksiyni-rasteniya", label: "Саксийни Растения" },
   { value: "sezonni-tsvetya", label: "Сезонни Цветя" },
   { value: "hrasti-darveta", label: "Храсти и Дървета" },

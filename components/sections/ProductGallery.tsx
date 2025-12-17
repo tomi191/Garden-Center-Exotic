@@ -39,7 +39,7 @@ const origins = [
 
 const categories = [
   { id: "all", label: "Всички Категории" },
-  { id: "ryazan-tsvyat", label: "Рязан Цвят" },
+  { id: "ryazan-tsvyat", label: "Отрязан Цвят" },
   { id: "saksiyni-rasteniya", label: "Саксийни" },
   { id: "sezonni-tsvetya", label: "Сезонни" },
   { id: "hrasti-darveta", label: "Храсти & Дървета" },

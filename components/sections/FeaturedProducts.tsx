@@ -39,7 +39,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
             transition={{ duration: 0.6 }}
           >
             <span className="text-[var(--color-secondary)] font-semibold tracking-wide uppercase text-xs mb-1 block">
-              Рязани цветя
+              Отрязани цветя
             </span>
             <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-[var(--color-primary-dark)]">
               Премиум качество

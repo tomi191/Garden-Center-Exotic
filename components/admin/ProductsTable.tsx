@@ -37,7 +37,7 @@ interface ProductsTableProps {
 }
 
 const categoryLabels: Record<string, string> = {
-  "ryazan-tsvyat": "Рязан цвят",
+  "ryazan-tsvyat": "Отрязан цвят",
   "saksiyni-rasteniya": "Саксийни",
   "sezonni-tsvetya": "Сезонни",
   "hrasti-darveta": "Храсти",
@@ -128,7 +128,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
               className="h-10 px-4 pr-8 rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 cursor-pointer hover:bg-gray-50 transition-colors w-full md:w-auto"
             >
               <option value="all">Всички категории</option>
-              <option value="ryazan-tsvyat">Рязан цвят</option>
+              <option value="ryazan-tsvyat">Отрязан цвят</option>
               <option value="saksiyni-rasteniya">Саксийни растения</option>
               <option value="sezonni-tsvetya">Сезонни цветя</option>
               <option value="hrasti-darveta">Храсти и дървета</option>
