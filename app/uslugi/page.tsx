@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Building2, Flower, Truck } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Sparkles, Building2, Flower, Phone } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { PageHero } from "@/components/sections/PageHero";
 import { ServiceShowcase } from "@/components/sections/ServiceShowcase";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ const mainServices = [
       "Консултации за болни растения",
       "Пресаждане на място"
     ],
-    image: "https://images.unsplash.com/photo-1604762524889-3e2fcc145683?q=80&w=2071&auto=format&fit=crop",
+    image: "/images/services/consultations.png",
     href: "/kontakti",
     cta: "Заявете консултация"
   },
@@ -36,7 +36,7 @@ const mainServices = [
       "Поддръжка на зелени площи",
       "Корпоративни подаръци"
     ],
-    image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/services/b2b.png",
     href: "/uslugi/za-biznesa",
     cta: "Вижте B2B оферти"
   }
@@ -45,14 +45,67 @@ const mainServices = [
 export default function ServicesPage() {
   return (
     <>
-      <PageHero
-        title="Нашите Услуги"
-        description="Отвъд простото предлагане на цветя. Ние създаваме атмосфера."
-      />
+      {/* Hero Section - consistent with other pages */}
+      <section className="relative min-h-[70vh] flex items-center">
+        {/* Full Screen Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/backgrounds/services-bg.jpg"
+            alt="Нашите Услуги"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/25" />
+        </div>
 
-      <Section className="py-20 bg-white">
+        <Container className="relative z-10 py-20">
+          <div className="max-w-2xl">
+            <span className="inline-block text-[var(--color-secondary)] text-sm font-medium tracking-wider uppercase mb-4">
+              Професионални Решения
+            </span>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6 leading-tight drop-shadow-lg">
+              Нашите Услуги
+            </h1>
+
+            <p className="!text-white text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md">
+              Отвъд простото предлагане на цветя. Ние създаваме атмосфера и превръщаме
+              всеки повод в незабравимо преживяване.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link href="/kontakti">
+                <Button className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] text-white rounded-full px-6">
+                  Заявете консултация
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+              <a href="tel:0895670370">
+                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-6">
+                  <Phone className="w-4 h-4 mr-2" />
+                  089 567 0370
+                </Button>
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Main Services Section */}
+      <Section className="py-16 md:py-20 bg-white">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12">
+          {/* Section Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <span className="text-[var(--color-secondary)] font-semibold tracking-wider uppercase text-sm mb-2 block">
+              Какво предлагаме
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-primary-dark)]">
+              Основни Направления
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {mainServices.map((service, index) => (
               <div 
                 key={index} 

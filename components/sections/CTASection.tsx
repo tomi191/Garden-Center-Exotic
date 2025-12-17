@@ -50,35 +50,36 @@ export function CTASection({
   };
 
   return (
-    <Section className={cn(bgVariants[bgVariant], className)}>
+    <Section className={cn(bgVariants[bgVariant], "py-10 md:py-16", className)}>
       <Container>
-        <Card className={cn(cardVariants[variant], "border-0 shadow-xl")}>
-          <CardContent className="p-8 md:p-12 text-center">
+        <Card className={cn(cardVariants[variant], "border-0 shadow-lg rounded-2xl md:rounded-3xl")}>
+          <CardContent className="p-5 md:p-8 text-center">
             {/* Icon */}
             {Icon && (
-              <Icon className="w-16 h-16 mx-auto mb-6 opacity-90" />
+              <Icon className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4 opacity-90" />
             )}
             {emoji && (
-              <div className="text-6xl mb-6">{emoji}</div>
+              <div className="text-4xl md:text-5xl mb-4">{emoji}</div>
             )}
 
             {/* Content */}
-            <h2 className="text-white mb-4">{title}</h2>
-            <p className="text-xl text-white/90 mb-8 mx-auto">
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">{title}</h2>
+            <p className="text-sm md:text-base text-white/80 mb-5 max-w-lg mx-auto leading-relaxed">
               {description}
             </p>
 
             {/* Buttons */}
             {buttons.length > 0 && (
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 {buttons.map((button, index) => (
                   <Link key={index} href={button.href}>
                     <Button
-                      size={button.size || "lg"}
+                      size="sm"
                       variant={button.variant}
                       className={cn(
+                        "rounded-full",
                         button.variant === "primary" && "bg-white text-[var(--color-primary)] hover:bg-gray-100",
-                        button.variant === "outline" && "border-white text-white hover:bg-white/10"
+                        button.variant === "outline" && "border-white/30 text-white hover:bg-white/10"
                       )}
                     >
                       {button.label}

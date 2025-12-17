@@ -170,24 +170,24 @@ export function ProductGallery({ initialProducts }: ProductGalleryProps) {
         </Container>
       </div>
 
-      <Container className="pb-24">
+      <Container className="pb-16 md:pb-20">
         {/* Results Info */}
-        <div className="flex items-center justify-between mb-8">
-           <h2 className="font-serif text-2xl font-bold text-[var(--color-primary-dark)]">
-             Резултати <span className="text-[var(--color-gray-400)] font-sans text-lg font-normal">({filteredProducts.length})</span>
+        <div className="flex items-center justify-between mb-6">
+           <h2 className="font-serif text-lg md:text-xl font-bold text-[var(--color-primary-dark)]">
+             Резултати <span className="text-[var(--color-gray-400)] font-sans text-sm font-normal">({filteredProducts.length})</span>
            </h2>
            {(selectedCategory !== 'all' || selectedOrigin !== 'all' || searchQuery) && (
-              <button 
+              <button
                 onClick={clearFilters}
-                className="text-sm text-red-500 hover:text-red-600 flex items-center gap-1 font-medium"
+                className="text-xs text-red-500 hover:text-red-600 flex items-center gap-1 font-medium"
               >
-                <X className="w-4 h-4" /> Изчисти филтрите
+                <X className="w-3.5 h-3.5" /> Изчисти филтрите
               </button>
            )}
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8">
            <AnimatePresence mode="popLayout">
              {filteredProducts.map((product, index) => (
                <ProductCard key={product.id} product={product} index={index} />
@@ -196,13 +196,13 @@ export function ProductGallery({ initialProducts }: ProductGalleryProps) {
         </div>
 
         {filteredProducts.length === 0 && (
-           <div className="text-center py-20 bg-white rounded-[2rem] border border-dashed border-[var(--color-gray-300)]">
-              <div className="w-16 h-16 bg-[var(--color-gray-100)] rounded-full flex items-center justify-center mx-auto mb-4">
-                 <Search className="w-8 h-8 text-[var(--color-gray-400)]" />
+           <div className="text-center py-12 md:py-16 bg-white rounded-xl md:rounded-2xl border border-dashed border-[var(--color-gray-300)]">
+              <div className="w-12 h-12 bg-[var(--color-gray-100)] rounded-full flex items-center justify-center mx-auto mb-3">
+                 <Search className="w-6 h-6 text-[var(--color-gray-400)]" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--color-gray-700)] mb-2">Няма намерени продукти</h3>
-              <p className="text-[var(--color-gray-500)]">Опитайте с други критерии за търсене.</p>
-              <Button variant="outline" className="mt-6" onClick={clearFilters}>Изчисти всички филтри</Button>
+              <h3 className="text-base md:text-lg font-bold text-[var(--color-gray-700)] mb-1.5">Няма намерени продукти</h3>
+              <p className="text-xs md:text-sm text-[var(--color-gray-500)]">Опитайте с други критерии за търсене.</p>
+              <Button variant="outline" size="sm" className="mt-4 rounded-full" onClick={clearFilters}>Изчисти всички филтри</Button>
            </div>
         )}
       </Container>

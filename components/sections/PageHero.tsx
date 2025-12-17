@@ -6,7 +6,8 @@ interface PageHeroProps {
   title: string;
   description?: string;
   badge?: ReactNode;
-  variant?: "gradient" | "solid" | "light";
+  variant?: "image" | "gradient" | "solid" | "light";
+  backgroundImage?: string;
   children?: ReactNode;
   className?: string;
 }
@@ -16,10 +17,12 @@ export function PageHero({
   description,
   badge,
   variant = "light",
+  backgroundImage,
   children,
   className,
 }: PageHeroProps) {
   const variants = {
+    image: "text-white",
     gradient:
       "bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-white",
     solid: "bg-[var(--color-primary)] text-white",
@@ -27,29 +30,47 @@ export function PageHero({
   };
 
   const hasWave = variant !== "light";
+  const hasImage = variant === "image" && backgroundImage;
+
+  // Different padding for image variant (taller hero)
+  const paddingClasses = variant === "image"
+    ? "pt-28 pb-20 md:pt-36 md:pb-28"
+    : "pt-20 pb-10 md:pt-24 md:pb-14";
 
   return (
     <Section
       className={cn(
         variants[variant],
-        "pt-24 pb-16 relative overflow-hidden",
+        paddingClasses,
+        "relative overflow-hidden",
         className
       )}
     >
+      {/* Background Image */}
+      {hasImage && (
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+        </>
+      )}
+
       {/* Background Pattern for gradient/solid variants */}
-      {variant !== "light" && (
+      {variant !== "light" && variant !== "image" && (
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-32 h-32 border-4 border-white rounded-full"></div>
-          <div className="absolute bottom-10 right-10 w-48 h-48 border-4 border-white rounded-full"></div>
+          <div className="absolute top-10 left-10 w-24 h-24 md:w-32 md:h-32 border-2 md:border-4 border-white rounded-full"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 md:w-48 md:h-48 border-2 md:border-4 border-white rounded-full"></div>
         </div>
       )}
 
       <Container className="relative z-10">
-        <div className="text-center mx-auto">
+        <div className="text-center mx-auto max-w-2xl">
           {badge && (
             <div
               className={cn(
-                "inline-block px-4 py-2 rounded-full text-sm font-medium mb-6",
+                "inline-block px-3 py-1.5 rounded-full text-xs font-medium mb-4",
                 variant === "light"
                   ? "bg-[var(--color-accent)]/20 text-[var(--color-secondary)]"
                   : "bg-white/20 backdrop-blur-sm text-white"
@@ -60,10 +81,10 @@ export function PageHero({
           )}
           <h1
             className={cn(
-              "mb-6",
+              "font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-3",
               variant === "light"
                 ? "text-[var(--color-foreground)]"
-                : "text-white"
+                : "!text-white"
             )}
           >
             {title}
@@ -71,10 +92,10 @@ export function PageHero({
           {description && (
             <p
               className={cn(
-                "text-lg md:text-xl",
+                "text-sm md:text-base leading-relaxed max-w-xl mx-auto",
                 variant === "light"
-                  ? "text-[var(--color-gray-700)]"
-                  : "text-white/90"
+                  ? "text-[var(--color-gray-600)]"
+                  : "!text-white"
               )}
             >
               {description}

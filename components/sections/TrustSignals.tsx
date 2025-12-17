@@ -1,63 +1,41 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Warehouse, Users, MapPin } from "lucide-react";
-import { Container, Section } from "@/components/ui/Container";
+import { Truck, Snowflake, BadgePercent, Gift } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 
-const signals = [
-  {
-    icon: Calendar,
-    title: "Наследство от 1998",
-    description: "Над 27 години история в отглеждането и вноса на растения.",
-  },
-  {
-    icon: Warehouse,
-    title: "Студена Верига",
-    description: "Гарантирана свежест чрез модерни климатизирани складове.",
-  },
-  {
-    icon: Users,
-    title: "Експертен Екип",
-    description: "Професионални флористи, готови да съдействат за всеки повод.",
-  },
-  {
-    icon: MapPin,
-    title: "Две Локации",
-    description: "Удобни шоуруми във Варна и Нова Загора.",
-  },
+const benefits = [
+  { icon: Truck, text: "Бърза доставка" },
+  { icon: Snowflake, text: "14+ дни свежест" },
+  { icon: BadgePercent, text: "Цени без посредник" },
+  { icon: Gift, text: "Безплатна опаковка" },
 ];
 
 export function TrustSignals() {
   return (
-    <Section className="py-20">
+    <section className="py-4 bg-[var(--color-primary)]">
       <Container>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {signals.map((signal, index) => {
-            const Icon = signal.icon;
+        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
             return (
               <motion.div
-                key={signal.title}
-                initial={{ opacity: 0, y: 20 }}
+                key={benefit.text}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center group"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="flex items-center gap-2"
               >
-                <div className="w-20 h-20 rounded-full bg-[var(--color-primary-light)]/40 flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-[var(--color-primary)] group-hover:scale-110">
-                  <Icon className="w-8 h-8 text-[var(--color-primary-dark)] transition-colors group-hover:text-white" />
-                </div>
-                
-                <h3 className="font-serif text-xl font-bold mb-3 text-[var(--color-foreground)]">
-                  {signal.title}
-                </h3>
-                <p className="text-[var(--color-gray-600)] leading-relaxed text-sm max-w-xs">
-                  {signal.description}
-                </p>
+                <Icon className="w-5 h-5 text-white/90" />
+                <span className="text-sm md:text-base font-medium text-white">
+                  {benefit.text}
+                </span>
               </motion.div>
             );
           })}
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

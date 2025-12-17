@@ -1,8 +1,10 @@
 import { Metadata } from "next";
-import { Calendar, Tag, User, Clock } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Calendar, Tag, User, Clock, ArrowRight, BookOpen } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
-import { PageHero } from "@/components/sections/PageHero";
+import { Button } from "@/components/ui/Button";
 import { blogPosts, getBlogCategories } from "@/data/blog";
 
 export const metadata: Metadata = {
@@ -16,13 +18,68 @@ const categories = getBlogCategories();
 export default function BlogPage() {
   return (
     <>
-      <PageHero
-        title="Блог"
-        description="Сезонни съвети, ръководства и новини от света на растенията"
-      />
+      {/* Hero Section - consistent with other pages */}
+      <section className="relative min-h-[70vh] flex items-center">
+        {/* Full Screen Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/backgrounds/blog-bg.png"
+            alt="Блог за Растения"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/25" />
+        </div>
 
-      <Section className="bg-white py-16">
+        <Container className="relative z-10 py-20">
+          <div className="max-w-2xl">
+            <span className="inline-block text-[var(--color-secondary)] text-sm font-medium tracking-wider uppercase mb-4">
+              Статии & Съвети
+            </span>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6 leading-tight drop-shadow-lg">
+              Зелен Блог
+            </h1>
+
+            <p className="!text-white text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md">
+              Сезонни съвети, ръководства и новини от света на растенията.
+              Научете тайните на успешното градинарство от нашите експерти.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link href="#articles">
+                <Button className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] text-white rounded-full px-6">
+                  Разгледай статиите
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+              <Link href="/grizhi">
+                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-6">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Наръчник за грижи
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <Section id="articles" className="bg-white py-16 md:py-20">
         <Container>
+          {/* Section Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <span className="text-[var(--color-secondary)] font-semibold tracking-wider uppercase text-sm mb-2 block">
+              Последни публикации
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-primary-dark)] mb-4">
+              Статии и Ръководства
+            </h2>
+            <p className="text-[var(--color-gray-600)] max-w-2xl mx-auto">
+              Открийте полезни съвети за грижа за растенията и сезонни препоръки от нашите експерти
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <Card key={post.id} className="h-full group hover:shadow-lg transition-shadow">
@@ -96,10 +153,15 @@ export default function BlogPage() {
       </Section>
 
       {/* Категории */}
-      <Section className="bg-[var(--color-light)] py-12">
+      <Section className="bg-[var(--color-light)] py-16 md:py-20">
         <Container>
-          <div className="text-center mb-8">
-            <h2 className="mb-4">Категории</h2>
+          <div className="text-center mb-12">
+            <span className="text-[var(--color-secondary)] font-semibold tracking-wider uppercase text-sm mb-2 block">
+              Теми
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-primary-dark)] mb-4">
+              Категории
+            </h2>
             <p className="text-[var(--color-gray-600)]">
               Разгледайте статиите по теми
             </p>

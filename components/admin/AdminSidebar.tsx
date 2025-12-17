@@ -11,7 +11,8 @@ import {
   LogOut,
   ExternalLink,
   ClipboardList,
-  Warehouse
+  Warehouse,
+  Sparkles
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +41,11 @@ const navItems = [
     title: "Добави Продукт",
     href: "/admin/products/new",
     icon: PlusCircle,
+  },
+  {
+    title: "AI Блог Генератор",
+    href: "/admin/blog-post-generator",
+    icon: Sparkles,
   },
 ];
 

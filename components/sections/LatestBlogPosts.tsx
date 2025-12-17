@@ -35,36 +35,37 @@ const blogPosts = [
 
 export function LatestBlogPosts() {
   return (
-    <Section className="bg-[var(--color-light)] py-24">
+    <Section className="bg-[var(--color-light)] py-12 md:py-24">
       <Container>
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 md:mb-16 gap-4 md:gap-6">
            <motion.div
              initial={{ opacity: 0, x: -20 }}
              whileInView={{ opacity: 1, x: 0 }}
              viewport={{ once: true }}
            >
-             <span className="text-[var(--color-secondary)] font-bold tracking-widest uppercase text-sm mb-2 block">
+             <span className="text-[var(--color-secondary)] font-bold tracking-widest uppercase text-xs md:text-sm mb-1 md:mb-2 block">
                Блог & Съвети
              </span>
-             <h2 className="font-serif text-4xl md:text-5xl font-bold text-[var(--color-primary-dark)]">
+             <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-[var(--color-primary-dark)]">
                Актуално от Екзотик
              </h2>
            </motion.div>
-           
+
            <motion.div
              initial={{ opacity: 0, x: 20 }}
              whileInView={{ opacity: 1, x: 0 }}
              viewport={{ once: true }}
            >
              <Link href="/blog">
-               <Button variant="outline" className="border-gray-300 hover:border-[var(--color-primary)]">
+               <Button variant="outline" size="sm" className="border-gray-300 hover:border-[var(--color-primary)] text-sm">
                  Всички статии <ArrowRight className="ml-2 w-4 h-4" />
                </Button>
              </Link>
            </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Horizontal scroll on mobile */}
+        <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
           {blogPosts.map((post, index) => (
             <motion.div
               key={index}
@@ -72,41 +73,41 @@ export function LatestBlogPosts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group cursor-pointer"
+              className="group cursor-pointer flex-shrink-0 w-[280px] md:w-auto snap-center"
             >
-              <div className="relative h-64 rounded-[2rem] overflow-hidden mb-6 shadow-md group-hover:shadow-xl transition-all duration-300">
+              <div className="relative h-48 md:h-64 rounded-2xl md:rounded-[2rem] overflow-hidden mb-4 md:mb-6 shadow-md group-hover:shadow-xl transition-all duration-300">
                 <img
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
+                <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-white/90 backdrop-blur-md px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
                   {post.category}
                 </div>
               </div>
 
-              <div className="space-y-3 px-2">
-                <div className="flex items-center gap-4 text-xs font-medium text-[var(--color-gray-500)]">
+              <div className="space-y-2 md:space-y-3 px-1 md:px-2">
+                <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs font-medium text-[var(--color-gray-500)]">
                   <span className="flex items-center gap-1">
-                     <Calendar className="w-3.5 h-3.5" />
+                     <Calendar className="w-3 h-3 md:w-3.5 md:h-3.5" />
                      {new Date(post.date).toLocaleDateString("bg-BG")}
                   </span>
                   <span className="flex items-center gap-1">
-                     <Clock className="w-3.5 h-3.5" />
+                     <Clock className="w-3 h-3 md:w-3.5 md:h-3.5" />
                      {post.readTime} четене
                   </span>
                 </div>
-                
-                <h3 className="font-serif text-xl font-bold leading-tight group-hover:text-[var(--color-primary)] transition-colors">
+
+                <h3 className="font-serif text-lg md:text-xl font-bold leading-tight group-hover:text-[var(--color-primary)] transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                
-                <p className="text-sm text-[var(--color-gray-600)] line-clamp-2">
+
+                <p className="text-xs md:text-sm text-[var(--color-gray-600)] line-clamp-2">
                   {post.excerpt}
                 </p>
-                
-                <div className="pt-2">
-                  <span className="text-sm font-bold underline decoration-2 underline-offset-4 decoration-[var(--color-secondary)]/30 group-hover:decoration-[var(--color-secondary)] transition-all">
+
+                <div className="pt-1 md:pt-2">
+                  <span className="text-xs md:text-sm font-bold underline decoration-2 underline-offset-4 decoration-[var(--color-secondary)]/30 group-hover:decoration-[var(--color-secondary)] transition-all">
                     Прочети цялата статия
                   </span>
                 </div>

@@ -1,8 +1,10 @@
 import { Metadata } from "next";
-import { Phone, Mail, Clock, MapPin, Navigation, Leaf, Flower2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Phone, Mail, Clock, MapPin, Navigation, ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
-import { PageHero } from "@/components/sections/PageHero";
+import { Button } from "@/components/ui/Button";
 import { Map } from "@/components/ui/Map";
 import { LOCATIONS } from "@/lib/constants";
 
@@ -15,12 +17,54 @@ export const metadata: Metadata = {
 export default function LocationsPage() {
   return (
     <>
-      <PageHero
-        title="Нашите Локации"
-        description="Посетете ни във Варна или Нова Загора. Очакваме ви с богат избор от растения и професионални съвети."
-      />
+      {/* Hero Section - consistent with other pages */}
+      <section className="relative min-h-[70vh] flex items-center">
+        {/* Full Screen Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/backgrounds/lokacii-bg.png"
+            alt="Нашите Локации"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/25" />
+        </div>
 
-      <Section className="bg-white py-16">
+        <Container className="relative z-10 py-20">
+          <div className="max-w-2xl">
+            <span className="inline-block text-[var(--color-secondary)] text-sm font-medium tracking-wider uppercase mb-4">
+              Варна & Нова Загора
+            </span>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6 leading-tight drop-shadow-lg">
+              Нашите Локации
+            </h1>
+
+            <p className="!text-white text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md">
+              Посетете ни във Варна или Нова Загора. Очакваме ви с богат избор
+              от растения и професионални съвети от нашите експерти.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link href="#varna">
+                <Button className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] text-white rounded-full px-6">
+                  Варна
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+              <Link href="#nova-zagora">
+                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-6">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  Нова Загора
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <Section id="varna" className="bg-white py-16 md:py-20">
         <Container>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left - Info */}
@@ -157,7 +201,7 @@ export default function LocationsPage() {
       </Section>
 
       {/* Nova Zagora Location */}
-      <Section className="bg-[var(--color-light)]">
+      <Section id="nova-zagora" className="bg-[var(--color-light)] py-16 md:py-20">
         <Container>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left - Map */}

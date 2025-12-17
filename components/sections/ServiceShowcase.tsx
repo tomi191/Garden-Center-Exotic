@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Package, Truck, Calendar, Users, Building2, Heart, Gift, Sparkles } from "lucide-react";
+import { Truck, Users, Heart, Gift, Sparkles } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
 
@@ -11,125 +11,105 @@ const serviceDetails = [
     title: "Доставка на Цветя",
     description: "Бърза и надеждна доставка на цветя и растения във Варна, Нова Загора и региона",
     examples: [
-      "Експресна доставка в рамките на 2-3 часа",
-      "Планирана доставка на определена дата и час",
-      "Безплатна доставка при поръчки над 50 лв",
-      "Специална опаковка за подарък",
+      "Експресна доставка в деня",
+      "Планирана доставка за конкретен час",
+      "Безплатна над 50 лв",
     ],
-    pricing: "От 5 лв (според локация)",
-    gradient: "from-blue-500 to-cyan-500",
+    pricing: "От 5 лв",
+    gradient: "from-emerald-600 to-green-700",
+    image: "/images/services/delivery.png",
   },
   {
     icon: Gift,
     title: "Букети и Аранжименти",
     description: "Индивидуални букети и флорални композиции за всеки повод",
     examples: [
-      "Романтични букети за двойки",
+      "Романтични букети",
       "Празнични аранжименти",
-      "Траурни венци и букети",
-      "Корпоративни цветя",
+      "Траурни венци",
     ],
-    pricing: "От 25 лв до 200+ лв",
-    gradient: "from-pink-500 to-rose-500",
+    pricing: "25 - 200+ лв",
+    gradient: "from-rose-500 to-orange-600",
+    image: "/images/services/bouquets.png",
   },
   {
     icon: Heart,
-    title: "Специални Поводи",
-    description: "Цветя и декорация за вашите най-важни моменти",
+    title: "Сватби и Събития",
+    description: "Цялостна флорална декорация за вашите най-важни моменти",
     examples: [
-      "Сватби - декорация и булчински букети",
-      "Рождени дни и юбилеи",
+      "Булчински букети",
+      "Декорация на маси и арки",
       "Корпоративни събития",
-      "Свети Валентин, 8 Март, Майски празници",
     ],
     pricing: "Индивидуална оферта",
-    gradient: "from-purple-500 to-violet-500",
-  },
-  {
-    icon: Building2,
-    title: "Озеленяване на Офиси",
-    description: "Професионални решения за озеленяване на работни пространства",
-    examples: [
-      "Избор на подходящи растения",
-      "Поставяне и аранжиране",
-      "Редовна поддръжка и полив",
-      "Замяна на растения при нужда",
-    ],
-    pricing: "От 50 лв/месец",
-    gradient: "from-green-500 to-emerald-500",
-  },
-  {
-    icon: Calendar,
-    title: "Абонаментни Услуги",
-    description: "Редовна доставка на свежи цветя за дома или офиса",
-    examples: [
-      "Седмична доставка на сезонни цветя",
-      "Месечни букети по избор",
-      "Автоматично подновяване",
-      "Специални отстъпки за абонати",
-    ],
-    pricing: "От 80 лв/месец",
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "from-amber-500 to-yellow-600",
+    image: "/images/services/weddings.png",
   },
   {
     icon: Users,
     title: "B2B Партньорства",
-    description: "Дългосрочни договори за хотели, ресторанти и корпорации",
+    description: "Едрови доставки за цветарски магазини и организатори на събития",
     examples: [
-      "Редовна доставка на цветя",
-      "Специални цени за обемни поръчки",
-      "Приоритетно обслужване",
-      "Месечно фактуриране",
+      "Директен внос от борсата",
+      "Преференциални цени",
+      "Онлайн система за поръчки",
     ],
-    pricing: "Индивидуална оферта",
-    gradient: "from-indigo-500 to-purple-500",
+    pricing: "Цени на едро",
+    gradient: "from-slate-600 to-slate-800",
+    image: "/images/services/b2b.png",
   },
   {
     icon: Sparkles,
-    title: "Консултации и Грижи",
-    description: "Професионални съвети за отглеждане на растенията",
+    title: "Консултации",
+    description: "Експертни съвети за грижа и отглеждане на растенията",
     examples: [
-      "Безплатна консултация при покупка",
-      "Препоръки за грижи",
-      "Диагностика на проблеми",
-      "Помощ при избор на растения",
+      "Диагностика на болести",
+      "Съвети за пресаждане",
+      "План за торене",
     ],
-    pricing: "Безплатно",
-    gradient: "from-teal-500 to-cyan-500",
-  },
-  {
-    icon: Package,
-    title: "Специални Пакети",
-    description: "Готови решения за различни нужди и бюджети",
-    examples: [
-      "Пакет 'Романтика' - 101 рози",
-      "Пакет 'Градина в дома' - 5 саксийни растения",
-      "Пакет 'Офис' - месечна доставка",
-      "Пакет 'Сватба' - пълна декорация",
-    ],
-    pricing: "От 150 лв до 2000+ лв",
-    gradient: "from-rose-500 to-pink-500",
+    pricing: "Безплатно*",
+    gradient: "from-teal-500 to-cyan-600",
+    image: "/images/services/consultations.png",
   },
 ];
 
 export function ServiceShowcase() {
   return (
-    <Section className="bg-white py-20">
-      <Container>
+    <Section className="relative py-12 md:py-20 overflow-hidden">
+      {/* Background Image with Opacity */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/backgrounds/services-bg.png"
+          alt=""
+          className="w-full h-full object-cover opacity-50"
+        />
+        <div className="absolute inset-0 bg-[var(--color-background)]/60" />
+      </div>
+
+      {/* Decorative organic blobs */}
+      <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-[var(--color-primary-light)]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[var(--color-secondary-light)]/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none z-[1]" />
+
+      <Container className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-14 max-w-2xl mx-auto"
         >
-          <h2 className="mb-4">Нашите Услуги в Детайли</h2>
-          <p className="text-xl text-[var(--color-gray-600)] mx-auto">
-            От доставка на цветя до пълно озеленяване - ние сме тук за всяка ваша нужда
+          <span className="text-[var(--color-secondary)] font-semibold tracking-wide uppercase text-xs mb-2 block">
+            Нашите услуги
+          </span>
+          <h2 className="font-serif text-2xl md:text-3xl mb-3 text-[var(--color-primary-dark)]">
+            Повече от просто <span className="italic text-[var(--color-primary)]">цветя</span>
+          </h2>
+          <p className="text-sm md:text-base text-[var(--color-gray-600)] leading-relaxed">
+            От индивидуални букети до цялостна сватбена декорация. {new Date().getFullYear() - 1998}+ години опит във флористиката.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {serviceDetails.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -138,48 +118,58 @@ export function ServiceShowcase() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 group">
-                  <CardContent className="p-6">
-                    {/* Икона с градиент */}
+                <Card className="h-full border-0 hover:shadow-xl transition-all duration-300 group bg-white rounded-2xl overflow-hidden shadow-sm">
+                  {/* Image with organic blob shape */}
+                  <div className="relative h-36 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/90 z-10" />
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      style={{
+                        clipPath: "ellipse(100% 85% at 50% 0%)",
+                      }}
+                    />
+                    {/* Floating Icon Badge */}
                     <div
-                      className={`w-14 h-14 mb-4 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                      className={`absolute bottom-2 left-4 z-20 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-all duration-300 bg-gradient-to-br ${service.gradient}`}
                     >
-                      <Icon className="w-7 h-7 text-white" />
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
+                  </div>
 
-                    {/* Заглавие */}
-                    <h3 className="text-xl font-bold mb-3 text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
+                  <CardContent className="p-4 pt-2 flex flex-col h-auto">
+                    {/* Content */}
+                    <h3 className="text-sm font-serif font-bold mb-1 text-[var(--color-primary-dark)] group-hover:text-[var(--color-primary)] transition-colors">
                       {service.title}
                     </h3>
 
-                    {/* Описание */}
-                    <p className="text-sm text-[var(--color-gray-600)] mb-4 leading-relaxed">
+                    <p className="text-[11px] text-[var(--color-gray-600)] mb-3 leading-relaxed line-clamp-2">
                       {service.description}
                     </p>
 
-                    {/* Примери */}
-                    <div className="mb-4 space-y-2">
+                    <ul className="space-y-1 mb-3">
                       {service.examples.map((example, i) => (
-                        <div
+                        <li
                           key={i}
-                          className="flex items-start gap-2 text-xs text-[var(--color-gray-700)]"
+                          className="flex items-start gap-1.5 text-[11px] text-[var(--color-gray-500)]"
                         >
-                          <span className="text-[var(--color-primary)] mt-0.5">•</span>
-                          <span className="flex-1">{example}</span>
-                        </div>
+                          <span className={`mt-1 w-1 h-1 rounded-full bg-gradient-to-br ${service.gradient} shrink-0`} />
+                          <span>{example}</span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
 
-                    {/* Ценова информация */}
-                    <div className="pt-4 border-t border-[var(--color-border)]">
-                      <div className="text-sm font-semibold text-[var(--color-gray-500)]">
-                        Цена:
-                      </div>
-                      <div className={`text-base font-bold bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
+                    {/* Footer / Price */}
+                    <div className="pt-2 mt-auto border-t border-[var(--color-border)]/50 flex justify-between items-center">
+                      <span className="text-[9px] font-semibold text-[var(--color-gray-400)] uppercase tracking-wide">
+                        Цена
+                      </span>
+                      <span className={`text-xs font-bold bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
                         {service.pricing}
-                      </div>
+                      </span>
                     </div>
                   </CardContent>
                 </Card>

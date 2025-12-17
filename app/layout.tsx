@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ConditionalLayout } from "@/components/layout/ConditionalLayout";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -8,6 +9,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
+
+import { BackgroundAtmosphere } from "@/components/layout/BackgroundAtmosphere";
+import { BotanicalBranding } from "@/components/layout/BotanicalBranding";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -83,7 +87,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bg" className={`${dmSans.variable} ${playfair.variable}`} suppressHydrationWarning>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-JTL50Q3BJG"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-JTL50Q3BJG');
+        `}
+      </Script>
       <body className="antialiased font-sans">
+        <BackgroundAtmosphere />
+        <BotanicalBranding />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <SmoothScrollProvider>
             <ConditionalLayout>{children}</ConditionalLayout>

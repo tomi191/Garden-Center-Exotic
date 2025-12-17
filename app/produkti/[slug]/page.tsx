@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Leaf, AlertCircle, Phone, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, Leaf, AlertCircle, Phone, ArrowRight, ShoppingBag } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { PageHero } from "@/components/sections/PageHero";
 import { CTASection } from "@/components/sections/CTASection";
 import { getProductsByCategory, getProductCountByCategory } from "@/lib/products";
 import { products as staticProducts } from "@/data/products";
@@ -13,34 +13,51 @@ import { CategoryProductGallery } from "@/components/sections/CategoryProductGal
 // Дефиниция на категориите с богати данни за визуализация
 const CATEGORY_DATA: Record<string, {
   title: string;
+  subtitle?: string;
   description: string;
-  image?: string;
-  icon: string;
+  heroImage: string;
+  cardImage: string;
   seoKeywords: string[];
 }> = {
   "ryazan-tsvyat": {
-    title: "Рязан Цвят",
+    title: "Рязани Цветя",
+    subtitle: "Директен внос",
     description: "Ексклузивна селекция от свежи рози, лалета и екзотични цветове, директен внос от най-добрите плантации в Колумбия, Еквадор и Холандия.",
-    icon: "🌹",
+    heroImage: "/images/categories/ryazani-cvetya-hero.png",
+    cardImage: "https://images.unsplash.com/photo-1596043286045-8f553229b433?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["рязан цвят", "рози на едро", "лалета", "букети", "внос цветя"],
   },
   "saksiyni-rasteniya": {
     title: "Саксийни Растения",
+    subtitle: "Стайни & Външни",
     description: "Внесете живот в интериора с нашите зелени и цъфтящи саксийни растения. От класически орхидеи до модерни големи палми.",
-    icon: "🪴",
+    heroImage: "/images/categories/saksiyni-rasteniya-hero.png",
+    cardImage: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["саксийни цветя", "орхидеи", "стайни растения", "палми", "озеленяване"],
-  },
-  "sezonni-tsvetya": {
-    title: "Сезонни Цветя",
-    description: "Най-доброто от всеки сезон. Пролетни луковични, летни петунии или есенни хризантеми – винаги актуални и свежи.",
-    icon: "🌷",
-    seoKeywords: ["сезонни цветя", "разсад", "градински цветя", "пролетни цветя"],
   },
   "hrasti-darveta": {
     title: "Храсти и Дървета",
+    subtitle: "За Градината",
     description: "Мащабни решения за вашата градина. Декоративни храсти, туи и дървета, подходящи за климата в България.",
-    icon: "🌳",
+    heroImage: "/images/categories/hrasti-darveta-hero.png",
+    cardImage: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=800",
     seoKeywords: ["градински храсти", "туи", "дървета за градина", "озеленяване двор"],
+  },
+  "gradinski": {
+    title: "Градински Растения",
+    subtitle: "Сезонни & Многогодишни",
+    description: "Храсти, дървета и сезонни разсади за вашата градина. Декоративни и плодни видове, подходящи за българския климат.",
+    heroImage: "/images/categories/gradinski-hero.png",
+    cardImage: "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&q=80&w=800",
+    seoKeywords: ["градински растения", "храсти", "дървета", "разсади", "озеленяване"],
+  },
+  "aksessoari": {
+    title: "Аксесоари",
+    subtitle: "Грижа за Растенията",
+    description: "Всичко необходимо за грижа за вашите растения - почви, торове, саксии и градински инструменти.",
+    heroImage: "/images/categories/aksessoari-hero.png",
+    cardImage: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=800",
+    seoKeywords: ["градински аксесоари", "почви", "торове", "саксии", "инструменти"],
   }
 };
 
@@ -115,18 +132,51 @@ export default async function CategoryPage({ params }: PageProps) {
 
   return (
     <>
-      {/* Hero Section */}
-      <PageHero
-        title={categoryInfo.title}
-        description={categoryInfo.description}
-        variant="gradient"
-        badge={
-          <span className="inline-flex items-center gap-2">
-            <Leaf className="w-4 h-4" />
-            {categoryProducts.length} артикула
-          </span>
-        }
-      />
+      {/* Hero Section - consistent with other pages */}
+      <section className="relative min-h-[60vh] flex items-center">
+        {/* Full Screen Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src={categoryInfo.heroImage}
+            alt={categoryInfo.title}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/25" />
+        </div>
+
+        <Container className="relative z-10 py-16">
+          <div className="max-w-2xl">
+            {categoryInfo.subtitle && (
+              <span className="inline-block text-[var(--color-secondary)] text-sm font-medium tracking-wider uppercase mb-4">
+                {categoryInfo.subtitle}
+              </span>
+            )}
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6 leading-tight drop-shadow-lg">
+              {categoryInfo.title}
+            </h1>
+
+            <p className="!text-white text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md">
+              {categoryInfo.description}
+            </p>
+
+            <div className="flex flex-wrap gap-4 items-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium">
+                <Leaf className="w-4 h-4" />
+                {categoryProducts.length} артикула
+              </div>
+              <Link href="#products">
+                <Button className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] text-white rounded-full px-6">
+                  <ShoppingBag className="w-4 h-4 mr-2" />
+                  Разгледай продуктите
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* Breadcrumb Navigation */}
       <div className="bg-white border-b border-[var(--color-gray-100)]">
@@ -163,34 +213,34 @@ export default async function CategoryPage({ params }: PageProps) {
 
       {/* Products Section */}
       {categoryProducts.length > 0 ? (
-        <div className="bg-[var(--color-background)] min-h-[60vh]">
+        <div id="products" className="bg-[var(--color-background)] min-h-[60vh]">
           <CategoryProductGallery products={categoryProducts} categoryName={categoryInfo.title} />
         </div>
       ) : (
-        <Section className="py-24 bg-[var(--color-background)]">
+        <Section className="py-16 md:py-20 bg-[var(--color-background)]">
           <Container>
-            <div className="max-w-lg mx-auto text-center">
-              <div className="w-24 h-24 mx-auto mb-6 bg-white rounded-[2rem] shadow-lg flex items-center justify-center">
-                <span className="text-5xl">{categoryInfo.icon}</span>
+            <div className="max-w-md mx-auto text-center">
+              <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-white rounded-2xl shadow-md flex items-center justify-center">
+                <span className="text-3xl md:text-4xl">{categoryInfo.icon}</span>
               </div>
-              <h2 className="font-serif text-3xl font-bold text-[var(--color-primary-dark)] mb-4">
+              <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-[var(--color-primary-dark)] mb-2">
                 Очаквайте скоро
               </h2>
-              <p className="text-[var(--color-gray-600)] mb-8 leading-relaxed">
+              <p className="text-xs md:text-sm text-[var(--color-gray-500)] mb-5 leading-relaxed">
                 В момента обновяваме каталога за категория <strong>{categoryInfo.title}</strong>.
                 Свържете се с нас за персонална оферта или проверете отново скоро.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/kontakti">
-                  <Button size="lg" className="rounded-full">
+                  <Button size="sm" className="rounded-full">
                     Направете запитване
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
-                <a href="tel:+35952600577">
-                  <Button variant="outline" size="lg" className="rounded-full">
+                <a href="tel:0895670370">
+                  <Button variant="outline" size="sm" className="rounded-full">
                     <Phone className="w-4 h-4 mr-2" />
-                    Обадете се
+                    089 567 0370
                   </Button>
                 </a>
               </div>
@@ -200,43 +250,42 @@ export default async function CategoryPage({ params }: PageProps) {
       )}
 
       {/* Related Categories */}
-      <Section className="py-16 bg-white border-t border-[var(--color-gray-100)]">
+      <Section className="py-8 md:py-10 bg-white">
         <Container>
-          <div className="text-center mb-10">
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-[var(--color-primary-dark)] mb-2">
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-[var(--color-primary-dark)] mb-2">
               Разгледайте и други категории
             </h2>
-            <p className="text-[var(--color-gray-600)]">
+            <p className="text-xs md:text-sm text-[var(--color-gray-500)]">
               Открийте още растения от нашата колекция
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {Object.entries(CATEGORY_DATA)
               .filter(([key]) => key !== slug)
               .map(([key, data]) => (
                 <Link
                   key={key}
                   href={`/produkti/${key}`}
-                  className="group relative overflow-hidden rounded-[2rem] bg-[var(--color-light)] p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  className="group relative h-36 md:h-44 rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-4xl">{data.icon}</span>
-                    {categoryCounts[key] > 0 && (
-                      <span className="px-3 py-1 text-xs font-bold bg-[var(--color-primary-light)] text-[var(--color-primary)] rounded-full">
-                        {categoryCounts[key]} продукта
-                      </span>
-                    )}
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${data.cardImage})` }}
+                  />
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/80 transition-colors duration-300" />
+
+                  <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end z-10">
+                    <h3 className="font-serif text-base md:text-lg font-bold !text-white mb-0.5 group-hover:-translate-y-0.5 transition-transform drop-shadow-lg">
+                      {data.title}
+                    </h3>
+                    <div className="flex items-center gap-1.5 text-[10px] md:text-xs font-semibold !text-white opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                      Разгледай <ArrowRight className="w-3 h-3" />
+                    </div>
                   </div>
-                  <h3 className="font-serif text-xl font-bold text-[var(--color-primary-dark)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">
-                    {data.title}
-                  </h3>
-                  <p className="text-sm text-[var(--color-gray-600)] line-clamp-2 mb-4">
-                    {data.description}
-                  </p>
-                  <span className="inline-flex items-center text-sm font-semibold text-[var(--color-secondary)] group-hover:gap-2 transition-all">
-                    Разгледай <ArrowRight className="w-4 h-4 ml-1" />
-                  </span>
                 </Link>
               ))}
           </div>
@@ -247,10 +296,10 @@ export default async function CategoryPage({ params }: PageProps) {
       <CTASection
         icon={Phone}
         title="Нуждаете се от специална поръчка?"
-        description="Внасяме директно от водещи плантации в Колумбия, Еквадор и Холандия. Свържете се за персонална оферта."
+        description="Внасяме директно от водещи плантации в Еквадор и Холандия. Свържете се за персонална оферта."
         buttons={[
           { label: "Свържете се с нас", href: "/kontakti", variant: "primary" },
-          { label: "Обадете се", href: "tel:+35952600577", variant: "outline" },
+          { label: "089 567 0370", href: "tel:0895670370", variant: "outline" },
         ]}
       />
     </>

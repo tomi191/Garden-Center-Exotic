@@ -104,3 +104,35 @@ export async function getProductCountByCategory() {
     _count: { id: count },
   }));
 }
+
+// Get all product slugs for static generation
+export async function getAllProductSlugs() {
+  const { data, error } = await supabaseAdmin
+    .from("Product")
+    .select("slug");
+
+  if (error) {
+    console.error("Error fetching product slugs:", error);
+    return [];
+  }
+
+  return (data || []).map((p) => p.slug).filter(Boolean);
+}
+
+// Get related products (same category, excluding current)
+export async function getRelatedProducts(category: string, excludeSlug: string, limit = 4) {
+  const { data, error } = await supabaseAdmin
+    .from("Product")
+    .select("*")
+    .eq("category", category)
+    .neq("slug", excludeSlug)
+    .eq("inStock", true)
+    .limit(limit);
+
+  if (error) {
+    console.error("Error fetching related products:", error);
+    return [];
+  }
+
+  return data || [];
+}

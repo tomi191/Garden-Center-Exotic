@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { MapPin, Phone, ShoppingBag } from "lucide-react";
 import { ProductRequestModal } from "@/components/catalog/ProductRequestModal";
+import { LOCATIONS } from "@/lib/constants";
 
 interface Product {
   id: string;
   name: string;
+  slug?: string;
   category: string;
   subcategory?: string | null;
   origin: string;
@@ -24,14 +27,21 @@ interface ProductCardProps {
   product: Product;
   index?: number;
   eurRate?: number;
+  disableLink?: boolean;
 }
 
-const ORDER_PHONE = "+359 52 600 577";
-
-export function ProductCard({ product, index = 0, eurRate = 1.9558 }: ProductCardProps) {
+export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink = false }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const priceEur = (product.price / eurRate).toFixed(2);
+  const productUrl = product.slug ? `/produkti/produkt/${product.slug}` : null;
+
+  const handleCardClick = () => {
+    if (!disableLink && productUrl) {
+      router.push(productUrl);
+    }
+  };
 
   return (
     <>
@@ -42,7 +52,11 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558 }: ProductCar
         transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
         className="h-full"
       >
-        <div className="group relative h-full flex flex-col">
+        <div
+          className={`group relative h-full flex flex-col ${!disableLink && productUrl ? 'cursor-pointer' : ''}`}
+          onClick={handleCardClick}
+          role={!disableLink && productUrl ? "link" : undefined}
+        >
           {/* Background Card with Organic Shape/Border Radius */}
           <div className="absolute inset-0 bg-white rounded-[2rem] shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:scale-[1.02]" />
 
@@ -79,16 +93,16 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558 }: ProductCar
 
             {/* Quick Action Buttons - Appears on Hover */}
             <div className="absolute bottom-4 right-4 flex gap-2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out">
-              <a
-                href={`tel:${ORDER_PHONE.replace(/\s/g, "")}`}
+              <button
+                onClick={(e) => { e.stopPropagation(); window.location.href = `tel:${LOCATIONS.varna.phone.replace(/\s/g, "")}`; }}
                 className="flex items-center justify-center w-12 h-12 bg-white text-[var(--color-primary)] rounded-full shadow-lg hover:bg-[var(--color-primary)] hover:text-white transition-colors"
                 title="Обади се"
               >
                 <Phone className="w-5 h-5" />
-              </a>
+              </button>
               {product.inStock && (
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); setIsModalOpen(true); }}
                   className="flex items-center justify-center w-12 h-12 bg-[var(--color-primary)] text-white rounded-full shadow-lg hover:bg-[var(--color-primary-dark)] transition-colors"
                   title="Изпрати заявка"
                 >
@@ -142,7 +156,7 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558 }: ProductCar
               {/* Order Button */}
               {product.inStock ? (
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); setIsModalOpen(true); }}
                   className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-semibold rounded-full hover:bg-[var(--color-primary-dark)] transition-colors shadow-sm"
                 >
                   Поръчай

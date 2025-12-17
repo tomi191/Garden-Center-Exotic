@@ -212,13 +212,13 @@ export function CategoryProductGallery({ products, categoryName }: CategoryProdu
         </Container>
       </div>
 
-      <Container className="py-8 pb-24">
+      <Container className="py-6 pb-16 md:pb-20">
         {/* Results Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="font-serif text-2xl font-bold text-[var(--color-primary-dark)]">
+            <h2 className="font-serif text-lg md:text-xl font-bold text-[var(--color-primary-dark)]">
               {categoryName}
-              <span className="text-[var(--color-gray-400)] font-sans text-lg font-normal ml-2">
+              <span className="text-[var(--color-gray-400)] font-sans text-sm font-normal ml-2">
                 ({filteredProducts.length})
               </span>
             </h2>
@@ -257,17 +257,17 @@ export function CategoryProductGallery({ products, categoryName }: CategoryProdu
             </AnimatePresence>
           </div>
         ) : (
-          <div className="text-center py-20 bg-white rounded-[2rem] border border-dashed border-[var(--color-gray-300)]">
-            <div className="w-16 h-16 bg-[var(--color-gray-100)] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-8 h-8 text-[var(--color-gray-400)]" />
+          <div className="text-center py-12 md:py-16 bg-white rounded-xl md:rounded-2xl border border-dashed border-[var(--color-gray-300)]">
+            <div className="w-12 h-12 bg-[var(--color-gray-100)] rounded-full flex items-center justify-center mx-auto mb-3">
+              <Search className="w-6 h-6 text-[var(--color-gray-400)]" />
             </div>
-            <h3 className="text-xl font-bold text-[var(--color-gray-700)] mb-2">
+            <h3 className="text-base md:text-lg font-bold text-[var(--color-gray-700)] mb-1.5">
               Няма намерени продукти
             </h3>
-            <p className="text-[var(--color-gray-500)] mb-6">
+            <p className="text-xs md:text-sm text-[var(--color-gray-500)] mb-4">
               Опитайте с други критерии за търсене или изчистете филтрите.
             </p>
-            <Button variant="outline" onClick={clearFilters}>
+            <Button variant="outline" size="sm" onClick={clearFilters} className="rounded-full">
               Изчисти всички филтри
             </Button>
           </div>

@@ -1,11 +1,13 @@
 import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import {
   Droplet, Sun, Sprout,
   Smartphone, Search, PlayCircle,
-  HelpCircle, BookOpen, MessageCircle
+  HelpCircle, BookOpen, MessageCircle, ArrowRight
 } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
-import { PageHero } from "@/components/sections/PageHero";
+import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/sections/CTASection";
 import { Card, CardContent } from "@/components/ui/Card";
 
@@ -63,21 +65,62 @@ const tips = [
 export default function PlantCarePage() {
   return (
     <>
-      <PageHero
-        title="Зелено Знание"
-        description="Всичко, което трябва да знаете, за да бъдат вашите растения здрави и щастливи."
-      />
+      {/* Hero Section - consistent with other pages */}
+      <section className="relative min-h-[70vh] flex items-center">
+        {/* Full Screen Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/backgrounds/plant-care-bg.png"
+            alt="Грижи за Растенията"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/25" />
+        </div>
+
+        <Container className="relative z-10 py-20">
+          <div className="max-w-2xl">
+            <span className="inline-block text-[var(--color-secondary)] text-sm font-medium tracking-wider uppercase mb-4">
+              Наръчник за Грижа
+            </span>
+
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6 leading-tight drop-shadow-lg">
+              Зелено Знание
+            </h1>
+
+            <p className="!text-white text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md">
+              Всичко, което трябва да знаете, за да бъдат вашите растения
+              здрави и щастливи. Експертни съвети от нашите специалисти.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link href="#care-tips">
+                <Button className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)] text-white rounded-full px-6">
+                  Научете повече
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+              <Link href="/kontakti">
+                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-6">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Задайте въпрос
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* Main Grid */}
-      <Section className="py-20 bg-white">
+      <Section id="care-tips" className="py-16 md:py-20 bg-white">
         <Container>
           {/* Section Header */}
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-full text-sm font-medium mb-4">
-              <BookOpen className="w-4 h-4" />
+          <div className="text-center mb-12 md:mb-16">
+            <span className="text-[var(--color-secondary)] font-semibold tracking-wider uppercase text-sm mb-2 block">
               Основи на грижата
             </span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-foreground)] mb-4">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-primary-dark)] mb-4">
               Четири Стълба на Успеха
             </h2>
             <p className="text-[var(--color-gray-600)] max-w-2xl mx-auto">
@@ -132,9 +175,11 @@ export default function PlantCarePage() {
               </div>
               <div className="relative">
                 <div className="aspect-square rounded-[2rem] overflow-hidden shadow-2xl">
-                  <img
-                    src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=800&auto=format&fit=crop"
+                  <Image
+                    src="/images/care/watering-tips.png"
                     alt="Поливане на растения"
+                    width={600}
+                    height={600}
                     className="w-full h-full object-cover"
                   />
                 </div>
