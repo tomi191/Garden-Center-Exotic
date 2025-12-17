@@ -304,11 +304,11 @@ export default async function ProductPage({ params }: PageProps) {
       {/* CTA */}
       <Section className="py-10 bg-[var(--color-primary)]">
         <Container>
-          <div className="text-center text-white">
-            <h2 className="font-serif text-2xl md:text-3xl font-bold mb-4">
+          <div className="text-center">
+            <h2 className="font-serif text-2xl md:text-3xl font-bold mb-4 !text-white">
               Нуждаете се от съвет?
             </h2>
-            <p className="mb-6 opacity-90">
+            <p className="mb-6 !text-white">
               Нашите експерти ще ви помогнат да изберете перфектното растение.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

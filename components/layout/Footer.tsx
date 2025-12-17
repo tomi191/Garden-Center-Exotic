@@ -43,7 +43,7 @@ export function Footer() {
                   />
                 </div>
               </Link>
-              <p className="text-white/70 text-sm leading-relaxed mb-8 max-w-xs">
+              <p className="text-white text-sm leading-relaxed mb-8 max-w-xs">
                 Директен вносител на премиум цветя от Еквадор, Холандия и Турция. Над 27 години опит.
               </p>
 
@@ -53,7 +53,7 @@ export function Footer() {
                   href={SOCIAL_LINKS.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors"
+                  className="text-white hover:text-[var(--color-secondary)] transition-colors"
                   aria-label="Facebook"
                 >
                   <Facebook className="w-5 h-5" />
@@ -62,7 +62,7 @@ export function Footer() {
                   href={SOCIAL_LINKS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors"
+                  className="text-white hover:text-[var(--color-secondary)] transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-5 h-5" />
@@ -72,13 +72,13 @@ export function Footer() {
 
             {/* Links Column */}
             <div className="lg:col-span-2">
-              <h4 className="text-white font-medium mb-6">Навигация</h4>
+              <h4 className="text-[var(--color-secondary)] font-medium mb-6">Навигация</h4>
               <ul className="space-y-4">
                 {footerLinks.navigation.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-white/70 hover:text-white text-sm transition-colors"
+                      className="text-white hover:text-[var(--color-secondary)] text-sm transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -89,13 +89,13 @@ export function Footer() {
 
             {/* Services Column */}
             <div className="lg:col-span-2">
-              <h4 className="text-white font-medium mb-6">Продукти</h4>
+              <h4 className="text-[var(--color-secondary)] font-medium mb-6">Продукти</h4>
               <ul className="space-y-4">
                 {footerLinks.services.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-white/70 hover:text-white text-sm transition-colors"
+                      className="text-white hover:text-[var(--color-secondary)] text-sm transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -106,23 +106,23 @@ export function Footer() {
 
             {/* Contact Column */}
             <div className="lg:col-span-4">
-              <h4 className="text-white font-medium mb-6">Контакти</h4>
+              <h4 className="text-[var(--color-secondary)] font-medium mb-6">Контакти</h4>
               <div className="space-y-5">
                 <a
                   href={`tel:${LOCATIONS.varna.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
+                  className="flex items-center gap-3 text-white hover:text-[var(--color-secondary)] transition-colors group"
                 >
                   <Phone className="w-4 h-4 text-[var(--color-secondary)]" />
                   <span className="text-sm">{LOCATIONS.varna.phone}</span>
                 </a>
                 <a
                   href={`mailto:${LOCATIONS.varna.email}`}
-                  className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
+                  className="flex items-center gap-3 text-white hover:text-[var(--color-secondary)] transition-colors"
                 >
                   <Mail className="w-4 h-4 text-[var(--color-secondary)]" />
                   <span className="text-sm">{LOCATIONS.varna.email}</span>
                 </a>
-                <div className="flex items-start gap-3 text-white/70">
+                <div className="flex items-start gap-3 text-white">
                   <MapPin className="w-4 h-4 text-[var(--color-secondary)] mt-0.5 flex-shrink-0" />
                   <div className="text-sm">
                     <p className="mb-1">Варна: {LOCATIONS.varna.address}</p>

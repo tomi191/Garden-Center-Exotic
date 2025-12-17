@@ -1,16 +1,42 @@
 import { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, PRODUCT_CATEGORIES } from "@/lib/constants";
+import { getAllProductSlugs } from "@/lib/products";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
   const currentDate = new Date().toISOString();
 
-  return [
+  // Static pages with proper priorities
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: currentDate,
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/produkti`,
+      lastModified: currentDate,
+      changeFrequency: "daily",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/uslugi`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/kontakti`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/lokacii`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/za-nas`,
@@ -19,52 +45,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/produkti`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/uslugi`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/uslugi/za-biznesa`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/grizhi`,
+      url: `${baseUrl}/blog`,
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/grizhi`,
       lastModified: currentDate,
       changeFrequency: "weekly",
-      priority: 0.7,
+      priority: 0.75,
     },
     {
-      url: `${baseUrl}/lokacii`,
+      url: `${baseUrl}/privacy`,
       lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 1.0,
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
     {
-      url: `${baseUrl}/faq`,
+      url: `${baseUrl}/terms`,
       lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/kontakti`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.9,
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
   ];
+
+  // Category pages - important for SEO
+  const categoryPages: MetadataRoute.Sitemap = PRODUCT_CATEGORIES.map((cat) => ({
+    url: `${baseUrl}/produkti/${cat.slug}`,
+    lastModified: currentDate,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
+
+  // Product pages - fetch dynamically from database
+  let productPages: MetadataRoute.Sitemap = [];
+  try {
+    const productSlugs = await getAllProductSlugs();
+    productPages = productSlugs.map((slug) => ({
+      url: `${baseUrl}/produkti/produkt/${slug}`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+  } catch (error) {
+    console.error("Error fetching product slugs for sitemap:", error);
+  }
+
+  return [...staticPages, ...categoryPages, ...productPages];
 }

@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Section } from "@/components/ui/Container";
 import { ProductCard } from "@/components/ui/ProductCard";
-import { Filter, Search, X, Check } from "lucide-react";
+import { Filter, Search, X, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+
+const PRODUCTS_PER_PAGE = 100; // Show all products by default (64 currently), paginate only when we have more
 
 interface Product {
   id: string;
@@ -49,34 +51,50 @@ export function ProductGallery({ initialProducts }: ProductGalleryProps) {
   const [showOnlyInStock, setShowOnlyInStock] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false); // Mobile toggle
-  const [isDesktop, setIsDesktop] = useState(true); // Default to true to show on desktop initially or handle via effect
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE); // Pagination state
 
   // Handle window resize safely
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth >= 768);
-    
-    // Set initial value
     handleResize();
-    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Filter Logic
-  const filteredProducts = initialProducts.filter((product) => {
-    if (selectedOrigin !== "all" && product.origin !== selectedOrigin) return false;
-    if (selectedCategory !== "all" && product.category !== selectedCategory) return false;
-    if (showOnlyInStock && !product.inStock) return false;
-    if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-    return true;
-  });
+  // Filter Logic with useMemo for performance
+  const filteredProducts = useMemo(() => {
+    return initialProducts.filter((product) => {
+      if (selectedOrigin !== "all" && product.origin !== selectedOrigin) return false;
+      if (selectedCategory !== "all" && product.category !== selectedCategory) return false;
+      if (showOnlyInStock && !product.inStock) return false;
+      if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      return true;
+    });
+  }, [initialProducts, selectedOrigin, selectedCategory, showOnlyInStock, searchQuery]);
 
-  const clearFilters = () => {
+  // Visible products (paginated)
+  const visibleProducts = useMemo(() => {
+    return filteredProducts.slice(0, visibleCount);
+  }, [filteredProducts, visibleCount]);
+
+  const hasMoreProducts = visibleCount < filteredProducts.length;
+
+  const loadMore = useCallback(() => {
+    setVisibleCount(prev => prev + PRODUCTS_PER_PAGE);
+  }, []);
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setVisibleCount(PRODUCTS_PER_PAGE);
+  }, [selectedOrigin, selectedCategory, showOnlyInStock, searchQuery]);
+
+  const clearFilters = useCallback(() => {
     setSelectedOrigin("all");
     setSelectedCategory("all");
     setShowOnlyInStock(false);
     setSearchQuery("");
-  };
+  }, []);
 
   return (
     <div className="w-full">
@@ -188,12 +206,25 @@ export function ProductGallery({ initialProducts }: ProductGalleryProps) {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8">
-           <AnimatePresence mode="popLayout">
-             {filteredProducts.map((product, index) => (
-               <ProductCard key={product.id} product={product} index={index} />
-             ))}
-           </AnimatePresence>
+           {visibleProducts.map((product, index) => (
+             <ProductCard key={product.id} product={product} index={index} />
+           ))}
         </div>
+
+        {/* Load More Button */}
+        {hasMoreProducts && (
+          <div className="flex justify-center mt-10">
+            <Button
+              onClick={loadMore}
+              variant="outline"
+              size="lg"
+              className="rounded-full px-8 flex items-center gap-2 hover:bg-[var(--color-primary)] hover:text-white transition-all"
+            >
+              Зареди още ({filteredProducts.length - visibleCount} останали)
+              <ChevronDown className="w-4 h-4" />
+            </Button>
+          </div>
+        )}
 
         {filteredProducts.length === 0 && (
            <div className="text-center py-12 md:py-16 bg-white rounded-xl md:rounded-2xl border border-dashed border-[var(--color-gray-300)]">
