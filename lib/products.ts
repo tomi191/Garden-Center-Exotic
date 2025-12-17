@@ -119,6 +119,35 @@ export async function getAllProductSlugs() {
   return (data || []).map((p) => p.slug).filter(Boolean);
 }
 
+// Get all products with slug and category for sitemap generation
+export async function getAllProductsForSitemap() {
+  const { data, error } = await supabaseAdmin
+    .from("Product")
+    .select("slug, category");
+
+  if (error) {
+    console.error("Error fetching products for sitemap:", error);
+    return [];
+  }
+
+  return (data || []).filter((p) => p.slug && p.category);
+}
+
+// Get all products
+export async function getAllProducts() {
+  const { data, error } = await supabaseAdmin
+    .from("Product")
+    .select("*")
+    .order("createdAt", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching all products:", error);
+    return [];
+  }
+
+  return data || [];
+}
+
 // Get related products (same category, excluding current)
 export async function getRelatedProducts(category: string, excludeSlug: string, limit = 4) {
   const { data, error } = await supabaseAdmin

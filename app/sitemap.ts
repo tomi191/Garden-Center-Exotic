@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG, PRODUCT_CATEGORIES } from "@/lib/constants";
-import { getAllProductSlugs } from "@/lib/products";
+import { getAllProductsForSitemap } from "@/lib/products";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
@@ -78,18 +78,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.85,
   }));
 
-  // Product pages - fetch dynamically from database
+  // Product pages - fetch dynamically from database with new URL structure
   let productPages: MetadataRoute.Sitemap = [];
   try {
-    const productSlugs = await getAllProductSlugs();
-    productPages = productSlugs.map((slug) => ({
-      url: `${baseUrl}/produkti/produkt/${slug}`,
+    const products = await getAllProductsForSitemap();
+    productPages = products.map((product) => ({
+      url: `${baseUrl}/produkti/${product.category}/${product.slug}`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
   } catch (error) {
-    console.error("Error fetching product slugs for sitemap:", error);
+    console.error("Error fetching products for sitemap:", error);
   }
 
   return [...staticPages, ...categoryPages, ...productPages];

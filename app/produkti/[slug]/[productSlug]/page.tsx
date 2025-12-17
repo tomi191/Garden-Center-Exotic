@@ -2,12 +2,13 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Phone, MapPin, Truck, Leaf, Heart, Calendar, Check, ShoppingBag } from "lucide-react";
+import { Phone, MapPin, Truck, Leaf, Heart, Calendar, MessageCircle } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { getProductBySlug, getRelatedProducts, getAllProductSlugs } from "@/lib/products";
+import { getProductBySlug, getRelatedProducts, getAllProducts } from "@/lib/products";
 import { LOCATIONS, SITE_CONFIG } from "@/lib/constants";
 import { ProductCard } from "@/components/ui/ProductCard";
+import { ProductPriceSection } from "@/components/product/ProductPriceSection";
 
 // SEO данни за категориите
 const CATEGORY_SEO: Record<string, {
@@ -60,13 +61,13 @@ function generateSeoDescription(product: {
 }
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; productSlug: string }>;
 }
 
 // Генериране на метаданни за SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const { productSlug } = await params;
+  const product = await getProductBySlug(productSlug);
 
   if (!product) {
     return { title: "Продуктът не е намерен" };
@@ -97,21 +98,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // Генериране на статични пътища
 export async function generateStaticParams() {
-  const slugs = await getAllProductSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const products = await getAllProducts();
+    return products.map((product) => ({
+      slug: product.category,
+      productSlug: product.slug,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const { slug: categorySlug, productSlug } = await params;
+  const product = await getProductBySlug(productSlug);
 
   if (!product) {
     notFound();
   }
 
+  // Verify the category matches
+  if (product.category !== categorySlug) {
+    notFound();
+  }
+
   const categoryInfo = CATEGORY_SEO[product.category] || CATEGORY_SEO["ryazan-tsvyat"];
-  const relatedProducts = await getRelatedProducts(product.category, slug, 4);
-  const priceEur = (product.price / 1.9558).toFixed(2);
+  const relatedProducts = await getRelatedProducts(product.category, productSlug, 4);
 
   // JSON-LD структурирани данни за SEO
   const jsonLd = {
@@ -132,12 +144,48 @@ export default async function ProductPage({ params }: PageProps) {
     },
   };
 
+  // Breadcrumb JSON-LD
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Начало",
+        item: SITE_CONFIG.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Продукти",
+        item: `${SITE_CONFIG.url}/produkti`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: categoryInfo.name,
+        item: `${SITE_CONFIG.url}/produkti/${product.category}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: product.name,
+        item: `${SITE_CONFIG.url}/produkti/${product.category}/${product.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
       {/* JSON-LD за Google */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Breadcrumb */}
@@ -162,25 +210,50 @@ export default async function ProductPage({ params }: PageProps) {
         <Container>
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Изображение */}
-            <div className="relative aspect-square rounded-3xl overflow-hidden bg-white shadow-lg">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              {/* Произход badge */}
-              <div className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm">
-                <MapPin className="w-4 h-4 text-[var(--color-primary)]" />
-                <span className="text-sm font-bold text-[var(--color-primary)]">{product.origin}</span>
-              </div>
-              {!product.inStock && (
-                <div className="absolute top-4 right-4 px-4 py-2 bg-[var(--color-secondary)] text-white text-sm font-bold rounded-full">
-                  Изчерпан
+            <div className="relative">
+              <div className="relative aspect-square rounded-3xl overflow-hidden bg-white shadow-lg group">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                {/* Произход badge */}
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm">
+                  <MapPin className="w-4 h-4 text-[var(--color-primary)]" />
+                  <span className="text-sm font-bold text-[var(--color-primary)]">{product.origin}</span>
                 </div>
-              )}
+                {!product.inStock && (
+                  <div className="absolute top-4 right-4 px-4 py-2 bg-[var(--color-secondary)] text-white text-sm font-bold rounded-full">
+                    Изчерпан
+                  </div>
+                )}
+              </div>
+
+              {/* Share buttons */}
+              <div className="flex items-center justify-center gap-3 mt-4">
+                <span className="text-sm text-[var(--color-gray-500)]">Сподели:</span>
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${SITE_CONFIG.url}/produkti/${product.category}/${product.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm hover:shadow-md hover:bg-[#1877F2] hover:text-white transition-all"
+                  title="Сподели във Facebook"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
+                </a>
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(`${product.name} - ${SITE_CONFIG.url}/produkti/${product.category}/${product.slug}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm hover:shadow-md hover:bg-[#25D366] hover:text-white transition-all"
+                  title="Сподели в WhatsApp"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                </a>
+              </div>
             </div>
 
             {/* Информация */}
@@ -197,47 +270,8 @@ export default async function ProductPage({ params }: PageProps) {
                 {product.description}
               </p>
 
-              {/* Цена */}
-              <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
-                <div className="flex items-end justify-between mb-4">
-                  <div>
-                    <span className="text-sm text-[var(--color-gray-400)] font-medium uppercase tracking-wide">Цена</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-serif text-4xl font-bold text-[var(--color-primary)]">
-                        {product.price.toFixed(2)}
-                      </span>
-                      <span className="text-lg text-[var(--color-gray-500)]">лв</span>
-                    </div>
-                    <span className="text-sm text-[var(--color-gray-400)]">
-                      {priceEur} € / {product.priceUnit?.replace("лв/", "") || "бр"}
-                    </span>
-                  </div>
-                  {product.inStock ? (
-                    <span className="flex items-center gap-2 text-green-600 font-medium">
-                      <Check className="w-5 h-5" />
-                      В наличност
-                    </span>
-                  ) : (
-                    <span className="text-[var(--color-secondary)] font-medium">Изчерпан</span>
-                  )}
-                </div>
-
-                {/* CTA бутони */}
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <a href={`tel:${LOCATIONS.varna.phone.replace(/\s/g, "")}`} className="flex-1">
-                    <Button size="lg" className="w-full rounded-full">
-                      <Phone className="w-5 h-5 mr-2" />
-                      Обади се
-                    </Button>
-                  </a>
-                  <Link href="/kontakti" className="flex-1">
-                    <Button variant="outline" size="lg" className="w-full rounded-full">
-                      <ShoppingBag className="w-5 h-5 mr-2" />
-                      Направи запитване
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+              {/* Цена - Client Component за toggle */}
+              <ProductPriceSection product={product} />
 
               {/* Подходящ за */}
               <div className="bg-white rounded-2xl p-6 shadow-sm">

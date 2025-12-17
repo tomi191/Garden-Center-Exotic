@@ -37,7 +37,7 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
   const { settings } = useSettings();
 
   const priceEur = (product.price / eurRate).toFixed(2);
-  const productUrl = product.slug ? `/produkti/produkt/${product.slug}` : null;
+  const productUrl = product.slug && product.category ? `/produkti/${product.category}/${product.slug}` : null;
   const hidePrices = settings.hidePrices;
 
   const handleCardClick = () => {
