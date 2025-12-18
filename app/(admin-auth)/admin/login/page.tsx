@@ -144,23 +144,23 @@ export default function AdminLoginPage() {
           <div>
             <div className="flex items-center gap-4">
               <Image
-                src="/images/logos/exotic-logo-white.png"
+                src="/images/logos/Logo print file white.png"
                 alt="Екзотик"
-                width={180}
-                height={60}
-                className="h-14 w-auto"
+                width={200}
+                height={70}
+                className="h-16 w-auto"
               />
             </div>
           </div>
 
           {/* Middle - Main Text */}
           <div className="space-y-6">
-            <h1 className="text-5xl font-serif font-bold text-white leading-tight">
+            <h1 className="text-5xl font-serif font-bold !text-white leading-tight drop-shadow-lg">
               Управлявайте<br />
-              <span className="text-[var(--color-secondary)]">вашия бизнес</span><br />
+              <span className="!text-white">вашия бизнес</span><br />
               с лекота
             </h1>
-            <p className="text-white/70 text-lg max-w-md leading-relaxed">
+            <p className="!text-white text-lg max-w-md leading-relaxed drop-shadow-md">
               Пълен контрол над продукти, заявки и складови наличности.
               Всичко на едно място.
             </p>
@@ -181,18 +181,18 @@ export default function AdminLoginPage() {
           {/* Bottom - Stats or Trust */}
           <div className="flex items-center gap-8">
             <div>
-              <p className="text-3xl font-bold text-white">27+</p>
-              <p className="text-white/60 text-sm">Години опит</p>
+              <p className="text-3xl font-bold !text-white drop-shadow-md">27+</p>
+              <p className="!text-white/80 text-sm">Години опит</p>
             </div>
-            <div className="w-px h-12 bg-white/20" />
+            <div className="w-px h-12 bg-white/40" />
             <div>
-              <p className="text-3xl font-bold text-white">63</p>
-              <p className="text-white/60 text-sm">Продукта</p>
+              <p className="text-3xl font-bold !text-white drop-shadow-md">63</p>
+              <p className="!text-white/80 text-sm">Продукта</p>
             </div>
-            <div className="w-px h-12 bg-white/20" />
+            <div className="w-px h-12 bg-white/40" />
             <div>
-              <p className="text-3xl font-bold text-white">2</p>
-              <p className="text-white/60 text-sm">Локации</p>
+              <p className="text-3xl font-bold !text-white drop-shadow-md">2</p>
+              <p className="!text-white/80 text-sm">Локации</p>
             </div>
           </div>
         </div>
@@ -204,11 +204,11 @@ export default function AdminLoginPage() {
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
             <Image
-              src="/images/logos/exotic-logo.jpg"
+              src="/images/logos/Logo print file.png"
               alt="Градински Център Екзотик"
               width={200}
               height={80}
-              className="h-20 w-auto mx-auto mb-4 rounded-xl shadow-lg"
+              className="h-20 w-auto mx-auto mb-4"
             />
           </div>
 
