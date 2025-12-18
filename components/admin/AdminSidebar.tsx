@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import {
   LayoutDashboard,
   Package,
@@ -46,6 +47,11 @@ const navItems = [
     title: "AI Блог Генератор",
     href: "/admin/blog-post-generator",
     icon: Sparkles,
+  },
+  {
+    title: "Настройки",
+    href: "/admin/settings",
+    icon: Settings,
   },
 ];
 
@@ -106,7 +112,7 @@ export function AdminSidebar() {
         </Link>
         <button
           className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-300 hover:bg-red-500/10 hover:text-red-200 transition-colors"
-          onClick={() => {/* Add logout logic here or keep it in header */}}
+          onClick={() => signOut({ callbackUrl: "/admin/login" })}
         >
           <LogOut className="w-5 h-5" />
           Изход

@@ -1,7 +1,20 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { LogOut, User, Menu, X, Bell } from "lucide-react";
+import {
+  LogOut,
+  Menu,
+  X,
+  Bell,
+  LayoutDashboard,
+  ClipboardList,
+  Warehouse,
+  Package,
+  PlusCircle,
+  Sparkles,
+  Settings,
+  ExternalLink
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import Link from "next/link";
@@ -16,8 +29,13 @@ interface AdminHeaderProps {
 }
 
 const navItems = [
-  { title: "Табло", href: "/admin" },
-  { title: "Продукти", href: "/admin/products" },
+  { title: "Табло", href: "/admin", icon: LayoutDashboard },
+  { title: "Заявки", href: "/admin/requests", icon: ClipboardList },
+  { title: "Склад", href: "/admin/stock", icon: Warehouse },
+  { title: "Продукти", href: "/admin/products", icon: Package },
+  { title: "Добави Продукт", href: "/admin/products/new", icon: PlusCircle },
+  { title: "AI Блог", href: "/admin/blog-post-generator", icon: Sparkles },
+  { title: "Настройки", href: "/admin/settings", icon: Settings },
 ];
 
 export function AdminHeader({ user }: AdminHeaderProps) {
@@ -70,23 +88,55 @@ export function AdminHeader({ user }: AdminHeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-xl animate-in slide-in-from-top-2">
+        <div className="lg:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-xl animate-in slide-in-from-top-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <nav className="p-4 space-y-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "block px-4 py-3 rounded-xl text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
-                    : "text-gray-600 hover:bg-gray-50"
-                )}
-              >
-                {item.title}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href ||
+                (item.href !== "/admin" && pathname.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                      : "text-gray-600 hover:bg-gray-50"
+                  )}
+                >
+                  <Icon className={cn("w-5 h-5", isActive ? "text-[var(--color-primary)]" : "text-gray-400")} />
+                  {item.title}
+                </Link>
+              );
+            })}
+
+            {/* Divider */}
+            <div className="h-px bg-gray-200 my-3" />
+
+            {/* External link to site */}
+            <Link
+              href="/"
+              target="_blank"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+            >
+              <ExternalLink className="w-5 h-5 text-gray-400" />
+              Към сайта
+            </Link>
+
+            {/* Logout */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                signOut({ callbackUrl: "/admin/login" });
+              }}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+            >
+              <LogOut className="w-5 h-5" />
+              Изход
+            </button>
           </nav>
         </div>
       )}
