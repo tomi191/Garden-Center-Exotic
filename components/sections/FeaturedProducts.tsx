@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ProductCard } from "@/components/ui/ProductCard";
@@ -27,6 +28,31 @@ interface FeaturedProductsProps {
 export function FeaturedProducts({ products }: FeaturedProductsProps) {
   // Use passed products, limit to 4 for display
   const featuredProducts = products.slice(0, 4);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Handle scroll to update active index
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const containerWidth = scrollRef.current.offsetWidth;
+      const cardWidth = Math.min(containerWidth * 0.72, 280) + 16; // 72vw or max 280px + gap
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(Math.min(newIndex, featuredProducts.length - 1));
+    }
+  };
+
+  // Scroll to specific card
+  const scrollToIndex = (index: number) => {
+    if (scrollRef.current) {
+      const containerWidth = scrollRef.current.offsetWidth;
+      const cardWidth = Math.min(containerWidth * 0.72, 280) + 16;
+      scrollRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <Section className="py-10 md:py-16 bg-[var(--color-background)]">
@@ -61,13 +87,41 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
           </motion.div>
         </div>
 
-        {/* Product Grid - Horizontal scroll on mobile */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
-          {featuredProducts.map((product, index) => (
-            <div key={product.id} className="flex-shrink-0 w-[280px] md:w-auto snap-center">
-              <ProductCard product={product} index={index} />
-            </div>
-          ))}
+        {/* Product Grid - Horizontal scroll on mobile with slider */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {featuredProducts.map((product, index) => (
+              <div
+                key={product.id}
+                className={`flex-shrink-0 w-[68vw] max-w-[280px] md:w-auto md:max-w-none snap-start ${
+                  index === 0 ? 'ml-4 md:ml-0' : ''
+                } ${index === featuredProducts.length - 1 ? 'mr-4 md:mr-0' : ''}`}
+              >
+                <ProductCard product={product} index={index} disableViewportAnimation />
+              </div>
+            ))}
+          </div>
+
+          {/* Slider Dots - Mobile Only */}
+          <div className="flex md:hidden justify-center gap-2 mt-4">
+            {featuredProducts.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeIndex === index
+                    ? "bg-[var(--color-primary)] w-6"
+                    : "bg-[var(--color-gray-300)]"
+                }`}
+                aria-label={`Продукт ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Categories Preview (Mini Banners) */}

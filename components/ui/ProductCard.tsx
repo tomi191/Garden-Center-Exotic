@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { MapPin, Phone, ShoppingBag, MessageCircle } from "lucide-react";
+import { MapPin, Phone, ShoppingBag } from "lucide-react";
 import { ProductRequestModal } from "@/components/catalog/ProductRequestModal";
 import { LOCATIONS } from "@/lib/constants";
 import { useSettings } from "@/components/providers/SettingsProvider";
@@ -29,9 +29,10 @@ interface ProductCardProps {
   index?: number;
   eurRate?: number;
   disableLink?: boolean;
+  disableViewportAnimation?: boolean;
 }
 
-export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink = false }: ProductCardProps) {
+export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink = false, disableViewportAnimation = false }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const { settings } = useSettings();
@@ -49,12 +50,13 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        initial={disableViewportAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+        whileInView={disableViewportAnimation ? undefined : { opacity: 1, y: 0 }}
+        animate={disableViewportAnimation ? { opacity: 1, y: 0 } : undefined}
+        viewport={disableViewportAnimation ? undefined : { once: true, margin: "-100px" }}
         transition={{
           duration: 0.3,
-          delay: index < 8 ? index * 0.05 : 0, // Only first 8 cards have stagger, rest instant
+          delay: disableViewportAnimation ? 0 : (index < 8 ? index * 0.05 : 0),
           ease: "easeOut"
         }}
         className="h-full"
@@ -146,14 +148,10 @@ export function ProductCard({ product, index = 0, eurRate = 1.9558, disableLink 
             <div className="mt-auto flex items-end justify-between">
               {hidePrices ? (
                 /* Hidden prices - show inquiry prompt */
-                <div className="flex flex-col">
-                  <span className="text-xs text-[var(--color-gray-400)] font-medium uppercase tracking-wide mb-1">
+                <div className="flex flex-col justify-center">
+                  <span className="text-sm text-[var(--color-gray-500)] font-medium">
                     Цена при запитване
                   </span>
-                  <div className="flex items-center gap-1.5 text-[var(--color-primary)]">
-                    <MessageCircle className="w-4 h-4" />
-                    <span className="text-sm font-medium">Свържете се с нас</span>
-                  </div>
                 </div>
               ) : (
                 /* Visible prices */
