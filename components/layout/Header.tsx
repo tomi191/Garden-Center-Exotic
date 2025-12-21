@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, MapPin, Clock, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -13,6 +14,10 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // Pages with dark hero backgrounds that need white logo at top
+  const hasHero = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +32,7 @@ export function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled
+          scrolled || !hasHero
             ? "bg-[#faf8f5]/80 backdrop-blur-lg border-b border-[var(--color-primary)]/10 py-2 md:py-3 shadow-sm"
             : "bg-transparent py-3 md:py-5"
         )}
@@ -44,18 +49,18 @@ export function Header() {
             >
               <div className={cn(
                 "relative transition-all duration-500 group-hover:scale-105 flex items-center justify-center",
-                scrolled
+                scrolled || !hasHero
                   ? "w-[140px] h-[48px] md:w-[220px] md:h-[75px]"
                   : "w-[160px] h-[56px] md:w-[260px] md:h-[90px]"
               )}>
-                {/* White logo when at top (hero section), dark logo when scrolled */}
+                {/* White logo when at top (hero section), dark logo when scrolled or on pages without hero */}
                 <Image
-                  src={scrolled ? "/images/logos/Logo print file.png" : "/images/logos/Logo print file white.png"}
+                  src={scrolled || !hasHero ? "/images/logos/Logo print file.png" : "/images/logos/Logo print file white.png"}
                   alt="Exotic Flowers"
                   fill
                   className={cn(
                     "object-contain transition-all duration-300",
-                    !scrolled && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+                    !scrolled && hasHero && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
                   )}
                   priority
                   sizes="(max-width: 768px) 160px, 260px"
@@ -81,7 +86,7 @@ export function Header() {
             <div className="flex items-center z-50">
               <a href={`tel:${LOCATIONS.varna.phone}`} className={cn(
                 "flex items-center justify-center w-10 h-10 rounded-full transition-colors lg:hidden",
-                scrolled
+                scrolled || !hasHero
                   ? "text-[var(--color-gray-700)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)]"
                   : "text-white hover:text-white/80 hover:bg-white/10"
               )}>
@@ -94,7 +99,7 @@ export function Header() {
               {/* Phone - visible on desktop */}
               <a href={`tel:${LOCATIONS.varna.phone}`} className={cn(
                 "hidden lg:flex items-center gap-2 text-sm font-semibold mr-4 transition-colors",
-                scrolled
+                scrolled || !hasHero
                   ? "text-[var(--color-gray-700)] hover:text-[var(--color-primary)]"
                   : "text-white hover:text-white/80"
               )}>
@@ -111,7 +116,7 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={cn(
                   "lg:hidden p-2.5 rounded-full transition-colors",
-                  scrolled
+                  scrolled || !hasHero
                     ? "text-[var(--color-gray-800)] hover:bg-[var(--color-primary-light)]"
                     : "text-white hover:bg-white/10"
                 )}
