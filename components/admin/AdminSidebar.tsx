@@ -13,7 +13,8 @@ import {
   ExternalLink,
   ClipboardList,
   Warehouse,
-  Sparkles
+  Sparkles,
+  Building2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,11 @@ const navItems = [
     title: "Склад",
     href: "/admin/stock",
     icon: Warehouse,
+  },
+  {
+    title: "B2B Компании",
+    href: "/admin/b2b",
+    icon: Building2,
   },
   {
     title: "Всички Продукти",
