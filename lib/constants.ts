@@ -35,7 +35,7 @@ export const LOCATIONS = {
     reviewCount: 23,
     hours: {
       weekdays: "09:00 - 18:00",
-      saturday: "09:00 - 16:00",
+      saturday: "Почивен ден",
       sunday: "Почивен ден",
     },
     coordinates: {
@@ -58,7 +58,7 @@ export const LOCATIONS = {
     reviewCount: 31,
     hours: {
       weekdays: "09:00 - 18:00",
-      saturday: "08:00 - 18:00",
+      saturday: "Почивен ден",
       sunday: "Почивен ден",
     },
     coordinates: {

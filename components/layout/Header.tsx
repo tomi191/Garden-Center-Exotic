@@ -190,7 +190,7 @@ export function Header() {
               {/* Working Hours Badge */}
               <div className="flex items-center justify-center gap-2 text-sm text-[var(--color-gray-600)]">
                 <Clock className="w-4 h-4" />
-                <span>Пон-Пет: 09:00-18:00 | Съб: 09:00-16:00</span>
+                <span>Пон-Пет: 09:00-18:00 | Съб-Нед: Почивни</span>
               </div>
 
               {/* Quick Actions */}

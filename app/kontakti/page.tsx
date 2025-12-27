@@ -103,7 +103,7 @@ export default function ContactPage() {
                      <Clock className="w-4 h-4 mt-0.5" />
                      <div>
                        <p>Пн-Пт: {LOCATIONS.varna.hours.weekdays}</p>
-                       <p>Съб: {LOCATIONS.varna.hours.saturday}</p>
+                       <p>Съб-Нед: Почивни</p>
                      </div>
                    </div>
                 </div>

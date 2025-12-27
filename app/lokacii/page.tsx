@@ -110,12 +110,8 @@ export default function LocationsPage() {
                           <span>{LOCATIONS.varna.hours.weekdays}</span>
                         </div>
                         <div className="flex justify-between gap-4">
-                          <span className="font-medium">Събота:</span>
-                          <span>{LOCATIONS.varna.hours.saturday}</span>
-                        </div>
-                        <div className="flex justify-between gap-4">
-                          <span className="font-medium">Неделя:</span>
-                          <span className="text-[var(--color-error)]">{LOCATIONS.varna.hours.sunday}</span>
+                          <span className="font-medium">Събота - Неделя:</span>
+                          <span className="text-[var(--color-error)]">Почивни дни</span>
                         </div>
                       </div>
                     </div>
@@ -276,12 +272,8 @@ export default function LocationsPage() {
                           <span>{LOCATIONS.novaZagora.hours.weekdays}</span>
                         </div>
                         <div className="flex justify-between gap-4">
-                          <span className="font-medium">Събота:</span>
-                          <span>{LOCATIONS.novaZagora.hours.saturday}</span>
-                        </div>
-                        <div className="flex justify-between gap-4">
-                          <span className="font-medium">Неделя:</span>
-                          <span className="text-[var(--color-error)]">{LOCATIONS.novaZagora.hours.sunday}</span>
+                          <span className="font-medium">Събота - Неделя:</span>
+                          <span className="text-[var(--color-error)]">Почивни дни</span>
                         </div>
                       </div>
                     </div>

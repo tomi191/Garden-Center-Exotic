@@ -85,10 +85,8 @@ export function Footer() {
             <div className="grid grid-cols-2 gap-2 text-sm">
               <div className="text-white/60">Пон - Пет</div>
               <div className="text-white">09:00 - 18:00</div>
-              <div className="text-white/60">Събота</div>
-              <div className="text-white">09:00 - 16:00</div>
-              <div className="text-white/60">Неделя</div>
-              <div className="text-white/50">Почивен ден</div>
+              <div className="text-white/60">Събота - Неделя</div>
+              <div className="text-white/50">Почивни дни</div>
             </div>
           </div>
 
@@ -272,7 +270,7 @@ export function Footer() {
                   </div>
                   <div className="text-sm pt-1">
                     <p className="mb-1">Пон-Пет: 09:00-18:00</p>
-                    <p>Събота: 09:00-16:00</p>
+                    <p>Съб-Нед: Почивни</p>
                   </div>
                 </div>
               </div>

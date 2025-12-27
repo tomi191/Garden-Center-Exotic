@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const publicDir = path.join(__dirname, '..', 'public');
-const logoPath = path.join(publicDir, 'images', 'logos', 'fav-ico.png');
+const logoPath = path.join(publicDir, 'images', 'logos', 'exotic-logo.jpg');
 
 async function generateFavicons() {
   console.log('Generating favicons from logo...');
