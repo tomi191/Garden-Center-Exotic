@@ -10,11 +10,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
-import { B2BSessionProvider } from "@/components/providers/B2BSessionProvider";
-
 const navItems = [
   { title: "Каталог", href: "/b2b/katalog", icon: Package },
-  { title: "Моите поръчки", href: "/b2b/porachki", icon: ShoppingCart },
+  { title: "Моите заявки", href: "/b2b/zayavki", icon: ShoppingCart },
 ];
 
 function B2BPortalContent({ children }: { children: React.ReactNode }) {
@@ -198,9 +196,5 @@ function B2BPortalContent({ children }: { children: React.ReactNode }) {
 }
 
 export default function B2BPortalLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <B2BSessionProvider>
-      <B2BPortalContent>{children}</B2BPortalContent>
-    </B2BSessionProvider>
-  );
+  return <B2BPortalContent>{children}</B2BPortalContent>;
 }

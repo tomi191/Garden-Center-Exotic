@@ -14,7 +14,8 @@ import {
   ClipboardList,
   Warehouse,
   Sparkles,
-  Building2
+  Building2,
+  ShoppingBag
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +39,11 @@ const navItems = [
     title: "B2B Компании",
     href: "/admin/b2b",
     icon: Building2,
+  },
+  {
+    title: "B2B Заявки",
+    href: "/admin/b2b/orders",
+    icon: ShoppingBag,
   },
   {
     title: "Всички Продукти",

@@ -32,7 +32,9 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
 
   const fetchCompany = async () => {
     try {
-      const response = await fetch(`/api/b2b/companies/${id}`);
+      const response = await fetch(`/api/b2b/companies/${id}`, {
+        credentials: "include",
+      });
       if (response.ok) {
         const data = await response.json();
         setCompany(data);
@@ -56,6 +58,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
       const response = await fetch(`/api/b2b/companies/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           status: "approved",
           tier: selectedTier,
@@ -84,6 +87,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
       const response = await fetch(`/api/b2b/companies/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           status: "rejected",
           notes,
@@ -109,6 +113,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
       const response = await fetch(`/api/b2b/companies/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ status: "suspended", notes }),
       });
 
@@ -130,6 +135,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
     try {
       const response = await fetch(`/api/b2b/companies/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
 
       if (response.ok) {
@@ -149,6 +155,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
       const response = await fetch(`/api/b2b/companies/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           tier: selectedTier,
           notes,

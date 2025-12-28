@@ -417,14 +417,38 @@ export default function B2BCatalogPage() {
                 </div>
                 <Button
                   className="w-full rounded-xl py-3"
-                  onClick={() => {
-                    toast.success("Поръчката е изпратена! Ще се свържем с вас.");
-                    setCart([]);
-                    setShowCart(false);
+                  onClick={async () => {
+                    try {
+                      const response = await fetch("/api/b2b/orders", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: JSON.stringify({
+                          items: cart.map((item) => ({
+                            product_id: item.product.id,
+                            product_name: item.product.name,
+                            quantity: item.quantity,
+                            unit_price: getDiscountedPrice(item.product.price),
+                          })),
+                        }),
+                      });
+
+                      if (response.ok) {
+                        toast.success("Заявката е изпратена успешно! Ще се свържем с вас.");
+                        setCart([]);
+                        setShowCart(false);
+                      } else {
+                        const data = await response.json();
+                        toast.error(data.error || "Грешка при изпращане на заявката");
+                      }
+                    } catch (error) {
+                      console.error("Error:", error);
+                      toast.error("Възникна грешка при изпращане");
+                    }
                   }}
                 >
                   <Check className="w-5 h-5 mr-2" />
-                  Изпрати поръчка
+                  Изпрати заявка
                 </Button>
                 <p className="text-xs text-gray-500 text-center mt-2">
                   Ще се свържем с вас за потвърждение
