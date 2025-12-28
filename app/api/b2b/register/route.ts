@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { hashPassword } from "@/lib/b2b-auth";
 import { z } from "zod";
+import { resend, FROM_EMAIL, ADMIN_EMAIL, getB2BRegistrationEmail } from "@/lib/resend";
 
 // Validation schema
 const registerSchema = z.object({
@@ -88,6 +89,20 @@ export async function POST(request: NextRequest) {
         { error: "Грешка при създаване на акаунта. Моля, опитайте отново." },
         { status: 500 }
       );
+    }
+
+    // Send email notification to admin
+    try {
+      const emailContent = getB2BRegistrationEmail(data.company_name, data.mol);
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: ADMIN_EMAIL,
+        subject: emailContent.subject,
+        html: emailContent.html,
+      });
+    } catch (emailError) {
+      console.error("Error sending registration email:", emailError);
+      // Don't fail registration if email fails
     }
 
     return NextResponse.json({

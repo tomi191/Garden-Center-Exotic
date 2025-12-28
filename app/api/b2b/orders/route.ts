@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { b2bAuthOptions } from "@/lib/b2b-auth";
 import { supabaseAdmin } from "@/lib/supabase";
+import { resend, FROM_EMAIL, ADMIN_EMAIL, getOrderConfirmationEmail } from "@/lib/resend";
 
 // GET - List B2B orders
 // For admin: all orders
@@ -164,6 +165,49 @@ export async function POST(request: NextRequest) {
         { error: "Грешка при създаване на заявката" },
         { status: 500 }
       );
+    }
+
+    // Send order confirmation emails
+    try {
+      // Get company email
+      const { data: companyData } = await supabaseAdmin
+        .from("b2b_companies")
+        .select("email")
+        .eq("id", company.id)
+        .single();
+
+      if (companyData?.email) {
+        const emailContent = getOrderConfirmationEmail(
+          company.company_name,
+          orderNumber,
+          orderItems.map((item: { product_name: string; quantity: number; total_price: number }) => ({
+            product_name: item.product_name,
+            quantity: item.quantity,
+            total_price: item.total_price,
+          })),
+          totalAmount,
+          company.discount_percent
+        );
+
+        // Send to company
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: companyData.email,
+          subject: emailContent.subject,
+          html: emailContent.html,
+        });
+
+        // Send copy to admin
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: `[Копие] ${emailContent.subject}`,
+          html: emailContent.html,
+        });
+      }
+    } catch (emailError) {
+      console.error("Error sending order emails:", emailError);
+      // Don't fail order creation if email fails
     }
 
     return NextResponse.json({

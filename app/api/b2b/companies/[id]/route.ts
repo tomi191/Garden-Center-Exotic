@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabase";
 import { TIER_DISCOUNTS, TIER_PAYMENT_TERMS } from "@/lib/b2b-auth";
+import { resend, FROM_EMAIL, getB2BApprovalEmail } from "@/lib/resend";
 
 // GET - Get single B2B company (admin only)
 export async function GET(
@@ -89,6 +90,13 @@ export async function PATCH(
       updateData.notes = body.notes;
     }
 
+    // Get current company data to check previous status
+    const { data: currentCompany } = await supabaseAdmin
+      .from("b2b_companies")
+      .select("status, email, company_name")
+      .eq("id", id)
+      .single();
+
     const { data: company, error } = await supabaseAdmin
       .from("b2b_companies")
       .update(updateData)
@@ -102,6 +110,25 @@ export async function PATCH(
         { error: "Грешка при обновяване на компанията" },
         { status: 500 }
       );
+    }
+
+    // Send approval email if status changed to approved
+    if (body.status === "approved" && currentCompany?.status !== "approved") {
+      try {
+        const tier = body.tier || "silver";
+        const discount = TIER_DISCOUNTS[tier as keyof typeof TIER_DISCOUNTS] || 10;
+        const emailContent = getB2BApprovalEmail(company.company_name, tier, discount);
+
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: company.email,
+          subject: emailContent.subject,
+          html: emailContent.html,
+        });
+      } catch (emailError) {
+        console.error("Error sending approval email:", emailError);
+        // Don't fail update if email fails
+      }
     }
 
     return NextResponse.json(company);

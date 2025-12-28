@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { b2bAuthOptions } from "@/lib/b2b-auth";
 import { supabaseAdmin } from "@/lib/supabase";
+import { resend, FROM_EMAIL, getOrderStatusEmail } from "@/lib/resend";
 
 // GET - Get single B2B order
 export async function GET(
@@ -128,6 +129,28 @@ export async function PATCH(
         { error: "Грешка при обновяване на заявката" },
         { status: 500 }
       );
+    }
+
+    // Send status update email if status changed
+    if (body.status && order.company?.email) {
+      try {
+        const emailContent = getOrderStatusEmail(
+          order.company.company_name,
+          order.order_number,
+          body.status,
+          body.tracking_number || order.tracking_number
+        );
+
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: order.company.email,
+          subject: emailContent.subject,
+          html: emailContent.html,
+        });
+      } catch (emailError) {
+        console.error("Error sending status email:", emailError);
+        // Don't fail update if email fails
+      }
     }
 
     return NextResponse.json(order);
