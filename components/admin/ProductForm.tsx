@@ -11,8 +11,15 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { ImageUpload } from "./ImageUpload";
 import toast from "react-hot-toast";
-import { Plus, X, Save, ArrowLeft } from "lucide-react";
+import { Plus, X, Save, ArrowLeft, Building2, Info } from "lucide-react";
 import Link from "next/link";
+
+// B2B tier configuration
+const b2bTiers = [
+  { name: "Silver", discount: 10, color: "text-gray-600", bg: "bg-gray-100" },
+  { name: "Gold", discount: 15, color: "text-amber-600", bg: "bg-amber-50" },
+  { name: "Platinum", discount: 20, color: "text-indigo-600", bg: "bg-indigo-50" },
+];
 
 const productSchema = z.object({
   name: z.string().min(1, "Името е задължително"),
@@ -91,6 +98,8 @@ export function ProductForm({ product, mode }: ProductFormProps) {
   const characteristics = watch("characteristics");
   const inStock = watch("inStock");
   const featured = watch("featured");
+  const price = watch("price");
+  const priceUnit = watch("priceUnit");
 
   function addCharacteristic() {
     if (newCharacteristic.trim()) {
@@ -258,6 +267,41 @@ export function ProductForm({ product, mode }: ProductFormProps) {
                   </select>
                 </div>
               </div>
+
+              {/* B2B Price Preview */}
+              {price > 0 && (
+                <div className="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-100">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Building2 className="w-4 h-4 text-indigo-600" />
+                    <h4 className="font-medium text-indigo-900">B2B Цени за партньори</h4>
+                    <div className="group relative">
+                      <Info className="w-4 h-4 text-indigo-400 cursor-help" />
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+                        Автоматични отстъпки за B2B клиенти
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {b2bTiers.map((tier) => {
+                      const discountedPrice = Number(price) * (1 - tier.discount / 100);
+                      return (
+                        <div
+                          key={tier.name}
+                          className={`${tier.bg} rounded-lg p-3 text-center`}
+                        >
+                          <p className={`text-xs font-medium ${tier.color} mb-1`}>
+                            {tier.name} (-{tier.discount}%)
+                          </p>
+                          <p className="text-lg font-bold text-gray-900">
+                            {discountedPrice.toFixed(2)}
+                          </p>
+                          <p className="text-xs text-gray-500">{priceUnit}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               <div>
                 <label className="block text-sm font-medium text-[var(--color-gray-700)] mb-1">

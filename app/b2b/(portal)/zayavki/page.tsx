@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Package, Clock, CheckCircle, Truck, XCircle, Calendar, ChevronRight, ShoppingBag } from "lucide-react";
+import Image from "next/image";
+import { Package, Clock, CheckCircle, Truck, XCircle, Calendar, ChevronRight, ShoppingBag, ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface OrderItem {
   id: string;
   product_name: string;
+  product_image?: string;
+  price_unit?: string;
   quantity: number;
   unit_price: number;
   total_price: number;
@@ -207,13 +210,31 @@ export default function B2BOrdersPage() {
                     <h4 className="text-sm font-medium text-gray-700 mb-3">Артикули</h4>
                     <div className="divide-y divide-gray-100 bg-white rounded-lg border border-gray-200">
                       {order.items?.map((item) => (
-                        <div key={item.id} className="p-3 flex justify-between items-center">
-                          <div>
-                            <p className="font-medium text-gray-900">{item.product_name}</p>
+                        <div key={item.id} className="p-3 flex items-center gap-3">
+                          {/* Product Image */}
+                          <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                            {item.product_image ? (
+                              <Image
+                                src={item.product_image}
+                                alt={item.product_name}
+                                width={48}
+                                height={48}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <ImageIcon className="w-5 h-5 text-gray-300" />
+                              </div>
+                            )}
+                          </div>
+                          {/* Product Info */}
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-gray-900 truncate">{item.product_name}</p>
                             <p className="text-sm text-gray-500">
-                              {item.quantity} x {item.unit_price?.toFixed(2)} лв
+                              {item.quantity} x {item.unit_price?.toFixed(2)} {item.price_unit || "лв"}
                             </p>
                           </div>
+                          {/* Price */}
                           <p className="font-semibold">{item.total_price?.toFixed(2)} лв</p>
                         </div>
                       ))}

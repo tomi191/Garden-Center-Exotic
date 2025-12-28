@@ -3,9 +3,10 @@
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShoppingBag, ArrowLeft, CheckCircle, XCircle, Clock, Truck, Package,
-  Building2, Mail, Phone, MapPin, Calendar, Loader2, AlertCircle
+  Building2, Mail, Phone, MapPin, Calendar, Loader2, AlertCircle, ImageIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
@@ -42,6 +43,8 @@ interface B2BOrder {
     id: string;
     product_id: string;
     product_name: string;
+    product_image?: string;
+    price_unit?: string;
     quantity: number;
     unit_price: number;
     total_price: number;
@@ -269,14 +272,32 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
             </h2>
             <div className="divide-y divide-gray-100">
               {order.items?.map((item) => (
-                <div key={item.id} className="py-3 flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-gray-900">{item.product_name}</p>
+                <div key={item.id} className="py-3 flex items-center gap-4">
+                  {/* Product Image */}
+                  <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                    {item.product_image ? (
+                      <Image
+                        src={item.product_image}
+                        alt={item.product_name}
+                        width={56}
+                        height={56}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <ImageIcon className="w-6 h-6 text-gray-300" />
+                      </div>
+                    )}
+                  </div>
+                  {/* Product Info */}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-900 truncate">{item.product_name}</p>
                     <p className="text-sm text-gray-500">
-                      {item.quantity} x {item.unit_price.toFixed(2)} лв
+                      {item.quantity} x {item.unit_price.toFixed(2)} {item.price_unit || "лв"}
                     </p>
                   </div>
-                  <p className="font-semibold">{item.total_price.toFixed(2)} лв</p>
+                  {/* Price */}
+                  <p className="font-semibold text-gray-900">{item.total_price.toFixed(2)} лв</p>
                 </div>
               ))}
             </div>

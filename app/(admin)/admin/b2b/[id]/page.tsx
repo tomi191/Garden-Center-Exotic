@@ -5,16 +5,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Building2, ArrowLeft, CheckCircle, XCircle, AlertCircle, Clock,
-  Mail, Phone, MapPin, Calendar, User, CreditCard, Percent, Loader2, Trash2
+  Mail, Phone, MapPin, Calendar, User, CreditCard, Percent, Loader2, Trash2, Info
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { B2BCompany, B2BTier } from "@/types";
 import toast from "react-hot-toast";
 
-const tierOptions: { value: B2BTier; label: string; discount: number; terms: number }[] = [
-  { value: "silver", label: "Silver", discount: 10, terms: 0 },
-  { value: "gold", label: "Gold", discount: 15, terms: 30 },
-  { value: "platinum", label: "Platinum", discount: 20, terms: 60 },
+const tierOptions: { value: B2BTier; label: string; discount: number; terms: number; description: string }[] = [
+  { value: "silver", label: "Silver", discount: 10, terms: 0, description: "Начално ниво за нови партньори. Плащане при доставка." },
+  { value: "gold", label: "Gold", discount: 15, terms: 30, description: "За редовни клиенти с добра история. 30 дни отложено плащане." },
+  { value: "platinum", label: "Platinum", discount: 20, terms: 60, description: "VIP партньори с голям обем. 60 дни отложено плащане." },
 ];
 
 export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -306,14 +306,22 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
 
             {/* Tier Selection */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ниво на партньорство
-              </label>
+              <div className="flex items-center gap-2 mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Ниво на партньорство
+                </label>
+                <div className="group relative">
+                  <Info className="w-4 h-4 text-gray-400 cursor-help" />
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity w-48 pointer-events-none z-10">
+                    Нивото определя отстъпката и условията за плащане на B2B клиента
+                  </div>
+                </div>
+              </div>
               <div className="space-y-2">
                 {tierOptions.map((tier) => (
                   <label
                     key={tier.value}
-                    className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    className={`relative flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition-all group ${
                       selectedTier === tier.value
                         ? "border-[var(--color-primary)] bg-[var(--color-primary-light)]"
                         : "border-gray-200 hover:border-gray-300"
@@ -328,11 +336,14 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
                         onChange={(e) => setSelectedTier(e.target.value as B2BTier)}
                         className="text-[var(--color-primary)]"
                       />
-                      <span className="font-medium">{tier.label}</span>
+                      <div>
+                        <span className="font-medium">{tier.label}</span>
+                        <p className="text-xs text-gray-500 mt-0.5">{tier.description}</p>
+                      </div>
                     </div>
                     <div className="text-right text-sm">
                       <p className="font-semibold text-[var(--color-primary)]">-{tier.discount}%</p>
-                      <p className="text-gray-500">{tier.terms}д срок</p>
+                      <p className="text-gray-500">{tier.terms === 0 ? "Веднага" : `${tier.terms}д срок`}</p>
                     </div>
                   </label>
                 ))}

@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Building2, Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
-import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 
-export default function B2BLoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/b2b/katalog";
@@ -80,14 +79,14 @@ export default function B2BLoginPage() {
           </h2>
 
           <p className="text-white/80 text-center max-w-md mb-10">
-            Достъп до преференциални цени, каталог на едро и лесно управление на поръчките
+            Достъп до преференциални цени, каталог на едро и лесно управление на заявките
           </p>
 
           <div className="space-y-4 w-full max-w-sm">
             {[
               "Цени с 10-20% отстъпка",
               "Достъп до пълен каталог",
-              "История на поръчките",
+              "История на заявките",
               "Приоритетна доставка",
             ].map((feature, i) => (
               <div key={i} className="flex items-center gap-3 bg-white/10 rounded-xl px-5 py-3">
@@ -233,5 +232,17 @@ export default function B2BLoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function B2BLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[var(--color-primary)]" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }

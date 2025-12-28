@@ -417,7 +417,7 @@ export default function B2BRegisterPage() {
           {/* Benefits */}
           <div className="mt-10 grid md:grid-cols-3 gap-6">
             {[
-              { title: "10-20% отстъпка", desc: "Според обема на поръчките" },
+              { title: "10-20% отстъпка", desc: "Според обема на заявките" },
               { title: "До 60 дни разсрочено", desc: "Плащане с фактура" },
               { title: "Приоритетна доставка", desc: "Експресни доставки" },
             ].map((benefit, i) => (

@@ -139,6 +139,8 @@ export async function POST(request: NextRequest) {
       product_name: string;
       quantity: number;
       unit_price: number;
+      product_image?: string;
+      price_unit?: string;
     }) => ({
       order_id: order.id,
       product_id: item.product_id,
@@ -146,6 +148,8 @@ export async function POST(request: NextRequest) {
       quantity: item.quantity,
       unit_price: item.unit_price,
       total_price: item.unit_price * item.quantity,
+      product_image: item.product_image || null,
+      price_unit: item.price_unit || "лв",
     }));
 
     const { error: itemsError } = await supabaseAdmin

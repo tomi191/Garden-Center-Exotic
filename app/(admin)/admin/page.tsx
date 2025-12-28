@@ -13,7 +13,9 @@ import {
   ClipboardList,
   Clock,
   CheckCircle,
-  Truck
+  Truck,
+  Building2,
+  ShoppingBag
 } from "lucide-react";
 
 export default async function AdminDashboard() {
@@ -79,6 +81,41 @@ export default async function AdminDashboard() {
     .from("Request")
     .select("*")
     .order("createdAt", { ascending: false })
+    .limit(5);
+
+  // Fetch B2B statistics
+  const { count: totalB2BOrders } = await supabaseAdmin
+    .from("b2b_orders")
+    .select("*", { count: "exact", head: true });
+
+  const { count: pendingB2BOrders } = await supabaseAdmin
+    .from("b2b_orders")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "pending");
+
+  const { count: confirmedB2BOrders } = await supabaseAdmin
+    .from("b2b_orders")
+    .select("*", { count: "exact", head: true })
+    .in("status", ["confirmed", "processing"]);
+
+  const { count: shippedB2BOrders } = await supabaseAdmin
+    .from("b2b_orders")
+    .select("*", { count: "exact", head: true })
+    .in("status", ["shipped", "delivered"]);
+
+  const { count: totalB2BCompanies } = await supabaseAdmin
+    .from("b2b_companies")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "approved");
+
+  // Fetch recent B2B orders
+  const { data: recentB2BOrders } = await supabaseAdmin
+    .from("b2b_orders")
+    .select(`
+      *,
+      company:b2b_companies(company_name, email)
+    `)
+    .order("created_at", { ascending: false })
     .limit(5);
 
   const categoryLabels: Record<string, string> = {
@@ -154,50 +191,85 @@ export default async function AdminDashboard() {
     },
   ];
 
+  const b2bStatCards = [
+    {
+      title: "B2B Заявки",
+      value: totalB2BOrders || 0,
+      icon: ShoppingBag,
+      description: "Общо B2B поръчки",
+      bg: "bg-indigo-50 text-indigo-600",
+      href: "/admin/b2b/orders",
+    },
+    {
+      title: "Чакащи",
+      value: pendingB2BOrders || 0,
+      icon: Clock,
+      description: "Нуждаят се от потвърждение",
+      bg: "bg-yellow-50 text-yellow-600",
+      href: "/admin/b2b/orders",
+    },
+    {
+      title: "В обработка",
+      value: confirmedB2BOrders || 0,
+      icon: Package,
+      description: "Активни поръчки",
+      bg: "bg-blue-50 text-blue-600",
+      href: "/admin/b2b/orders",
+    },
+    {
+      title: "B2B Партньори",
+      value: totalB2BCompanies || 0,
+      icon: Building2,
+      description: "Одобрени компании",
+      bg: "bg-emerald-50 text-emerald-600",
+      href: "/admin/b2b",
+    },
+  ];
+
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+    <div className="space-y-6 md:space-y-8 animate-in fade-in duration-500">
+      {/* Header - Mobile Optimized */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white p-4 md:p-6 rounded-xl md:rounded-2xl shadow-sm border border-gray-100">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-gray-900">
+          <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900">
             Здравейте! 👋
           </h1>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-500 text-sm md:text-base mt-1">
             Ето какво се случва в магазина днес.
           </p>
         </div>
-        <Link href="/admin/products/new">
-          <Button className="rounded-full shadow-lg shadow-green-900/20 hover:shadow-xl">
+        <Link href="/admin/products/new" className="w-full sm:w-auto">
+          <Button className="w-full sm:w-auto rounded-full shadow-lg shadow-green-900/20 hover:shadow-xl text-sm md:text-base py-2.5 md:py-2">
             <Plus className="w-4 h-4 mr-2" />
             Добави Продукт
           </Button>
         </Link>
       </div>
 
-      {/* Product Stats Grid */}
+      {/* Product Stats Grid - Mobile Optimized */}
       <div>
-        <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <h2 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4 flex items-center gap-2 px-1">
           <Package className="w-5 h-5 text-green-600" />
           Продукти
         </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           {productStatCards.map((stat) => (
-            <div key={stat.title} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity`}>
-                <stat.icon className={`w-24 h-24 ${stat.bg.split(' ')[1]}`} />
+            <div key={stat.title} className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div className={`absolute top-0 right-0 p-2 md:p-4 opacity-10 group-hover:opacity-20 transition-opacity`}>
+                <stat.icon className={`w-16 md:w-24 h-16 md:h-24 ${stat.bg.split(' ')[1]}`} />
               </div>
 
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${stat.bg}`}>
-                <stat.icon className="w-6 h-6" />
+              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center mb-2 md:mb-4 ${stat.bg}`}>
+                <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
               </div>
 
-              <p className="text-sm font-medium text-gray-500 mb-1">
+              <p className="text-xs md:text-sm font-medium text-gray-500 mb-0.5 md:mb-1">
                 {stat.title}
               </p>
-              <h3 className="text-3xl font-bold text-gray-900">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
                 {stat.value}
               </h3>
-              <p className="text-xs text-gray-400 mt-2">
+              <p className="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 line-clamp-1">
                 {stat.description}
               </p>
             </div>
@@ -205,30 +277,30 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* Request Stats Grid */}
+      {/* B2B Stats Grid - Mobile Optimized */}
       <div>
-        <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <ClipboardList className="w-5 h-5 text-purple-600" />
-          Заявки от клиенти
+        <h2 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4 flex items-center gap-2 px-1">
+          <Building2 className="w-5 h-5 text-indigo-600" />
+          B2B Партньори
         </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {requestStatCards.map((stat) => (
-            <Link key={stat.title} href="/admin/requests" className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity`}>
-                <stat.icon className={`w-24 h-24 ${stat.bg.split(' ')[1]}`} />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+          {b2bStatCards.map((stat) => (
+            <Link key={stat.title} href={stat.href} className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div className={`absolute top-0 right-0 p-2 md:p-4 opacity-10 group-hover:opacity-20 transition-opacity`}>
+                <stat.icon className={`w-16 md:w-24 h-16 md:h-24 ${stat.bg.split(' ')[1]}`} />
               </div>
 
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${stat.bg}`}>
-                <stat.icon className="w-6 h-6" />
+              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center mb-2 md:mb-4 ${stat.bg}`}>
+                <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
               </div>
 
-              <p className="text-sm font-medium text-gray-500 mb-1">
+              <p className="text-xs md:text-sm font-medium text-gray-500 mb-0.5 md:mb-1">
                 {stat.title}
               </p>
-              <h3 className="text-3xl font-bold text-gray-900">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
                 {stat.value}
               </h3>
-              <p className="text-xs text-gray-400 mt-2">
+              <p className="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 line-clamp-1">
                 {stat.description}
               </p>
             </Link>
@@ -236,30 +308,30 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Recent Products */}
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h2 className="font-bold text-lg text-gray-900 flex items-center gap-2">
-                <Leaf className="w-5 h-5 text-green-600" />
+      <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
+        {/* Recent Products - Mobile Optimized */}
+        <div className="lg:col-span-2 bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="p-4 md:p-6 border-b border-gray-100 flex items-center justify-between">
+              <h2 className="font-bold text-base md:text-lg text-gray-900 flex items-center gap-2">
+                <Leaf className="w-4 h-4 md:w-5 md:h-5 text-green-600" />
                 Последно добавени
               </h2>
               <Link
                 href="/admin/products"
-                className="text-sm font-medium text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 px-3 py-1 rounded-full transition-colors flex items-center gap-1"
+                className="text-xs md:text-sm font-medium text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 px-2 md:px-3 py-1 rounded-full transition-colors flex items-center gap-1"
               >
                 Виж всички
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
               </Link>
             </div>
-            
+
             <div className="p-2">
               {!recentProducts || recentProducts.length === 0 ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Package className="w-8 h-8 text-gray-300" />
+                <div className="text-center py-8 md:py-12">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                    <Package className="w-6 h-6 md:w-8 md:h-8 text-gray-300" />
                   </div>
-                  <p className="text-gray-500">Няма добавени продукти</p>
+                  <p className="text-gray-500 text-sm md:text-base">Няма добавени продукти</p>
                 </div>
               ) : (
                 <div className="space-y-1">
@@ -267,9 +339,9 @@ export default async function AdminDashboard() {
                     <Link
                       key={product.id}
                       href={`/admin/products/${product.id}/edit`}
-                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-all group"
+                      className="flex items-center gap-3 md:gap-4 p-2 md:p-3 rounded-lg md:rounded-xl hover:bg-gray-50 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden relative border border-gray-200">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-gray-100 overflow-hidden relative border border-gray-200 flex-shrink-0">
                         {product.image ? (
                           <img
                             src={product.image}
@@ -278,32 +350,32 @@ export default async function AdminDashboard() {
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-300">
-                            <Leaf className="w-6 h-6" />
+                            <Leaf className="w-5 h-5 md:w-6 md:h-6" />
                           </div>
                         )}
                       </div>
-                      
+
                       <div className="flex-1 min-w-0">
-                        <p className="font-bold text-gray-900 truncate group-hover:text-[var(--color-primary)] transition-colors">
+                        <p className="font-bold text-sm md:text-base text-gray-900 truncate group-hover:text-[var(--color-primary)] transition-colors">
                           {product.name}
                         </p>
-                        <p className="text-sm text-gray-500">
-                          {product.category}
+                        <p className="text-xs md:text-sm text-gray-500 truncate">
+                          {categoryLabels[product.category] || product.category}
                         </p>
                       </div>
 
-                      <div className="text-right">
-                        <p className="font-bold text-gray-900">
+                      <div className="text-right flex-shrink-0">
+                        <p className="font-bold text-sm md:text-base text-gray-900">
                           {product.price.toFixed(2)} лв.
                         </p>
-                        <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                        <span className={`inline-block px-1.5 md:px-2 py-0.5 rounded text-[9px] md:text-[10px] font-bold uppercase tracking-wider ${
                            product.inStock ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
                         }`}>
                            {product.inStock ? "Наличен" : "Изчерпан"}
                         </span>
                       </div>
-                      
-                      <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[var(--color-primary)] opacity-0 group-hover:opacity-100 transition-all" />
+
+                      <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[var(--color-primary)] hidden md:block opacity-0 group-hover:opacity-100 transition-all" />
                     </Link>
                   ))}
                 </div>
@@ -311,16 +383,16 @@ export default async function AdminDashboard() {
             </div>
         </div>
 
-        {/* Category Distribution */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden h-fit">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="font-bold text-lg text-gray-900">
+        {/* Category Distribution - Mobile Optimized */}
+        <div className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden h-fit">
+          <div className="p-4 md:p-6 border-b border-gray-100">
+            <h2 className="font-bold text-base md:text-lg text-gray-900">
               Разпределение
             </h2>
           </div>
-          <div className="p-6 space-y-6">
+          <div className="p-4 md:p-6 space-y-4 md:space-y-6">
             {Object.keys(categoryStats).length === 0 ? (
-                <p className="text-gray-500 text-center">Няма данни</p>
+                <p className="text-gray-500 text-center text-sm">Няма данни</p>
               ) : (
                 Object.entries(categoryStats).sort((a,b) => b[1] - a[1]).map(([category, count]) => {
                   const percentage = Math.round(
@@ -328,15 +400,15 @@ export default async function AdminDashboard() {
                   );
                   return (
                     <div key={category}>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-700">
+                      <div className="flex items-center justify-between mb-1.5 md:mb-2">
+                        <span className="text-xs md:text-sm font-medium text-gray-700">
                           {categoryLabels[category] || category}
                         </span>
-                        <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded-md">
+                        <span className="text-[10px] md:text-xs font-bold text-gray-500 bg-gray-100 px-1.5 md:px-2 py-0.5 md:py-1 rounded-md">
                           {count as number}
                         </span>
                       </div>
-                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-1.5 md:h-2 bg-gray-100 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-[var(--color-secondary)] rounded-full transition-all duration-1000 ease-out"
                           style={{ width: `${percentage}%` }}
@@ -346,9 +418,9 @@ export default async function AdminDashboard() {
                   );
                 })
               )}
-              
-              <div className="pt-4 border-t border-gray-100">
-                 <Link href="/admin/products" className="block w-full text-center text-sm font-medium text-[var(--color-primary)] hover:underline">
+
+              <div className="pt-3 md:pt-4 border-t border-gray-100">
+                 <Link href="/admin/products" className="block w-full text-center text-xs md:text-sm font-medium text-[var(--color-primary)] hover:underline">
                     Управление на категориите
                  </Link>
               </div>
@@ -356,77 +428,81 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* Recent Requests */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="font-bold text-lg text-gray-900 flex items-center gap-2">
-            <ClipboardList className="w-5 h-5 text-purple-600" />
-            Последни заявки
+      {/* Recent B2B Orders - Mobile Optimized */}
+      <div className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="p-4 md:p-6 border-b border-gray-100 flex items-center justify-between">
+          <h2 className="font-bold text-base md:text-lg text-gray-900 flex items-center gap-2">
+            <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-indigo-600" />
+            Последни B2B заявки
           </h2>
           <Link
-            href="/admin/requests"
-            className="text-sm font-medium text-purple-600 hover:bg-purple-50 px-3 py-1 rounded-full transition-colors flex items-center gap-1"
+            href="/admin/b2b/orders"
+            className="text-xs md:text-sm font-medium text-indigo-600 hover:bg-indigo-50 px-2 md:px-3 py-1 rounded-full transition-colors flex items-center gap-1"
           >
             Виж всички
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
           </Link>
         </div>
 
         <div className="p-2">
-          {!recentRequests || recentRequests.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ClipboardList className="w-8 h-8 text-gray-300" />
+          {!recentB2BOrders || recentB2BOrders.length === 0 ? (
+            <div className="text-center py-8 md:py-12">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                <ShoppingBag className="w-6 h-6 md:w-8 md:h-8 text-gray-300" />
               </div>
-              <p className="text-gray-500">Няма регистрирани заявки</p>
-              <Link href="/admin/requests/new" className="text-purple-600 hover:underline text-sm mt-2 inline-block">
-                Добави първата заявка
+              <p className="text-gray-500 text-sm md:text-base">Няма B2B заявки</p>
+              <Link href="/admin/b2b" className="text-indigo-600 hover:underline text-xs md:text-sm mt-2 inline-block">
+                Управление на B2B партньори
               </Link>
             </div>
           ) : (
             <div className="space-y-1">
-              {recentRequests.map((request) => {
+              {recentB2BOrders.map((order: any) => {
                 const statusStyles: Record<string, string> = {
                   pending: "bg-yellow-100 text-yellow-700",
                   confirmed: "bg-blue-100 text-blue-700",
-                  completed: "bg-green-100 text-green-700",
+                  processing: "bg-purple-100 text-purple-700",
+                  shipped: "bg-indigo-100 text-indigo-700",
+                  delivered: "bg-green-100 text-green-700",
                   cancelled: "bg-red-100 text-red-700",
                 };
                 const statusLabels: Record<string, string> = {
                   pending: "Чакаща",
                   confirmed: "Потвърдена",
-                  completed: "Доставена",
+                  processing: "Обработка",
+                  shipped: "Изпратена",
+                  delivered: "Доставена",
                   cancelled: "Отказана",
                 };
                 return (
                   <Link
-                    key={request.id}
-                    href={`/admin/requests/${request.id}/edit`}
-                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-all group"
+                    key={order.id}
+                    href={`/admin/b2b/orders/${order.id}`}
+                    className="flex items-center gap-3 md:gap-4 p-2 md:p-3 rounded-lg md:rounded-xl hover:bg-gray-50 transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600">
-                      <ClipboardList className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 flex-shrink-0">
+                      <ShoppingBag className="w-5 h-5" />
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-900 truncate group-hover:text-purple-600 transition-colors">
-                        {request.clientName}
+                      <p className="font-bold text-sm md:text-base text-gray-900 truncate group-hover:text-indigo-600 transition-colors">
+                        {order.company?.company_name || "Неизвестна компания"}
                       </p>
-                      <p className="text-sm text-gray-500 truncate">
-                        {request.productName} • {request.quantity} {request.unit}
+                      <p className="text-xs md:text-sm text-gray-500 truncate">
+                        {order.order_number}
                       </p>
                     </div>
 
-                    <div className="text-right">
-                      <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${statusStyles[request.status]}`}>
-                        {statusLabels[request.status]}
+                    <div className="text-right flex-shrink-0">
+                      <p className="font-bold text-sm md:text-base text-gray-900">
+                        {order.total_amount?.toFixed(2)} лв
+                      </p>
+                      <span className={`inline-block px-1.5 md:px-2 py-0.5 rounded text-[9px] md:text-[10px] font-bold uppercase tracking-wider ${statusStyles[order.status] || statusStyles.pending}`}>
+                        {statusLabels[order.status] || "Чакаща"}
                       </span>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {request.dueDate}
-                      </p>
                     </div>
 
-                    <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-purple-600 opacity-0 group-hover:opacity-100 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-indigo-600 hidden md:block opacity-0 group-hover:opacity-100 transition-all" />
                   </Link>
                 );
               })}

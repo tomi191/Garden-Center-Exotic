@@ -427,6 +427,8 @@ export default function B2BCatalogPage() {
                           items: cart.map((item) => ({
                             product_id: item.product.id,
                             product_name: item.product.name,
+                            product_image: item.product.image,
+                            price_unit: item.product.priceUnit,
                             quantity: item.quantity,
                             unit_price: getDiscountedPrice(item.product.price),
                           })),
