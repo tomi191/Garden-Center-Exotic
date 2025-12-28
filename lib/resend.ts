@@ -48,6 +48,8 @@ export function getB2BRegistrationEmail(companyName: string, mol: string) {
           </div>
           <div class="footer">
             <p>Exotic Flowers &copy; ${new Date().getFullYear()}</p>
+            <p>Телефон: 089 567 0370 | 088 830 6000</p>
+            <p>Варна | Нова Загора</p>
           </div>
         </div>
       </body>
@@ -105,6 +107,7 @@ export function getB2BApprovalEmail(companyName: string, tier: string, discount:
           </div>
           <div class="footer">
             <p>Exotic Flowers &copy; ${new Date().getFullYear()}</p>
+            <p>Телефон: 089 567 0370 | 088 830 6000</p>
             <p>Варна | Нова Загора</p>
           </div>
         </div>
@@ -197,7 +200,8 @@ export function getOrderConfirmationEmail(
           </div>
           <div class="footer">
             <p>Exotic Flowers &copy; ${new Date().getFullYear()}</p>
-            <p>Телефон: 089 567 0370</p>
+            <p>Телефон: 089 567 0370 | 088 830 6000</p>
+            <p>Варна | Нова Загора</p>
           </div>
         </div>
       </body>
@@ -269,7 +273,8 @@ export function getOrderStatusEmail(
           </div>
           <div class="footer">
             <p>Exotic Flowers &copy; ${new Date().getFullYear()}</p>
-            <p>Телефон: 089 567 0370</p>
+            <p>Телефон: 089 567 0370 | 088 830 6000</p>
+            <p>Варна | Нова Загора</p>
           </div>
         </div>
       </body>
