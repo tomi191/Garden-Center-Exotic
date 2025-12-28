@@ -3,7 +3,7 @@ import { Resend } from "resend";
 export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "noreply@exoticflowers.bg";
-export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@gardenexotic.bg";
+export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@exoticflowers.bg";
 
 // Email Templates
 
@@ -43,7 +43,7 @@ export function getB2BRegistrationEmail(companyName: string, mol: string) {
             <p>Влезте в админ панела, за да прегледате и одобрите заявката.</p>
 
             <p style="text-align: center; margin-top: 30px;">
-              <a href="https://gardenexotic.bg/admin/b2b" class="btn">Към B2B панела</a>
+              <a href="https://exoticflowers.bg/admin/b2b" class="btn">Към B2B панела</a>
             </p>
           </div>
           <div class="footer">
@@ -102,7 +102,7 @@ export function getB2BApprovalEmail(companyName: string, tier: string, discount:
             </ul>
 
             <p style="text-align: center; margin-top: 30px;">
-              <a href="https://gardenexotic.bg/b2b/katalog" class="btn">Влез в B2B портала</a>
+              <a href="https://exoticflowers.bg/b2b/katalog" class="btn">Влез в B2B портала</a>
             </p>
           </div>
           <div class="footer">
@@ -195,7 +195,7 @@ export function getOrderConfirmationEmail(
             <p>Ще се свържем с вас за потвърждение на заявката.</p>
 
             <p style="text-align: center; margin-top: 30px;">
-              <a href="https://gardenexotic.bg/b2b/zayavki" class="btn">Виж заявките</a>
+              <a href="https://exoticflowers.bg/b2b/zayavki" class="btn">Виж заявките</a>
             </p>
           </div>
           <div class="footer">
@@ -268,7 +268,7 @@ export function getOrderStatusEmail(
             ` : ""}
 
             <p style="text-align: center; margin-top: 30px;">
-              <a href="https://gardenexotic.bg/b2b/zayavki" class="btn">Виж детайли</a>
+              <a href="https://exoticflowers.bg/b2b/zayavki" class="btn">Виж детайли</a>
             </p>
           </div>
           <div class="footer">

@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-**Garden Center Exotic (Градински Център Екзотик)** - A Bulgarian garden center and flower shop website with two physical locations in Varna and Nova Zagora. The business has been operating since 1998 and specializes in premium imported flowers from Ecuador, Holland, and Turkey.
+**Exotic Flowers (Екзотик Флауърс)** - A Bulgarian flower shop website with a physical location in Varna. The business specializes in premium imported flowers from Ecuador, Holland, and Turkey.
 
-**Live URL:** https://gardenexotic.bg
+**Live URL:** https://exoticflowers.bg
 **Language:** Bulgarian (bg-BG)
 
 ## Tech Stack
