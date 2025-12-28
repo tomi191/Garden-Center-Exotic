@@ -395,7 +395,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                   <Button
                     onClick={() => updateStatus("confirmed")}
                     disabled={saving}
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)]"
                   >
                     {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
                     Потвърди заявката
@@ -406,7 +406,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                   <Button
                     onClick={() => updateStatus("processing")}
                     disabled={saving}
-                    className="w-full bg-purple-600 hover:bg-purple-700"
+                    className="w-full bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)]"
                   >
                     {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Package className="w-4 h-4 mr-2" />}
                     Започни обработка
@@ -417,7 +417,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                   <Button
                     onClick={() => updateStatus("shipped")}
                     disabled={saving}
-                    className="w-full bg-indigo-600 hover:bg-indigo-700"
+                    className="w-full bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-dark)]"
                   >
                     {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Truck className="w-4 h-4 mr-2" />}
                     Маркирай като изпратена
@@ -428,7 +428,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                   <Button
                     onClick={() => updateStatus("delivered")}
                     disabled={saving}
-                    className="w-full bg-green-600 hover:bg-green-700"
+                    className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]"
                   >
                     {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
                     Маркирай като доставена

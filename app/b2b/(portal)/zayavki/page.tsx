@@ -30,13 +30,13 @@ interface Order {
   items: OrderItem[];
 }
 
-const statusConfig: Record<string, { label: string; color: string; icon: typeof Clock }> = {
-  pending: { label: "Чакаща потвърждение", color: "bg-yellow-100 text-yellow-700", icon: Clock },
-  confirmed: { label: "Потвърдена", color: "bg-blue-100 text-blue-700", icon: CheckCircle },
-  processing: { label: "В обработка", color: "bg-purple-100 text-purple-700", icon: Package },
-  shipped: { label: "Изпратена", color: "bg-indigo-100 text-indigo-700", icon: Truck },
-  delivered: { label: "Доставена", color: "bg-green-100 text-green-700", icon: CheckCircle },
-  cancelled: { label: "Отказана", color: "bg-red-100 text-red-700", icon: XCircle },
+const statusConfig: Record<string, { label: string; shortLabel: string; color: string; icon: typeof Clock }> = {
+  pending: { label: "Чакаща потвърждение", shortLabel: "Чакаща", color: "bg-yellow-100 text-yellow-700", icon: Clock },
+  confirmed: { label: "Потвърдена", shortLabel: "Потвърдена", color: "bg-blue-100 text-blue-700", icon: CheckCircle },
+  processing: { label: "В обработка", shortLabel: "Обработка", color: "bg-purple-100 text-purple-700", icon: Package },
+  shipped: { label: "Изпратена", shortLabel: "Изпратена", color: "bg-indigo-100 text-indigo-700", icon: Truck },
+  delivered: { label: "Доставена", shortLabel: "Доставена", color: "bg-green-100 text-green-700", icon: CheckCircle },
+  cancelled: { label: "Отказана", shortLabel: "Отказана", color: "bg-red-100 text-red-700", icon: XCircle },
 };
 
 export default function B2BOrdersPage() {
@@ -181,7 +181,7 @@ export default function B2BOrdersPage() {
                                     <StepIcon className="w-4 h-4" />
                                   </div>
                                   <span className={`mt-1 text-xs ${isActive ? "text-[var(--color-primary)] font-medium" : "text-gray-400"}`}>
-                                    {statusConfig[step].label.split(" ")[0]}
+                                    {statusConfig[step].shortLabel}
                                   </span>
                                 </div>
                                 {index < 4 && (
