@@ -1,6 +1,26 @@
 import { Resend } from "resend";
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build-time errors when API key is not available
+let _resend: Resend | null = null;
+
+export function getResend(): Resend {
+  if (!_resend) {
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error("RESEND_API_KEY environment variable is not set");
+    }
+    _resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return _resend;
+}
+
+// For backwards compatibility - but use getResend() in API routes
+export const resend = {
+  emails: {
+    send: async (...args: Parameters<Resend["emails"]["send"]>) => {
+      return getResend().emails.send(...args);
+    },
+  },
+};
 
 export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "noreply@exoticflowers.bg";
 export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@exoticflowers.bg";
