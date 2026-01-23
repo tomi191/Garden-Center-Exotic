@@ -20,8 +20,8 @@ export function ValentineFAB() {
   const [isVisible, setIsVisible] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
 
-  // Hide on homepage and admin pages
-  const shouldShow = pathname !== "/" && !pathname.startsWith("/admin") && !pathname.startsWith("/b2b");
+  // Hide on admin and b2b pages only
+  const shouldShow = !pathname.startsWith("/admin") && !pathname.startsWith("/b2b");
 
   useEffect(() => {
     if (!shouldShow) return;
