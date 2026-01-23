@@ -2,48 +2,101 @@ import type { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Свети Валентин 2025 - Ексклузивни Рози | Екзотик Флауърс",
+  title: "Свети Валентин 2025 - Premium Рози от Еквадор | Exotic Flowers Варна",
   description:
-    "Изненадайте любимия човек този Свети Валентин с ексклузивни рози от Колумбия и Еквадор. Дължина до 90см. Приоритетно обслужване при ранна заявка. Варна и Нова Загора.",
+    "Изненадайте любимия човек този Свети Валентин с premium рози от Еквадор. Директен внос, без посредници. Приоритетно обслужване при заявка до 12 февруари. Exotic Flowers Варна.",
   keywords: [
-    "свети валентин",
-    "валентин цветя",
-    "рози за валентин",
-    "букет за валентин",
+    "свети валентин 2025",
+    "свети валентин рози",
+    "рози за валентин варна",
+    "букет за свети валентин",
     "червени рози варна",
     "цветя за любимата",
-    "романтичен подарък",
+    "романтичен подарък варна",
     "рози от еквадор",
-    "рози от колумбия",
+    "premium рози варна",
+    "луксозни рози",
     "доставка цветя варна",
-    "14 февруари",
+    "14 февруари 2025",
+    "exotic flowers варна",
+    "цветарски магазин варна",
   ],
   openGraph: {
-    title: "Свети Валентин 2025 - Ексклузивни Рози | Екзотик Флауърс",
+    title: "Свети Валентин 2025 - Premium Рози от Еквадор | Exotic Flowers",
     description:
-      "Изненадайте любимия човек този Свети Валентин с ексклузивни рози от Колумбия и Еквадор. Дължина до 90см.",
+      "Premium рози от Еквадор за Свети Валентин. Директен внос, без посредници. Заявка до 12 февруари = приоритетно обслужване.",
     url: `${SITE_CONFIG.url}/sv-valentin`,
-    siteName: SITE_CONFIG.nameBg,
+    siteName: "Exotic Flowers",
     locale: "bg_BG",
     type: "website",
     images: [
       {
-        url: `${SITE_CONFIG.url}/images/og-valentine.jpg`,
+        url: `${SITE_CONFIG.url}/images/valentine/valentine-hero-new.png`,
         width: 1200,
         height: 630,
-        alt: "Свети Валентин - Екзотик Флауърс",
+        alt: "Свети Валентин 2025 - Premium рози от Еквадор - Exotic Flowers Варна",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Свети Валентин 2025 - Ексклузивни Рози",
+    title: "Свети Валентин 2025 - Premium Рози от Еквадор",
     description:
-      "Изненадайте любимия човек с ексклузивни рози от Колумбия и Еквадор. Дължина до 90см.",
-    images: [`${SITE_CONFIG.url}/images/og-valentine.jpg`],
+      "Premium рози от Еквадор за Свети Валентин. Директен внос. Заявка до 12 февруари = приоритет.",
+    images: [`${SITE_CONFIG.url}/images/valentine/valentine-hero-new.png`],
   },
   alternates: {
     canonical: `${SITE_CONFIG.url}/sv-valentin`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+// JSON-LD Structured Data for SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: "Свети Валентин 2025 - Premium Рози от Еквадор",
+  description: "Premium рози от Еквадор за Свети Валентин. Директен внос, без посредници. Приоритетно обслужване при заявка до 12 февруари.",
+  startDate: "2025-02-14",
+  endDate: "2025-02-14",
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  location: {
+    "@type": "Place",
+    name: "Exotic Flowers Варна",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ул. Франга дере 27А",
+      addressLocality: "Варна",
+      postalCode: "9010",
+      addressCountry: "BG",
+    },
+  },
+  organizer: {
+    "@type": "LocalBusiness",
+    name: "Exotic Flowers",
+    url: "https://exoticflowers.bg",
+    telephone: "+359895670370",
+    image: "https://exoticflowers.bg/images/valentine/valentine-hero-new.png",
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ул. Франга дере 27А",
+      addressLocality: "Варна",
+      postalCode: "9010",
+      addressCountry: "BG",
+    },
+  },
+  image: "https://exoticflowers.bg/images/valentine/valentine-hero-new.png",
+  offers: {
+    "@type": "Offer",
+    name: "Premium рози от Еквадор",
+    description: "Директен внос, без посредници",
+    availability: "https://schema.org/InStock",
+    priceCurrency: "BGN",
   },
 };
 
@@ -52,5 +105,13 @@ export default function ValentineLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }
