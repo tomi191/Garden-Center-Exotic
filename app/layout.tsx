@@ -13,6 +13,7 @@ import { ThemeProvider } from "next-themes";
 
 import { BackgroundAtmosphere } from "@/components/layout/BackgroundAtmosphere";
 import { BotanicalBranding } from "@/components/layout/BotanicalBranding";
+import { ValentineFAB } from "@/components/valentine/ValentineFAB";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -143,6 +144,7 @@ export default function RootLayout({
             </SmoothScrollProvider>
           </SettingsProvider>
         </ThemeProvider>
+        <ValentineFAB />
         <Analytics />
         <SpeedInsights />
       </body>
