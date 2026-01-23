@@ -128,7 +128,7 @@ function HeroSection() {
             }}
           >
             <Sparkles className="w-3 h-3" />
-            14 Февруари 2025
+            14 Февруари 2026
             <Sparkles className="w-3 h-3" />
           </span>
         </motion.div>
