@@ -87,7 +87,7 @@ function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative h-[100svh] flex items-center justify-center overflow-hidden"
+      className="relative h-[100svh] flex items-end md:items-center justify-center overflow-hidden pt-[70px] md:pt-[100px]"
     >
       {/* Background with Parallax */}
       <motion.div className="absolute inset-0" style={{ y, scale }}>
@@ -99,29 +99,29 @@ function HeroSection() {
           priority
           quality={95}
         />
-        {/* Cinematic Overlay */}
+        {/* Cinematic Overlay - stronger for text readability */}
         <div
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(ellipse at 50% 100%, transparent 0%, ${palette.ink}40 100%),
-              linear-gradient(to bottom, ${palette.ink}10 0%, transparent 30%, ${palette.ink}60 100%)
+              radial-gradient(ellipse at 50% 100%, transparent 0%, ${palette.ink}50 100%),
+              linear-gradient(to bottom, ${palette.ink}30 0%, transparent 40%, ${palette.ink}70 100%)
             `,
           }}
         />
       </motion.div>
 
       {/* Decorative Frame */}
-      <div className="absolute inset-8 md:inset-16 border border-white/10 pointer-events-none z-10" />
+      <div className="absolute inset-4 md:inset-16 border border-white/10 pointer-events-none z-10" />
 
-      {/* Content */}
-      <motion.div style={{ opacity, y: textY }} className="relative z-20 text-center px-6">
+      {/* Content - padded to clear fixed nav */}
+      <motion.div style={{ opacity, y: textY }} className="relative z-20 text-center px-6 pb-20 md:pb-0 pt-24 md:pt-0">
         {/* Date Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mb-8"
+          className="mb-4 md:mb-6"
         >
           <span
             className="inline-flex items-center gap-3 px-6 py-3 text-[10px] md:text-xs tracking-[0.4em] uppercase"
@@ -142,9 +142,9 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5 }}
         >
-          <h1 className="font-serif leading-[0.85] mb-6">
+          <h1 className="font-serif leading-[0.85] mb-4 md:mb-6">
             <span
-              className="block text-[clamp(3rem,12vw,10rem)] font-light tracking-tight"
+              className="block text-[clamp(3rem,11vw,9rem)] font-light tracking-tight"
               style={{
                 color: palette.cream,
                 textShadow: `0 4px 30px ${palette.ink}80`,
@@ -153,7 +153,7 @@ function HeroSection() {
               Ден на
             </span>
             <span
-              className="block text-[clamp(4rem,15vw,13rem)] font-medium italic -mt-4 md:-mt-8"
+              className="block text-[clamp(3.5rem,13vw,11rem)] font-medium italic -mt-2 md:-mt-6"
               style={{
                 color: palette.lilacLight,
                 textShadow: `0 4px 40px ${palette.lilacDeep}`,
@@ -169,7 +169,7 @@ function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="text-base md:text-xl lg:text-2xl font-light tracking-wide max-w-xl mx-auto mb-12"
+          className="text-sm md:text-xl lg:text-2xl font-light tracking-wide max-w-xl mx-auto mb-8 md:mb-12"
           style={{
             color: palette.cream,
             textShadow: `0 2px 20px ${palette.ink}`,
@@ -208,12 +208,12 @@ function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - hidden on mobile since content pushes down */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
+        className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 12, 0] }}
