@@ -77,7 +77,7 @@ export const SOCIAL_LINKS = {
 
 export const NAV_LINKS = [
   { href: "/", label: "Начало" },
-  { href: "/sv-valentin", label: "Св. Валентин 💝" },
+  { href: "/den-na-zhenata", label: "8-ми Март 🌷" },
   { href: "/za-nas", label: "За Нас" },
   { href: "/produkti", label: "Продукти" },
   { href: "/uslugi", label: "Услуги" },

@@ -8,21 +8,11 @@ import { Button } from "@/components/ui/Button";
 
 const seasonalOffers = [
   {
-    icon: Heart,
-    title: "Свети Валентин",
-    subtitle: "Колекция Любов",
-    date: "14 Февруари",
-    description: "Ексклузивни червени рози от Колумбия с дължина до 90см.",
-    color: "bg-rose-50 text-rose-900",
-    iconColor: "text-rose-600",
-    available: true,
-  },
-  {
     icon: Flower,
     title: "8-ми Март",
     subtitle: "За нея",
     date: "8 Март",
-    description: "Пролетни букети с лалета, зюмбюли и фрезии.",
+    description: "Пролетни букети с лалета, зюмбюли, фрезии и рози от Еквадор.",
     color: "bg-purple-50 text-purple-900",
     iconColor: "text-purple-600",
     available: true,
@@ -36,6 +26,16 @@ const seasonalOffers = [
     color: "bg-amber-50 text-amber-900",
     iconColor: "text-amber-600",
     available: true,
+  },
+  {
+    icon: Heart,
+    title: "Свети Валентин",
+    subtitle: "Колекция Любов",
+    date: "14 Февруари",
+    description: "Ексклузивни червени рози от Колумбия с дължина до 90см.",
+    color: "bg-rose-50 text-rose-900",
+    iconColor: "text-rose-600",
+    available: false,
   },
 ];
 

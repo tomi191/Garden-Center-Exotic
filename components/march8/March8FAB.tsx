@@ -3,37 +3,36 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Phone, Heart, X, Gift } from "lucide-react";
+import Link from "next/link";
+import { Phone, Flower2, X } from "lucide-react";
 import { LOCATIONS } from "@/lib/constants";
 
 const palette = {
-  burgundy: "#722F37",
-  burgundyDeep: "#4A1D23",
-  cream: "#FAF7F2",
-  gold: "#C9A962",
-  goldLight: "#E8DCC4",
+  lilac: "#9B7EBD",
+  lilacDeep: "#6A4C93",
+  cream: "#FFF8F0",
+  rose: "#D4789C",
+  roseLight: "#F0D0E0",
+  lilacLight: "#C8A8E9",
 };
 
-export function ValentineFAB() {
+export function March8FAB() {
   const pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
 
-  // Hide on admin and b2b pages only
   const shouldShow = !pathname.startsWith("/admin") && !pathname.startsWith("/b2b");
 
   useEffect(() => {
     if (!shouldShow) return;
 
-    // Calculate days until Valentine's Day
-    const valentineDate = new Date("2026-02-14");
+    const march8Date = new Date("2026-03-08");
     const today = new Date();
-    const diffTime = valentineDate.getTime() - today.getTime();
+    const diffTime = march8Date.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     setDaysLeft(Math.max(0, diffDays));
 
-    // Show FAB after 2 seconds
     const timer = setTimeout(() => setIsVisible(true), 2000);
     return () => clearTimeout(timer);
   }, [shouldShow]);
@@ -46,7 +45,6 @@ export function ValentineFAB() {
         <div className="fixed bottom-6 right-4 z-[60] md:hidden">
           <AnimatePresence mode="wait">
             {!isExpanded ? (
-              // Collapsed FAB Button
               <motion.button
                 key="fab-button"
                 initial={{ scale: 0, opacity: 0 }}
@@ -56,14 +54,14 @@ export function ValentineFAB() {
                 onClick={() => setIsExpanded(true)}
                 className="relative w-16 h-16 rounded-full shadow-2xl flex items-center justify-center"
                 style={{
-                  background: `linear-gradient(135deg, ${palette.burgundy} 0%, ${palette.burgundyDeep} 100%)`,
-                  boxShadow: `0 8px 32px ${palette.burgundy}50`,
+                  background: `linear-gradient(135deg, ${palette.lilac} 0%, ${palette.lilacDeep} 100%)`,
+                  boxShadow: `0 8px 32px ${palette.lilacDeep}50`,
                 }}
               >
                 {/* Pulse rings */}
                 <motion.div
                   className="absolute inset-0 rounded-full"
-                  style={{ border: `2px solid ${palette.gold}` }}
+                  style={{ border: `2px solid ${palette.lilacLight}` }}
                   animate={{
                     scale: [1, 1.4, 1.4],
                     opacity: [0.6, 0, 0],
@@ -76,7 +74,7 @@ export function ValentineFAB() {
                 />
                 <motion.div
                   className="absolute inset-0 rounded-full"
-                  style={{ border: `2px solid ${palette.gold}` }}
+                  style={{ border: `2px solid ${palette.lilacLight}` }}
                   animate={{
                     scale: [1, 1.4, 1.4],
                     opacity: [0.6, 0, 0],
@@ -89,7 +87,7 @@ export function ValentineFAB() {
                   }}
                 />
 
-                {/* Heart icon with bounce */}
+                {/* Flower icon with bounce */}
                 <motion.div
                   animate={{
                     scale: [1, 1.15, 1],
@@ -100,9 +98,9 @@ export function ValentineFAB() {
                     ease: "easeInOut",
                   }}
                 >
-                  <Heart
+                  <Flower2
                     className="w-7 h-7 fill-current"
-                    style={{ color: palette.gold }}
+                    style={{ color: palette.cream }}
                   />
                 </motion.div>
 
@@ -111,8 +109,8 @@ export function ValentineFAB() {
                   <motion.div
                     className="absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold"
                     style={{
-                      backgroundColor: palette.gold,
-                      color: palette.burgundyDeep,
+                      backgroundColor: palette.rose,
+                      color: palette.cream,
                     }}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -123,7 +121,6 @@ export function ValentineFAB() {
                 )}
               </motion.button>
             ) : (
-              // Expanded Card
               <motion.div
                 key="fab-card"
                 initial={{ scale: 0.8, opacity: 0, y: 20 }}
@@ -131,9 +128,9 @@ export function ValentineFAB() {
                 exit={{ scale: 0.8, opacity: 0, y: 20 }}
                 className="relative w-72 rounded-3xl overflow-hidden shadow-2xl"
                 style={{
-                  background: `linear-gradient(145deg, ${palette.burgundy}f5 0%, ${palette.burgundyDeep}f5 100%)`,
+                  background: `linear-gradient(145deg, ${palette.lilac}f5 0%, ${palette.lilacDeep}f5 100%)`,
                   backdropFilter: "blur(20px)",
-                  boxShadow: `0 20px 60px ${palette.burgundy}40`,
+                  boxShadow: `0 20px 60px ${palette.lilacDeep}40`,
                 }}
               >
                 {/* Close button */}
@@ -155,23 +152,23 @@ export function ValentineFAB() {
                     <div
                       className="w-12 h-12 rounded-2xl flex items-center justify-center"
                       style={{
-                        background: `linear-gradient(135deg, ${palette.gold}30 0%, ${palette.gold}10 100%)`,
+                        background: `linear-gradient(135deg, ${palette.roseLight}30 0%, ${palette.rose}10 100%)`,
                       }}
                     >
-                      <Gift className="w-6 h-6" style={{ color: palette.gold }} />
+                      <Flower2 className="w-6 h-6" style={{ color: palette.cream }} />
                     </div>
                     <div>
                       <h3
                         className="font-serif text-lg font-semibold leading-tight"
                         style={{ color: palette.cream }}
                       >
-                        Свети Валентин
+                        8-ми Март
                       </h3>
                       <p
                         className="text-xs"
-                        style={{ color: palette.goldLight }}
+                        style={{ color: palette.roseLight }}
                       >
-                        Premium рози от Еквадор
+                        Пролетни букети
                       </p>
                     </div>
                   </div>
@@ -182,7 +179,7 @@ export function ValentineFAB() {
                       className="mb-4 py-3 px-4 rounded-2xl text-center"
                       style={{
                         backgroundColor: palette.cream + "10",
-                        border: `1px solid ${palette.gold}20`,
+                        border: `1px solid ${palette.lilacLight}20`,
                       }}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -190,18 +187,18 @@ export function ValentineFAB() {
                     >
                       <p
                         className="text-[10px] uppercase tracking-widest mb-1"
-                        style={{ color: palette.goldLight + "99" }}
+                        style={{ color: palette.roseLight + "99" }}
                       >
                         Остават
                       </p>
                       <p
                         className="text-3xl font-serif font-bold"
-                        style={{ color: palette.gold }}
+                        style={{ color: palette.cream }}
                       >
                         {daysLeft}
                         <span
                           className="text-sm font-sans font-normal ml-1"
-                          style={{ color: palette.goldLight }}
+                          style={{ color: palette.roseLight }}
                         >
                           {daysLeft === 1 ? "ден" : "дни"}
                         </span>
@@ -214,9 +211,22 @@ export function ValentineFAB() {
                     className="text-xs text-center mb-4 leading-relaxed"
                     style={{ color: palette.cream + "cc" }}
                   >
-                    Заявка до <span style={{ color: palette.gold }}>12 февруари</span>
+                    Заявка до <span style={{ color: palette.roseLight }}>5 март</span>
                     <br />= приоритетно обслужване
                   </p>
+
+                  {/* Link to page */}
+                  <Link
+                    href="/den-na-zhenata"
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-2xl font-semibold text-sm mb-2"
+                    style={{
+                      background: `linear-gradient(135deg, ${palette.rose} 0%, ${palette.roseLight} 100%)`,
+                      color: palette.lilacDeep,
+                    }}
+                  >
+                    <Flower2 className="w-4 h-4" />
+                    <span>Вижте букетите</span>
+                  </Link>
 
                   {/* Call button */}
                   <motion.a
@@ -224,8 +234,8 @@ export function ValentineFAB() {
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-semibold text-sm"
                     style={{
-                      background: `linear-gradient(135deg, ${palette.gold} 0%, ${palette.goldLight} 100%)`,
-                      color: palette.burgundyDeep,
+                      background: `linear-gradient(135deg, ${palette.lilacLight} 0%, ${palette.cream} 100%)`,
+                      color: palette.lilacDeep,
                     }}
                   >
                     <Phone className="w-5 h-5" />
@@ -241,13 +251,13 @@ export function ValentineFAB() {
                   </p>
                 </div>
 
-                {/* Decorative hearts */}
+                {/* Decorative flower */}
                 <motion.div
                   className="absolute -bottom-4 -left-4 opacity-10"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 >
-                  <Heart className="w-24 h-24 fill-current" style={{ color: palette.gold }} />
+                  <Flower2 className="w-24 h-24 fill-current" style={{ color: palette.lilacLight }} />
                 </motion.div>
               </motion.div>
             )}

@@ -3,62 +3,65 @@
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { Phone, ArrowDown, MapPin, Clock, Heart, Sparkles } from "lucide-react";
+import { Phone, ArrowDown, MapPin, Clock, Flower2, Sparkles } from "lucide-react";
 import { LOCATIONS } from "@/lib/constants";
 
 // ============================================
-// DESIGN SYSTEM - Editorial Luxury Romance
+// DESIGN SYSTEM - Editorial Spring Elegance
 // ============================================
 
 const palette = {
-  burgundy: "#722F37",
-  burgundyDeep: "#4A1D23",
-  burgundyLight: "#8B3A44",
-  cream: "#FAF7F2",
-  creamDark: "#EDE8E0",
-  gold: "#C9A962",
-  goldLight: "#E8DCC4",
+  lilac: "#9B7EBD",
+  lilacDeep: "#6A4C93",
+  lilacLight: "#C8A8E9",
+  cream: "#FFF8F0",
+  creamDark: "#F5EDE4",
+  rose: "#D4789C",
+  roseLight: "#F0D0E0",
+  green: "#5B8C5A",
   ink: "#1A1715",
   inkMuted: "#6B635B",
 };
 
 // ============================================
-// ANIMATED CURSOR HEART
+// FLOATING SPRING FLOWERS
 // ============================================
 
-function FloatingHearts() {
-  const [hearts, setHearts] = useState<{ id: number; x: number; delay: number }[]>([]);
+function FloatingFlowers() {
+  const [flowers, setFlowers] = useState<{ id: number; x: number; delay: number; emoji: string }[]>([]);
 
   useEffect(() => {
-    const newHearts = Array.from({ length: 12 }, (_, i) => ({
+    const emojis = ["🌷", "🌸", "💐", "🌺", "🌼"];
+    const newFlowers = Array.from({ length: 12 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       delay: Math.random() * 5,
+      emoji: emojis[i % emojis.length],
     }));
-    setHearts(newHearts);
+    setFlowers(newFlowers);
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-      {hearts.map((heart) => (
+      {flowers.map((flower) => (
         <motion.div
-          key={heart.id}
-          className="absolute text-burgundy/10"
-          style={{ left: `${heart.x}%` }}
+          key={flower.id}
+          className="absolute text-lg"
+          style={{ left: `${flower.x}%`, opacity: 0.15 }}
           initial={{ y: "100vh", opacity: 0, rotate: -20 }}
           animate={{
             y: "-100vh",
-            opacity: [0, 0.3, 0.3, 0],
+            opacity: [0, 0.2, 0.2, 0],
             rotate: 20,
           }}
           transition={{
-            duration: 15,
-            delay: heart.delay,
+            duration: 18,
+            delay: flower.delay,
             repeat: Infinity,
             ease: "linear",
           }}
         >
-          <Heart className="w-4 h-4 fill-current" style={{ color: palette.burgundy }} />
+          {flower.emoji}
         </motion.div>
       ))}
     </div>
@@ -89,8 +92,8 @@ function HeroSection() {
       {/* Background with Parallax */}
       <motion.div className="absolute inset-0" style={{ y, scale }}>
         <Image
-          src="/images/valentine/valentine-hero-new.png"
-          alt="Луксозни рози за Свети Валентин"
+          src="/images/march8/march8-hero.png"
+          alt="Пролетни букети за 8-ми Март"
           fill
           className="object-cover"
           priority
@@ -123,12 +126,12 @@ function HeroSection() {
           <span
             className="inline-flex items-center gap-3 px-6 py-3 text-[10px] md:text-xs tracking-[0.4em] uppercase"
             style={{
-              backgroundColor: palette.burgundy,
+              backgroundColor: palette.lilacDeep,
               color: palette.cream,
             }}
           >
             <Sparkles className="w-3 h-3" />
-            14 Февруари 2026
+            8 Март 2026
             <Sparkles className="w-3 h-3" />
           </span>
         </motion.div>
@@ -147,16 +150,16 @@ function HeroSection() {
                 textShadow: `0 4px 30px ${palette.ink}80`,
               }}
             >
-              Свети
+              Ден на
             </span>
             <span
               className="block text-[clamp(4rem,15vw,13rem)] font-medium italic -mt-4 md:-mt-8"
               style={{
-                color: palette.gold,
-                textShadow: `0 4px 40px ${palette.burgundy}`,
+                color: palette.lilacLight,
+                textShadow: `0 4px 40px ${palette.lilacDeep}`,
               }}
             >
-              Валентин
+              Жената
             </span>
           </h1>
         </motion.div>
@@ -172,9 +175,9 @@ function HeroSection() {
             textShadow: `0 2px 20px ${palette.ink}`,
           }}
         >
-          Premium рози от <span className="italic font-medium">Еквадор</span>
+          Пролетни букети от свежи <span className="italic font-medium">лалета, фрезии и рози</span>
           <br />
-          <span className="text-sm md:text-lg opacity-80">Директен внос • Без посредници</span>
+          <span className="text-sm md:text-lg opacity-80">Директен внос от Нидерландия и Еквадор</span>
         </motion.p>
 
         {/* CTA Button */}
@@ -189,14 +192,14 @@ function HeroSection() {
           >
             <span
               className="relative z-10 flex items-center gap-4 px-10 py-5 text-lg font-medium tracking-wide transition-all duration-500"
-              style={{ backgroundColor: palette.cream, color: palette.burgundy }}
+              style={{ backgroundColor: palette.cream, color: palette.lilacDeep }}
             >
               <Phone className="w-5 h-5 transition-transform group-hover:rotate-12" />
               <span>Обадете се сега</span>
             </span>
             <motion.span
               className="absolute inset-0 z-0"
-              style={{ backgroundColor: palette.gold }}
+              style={{ backgroundColor: palette.lilacLight }}
               initial={{ x: "-100%" }}
               whileHover={{ x: 0 }}
               transition={{ duration: 0.4 }}
@@ -249,8 +252,8 @@ function SplitEditorialSection() {
           transition={{ duration: 1 }}
         >
           <Image
-            src="/images/valentine/valentine-roses-closeup-new.png"
-            alt="Макро снимка на роза"
+            src="/images/march8/march8-flowers-closeup.png"
+            alt="Пролетни цветя - лалета и фрезии"
             fill
             className="object-cover"
           />
@@ -262,10 +265,10 @@ function SplitEditorialSection() {
               opacity: 0.3,
             }}
           />
-          {/* Gold Accent Line */}
+          {/* Lilac Accent Line */}
           <motion.div
             className="absolute bottom-0 left-0 right-0 h-1"
-            style={{ backgroundColor: palette.gold }}
+            style={{ backgroundColor: palette.lilac }}
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 1.5, delay: 0.5 }}
@@ -283,8 +286,8 @@ function SplitEditorialSection() {
             <span
               className="inline-block text-[10px] tracking-[0.4em] uppercase mb-8 pb-2"
               style={{
-                color: palette.gold,
-                borderBottom: `1px solid ${palette.gold}`,
+                color: palette.lilac,
+                borderBottom: `1px solid ${palette.lilac}`,
               }}
             >
               Защо да изберете нас
@@ -295,10 +298,10 @@ function SplitEditorialSection() {
               className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-8"
               style={{ color: palette.ink }}
             >
-              Директен внос.
+              Свежест от първия ден.
               <br />
-              <span className="italic" style={{ color: palette.burgundy }}>
-                Без компромиси.
+              <span className="italic" style={{ color: palette.lilacDeep }}>
+                Директен внос.
               </span>
             </h2>
 
@@ -307,8 +310,8 @@ function SplitEditorialSection() {
               className="text-lg md:text-xl font-light leading-relaxed mb-12 max-w-md"
               style={{ color: palette.inkMuted }}
             >
-              От плантациите на Еквадор директно до вашите ръце.
-              Всяка роза е подбрана лично и транспортирана с грижа.
+              Пролетни цветя от плантациите на Нидерландия и Еквадор директно до вашите ръце.
+              Лалета, фрезии, зюмбюли и рози - подбрани лично и транспортирани с грижа.
             </p>
 
             {/* Stats */}
@@ -326,7 +329,7 @@ function SplitEditorialSection() {
                 >
                   <span
                     className="block font-serif text-4xl md:text-5xl mb-1"
-                    style={{ color: palette.burgundy }}
+                    style={{ color: palette.lilacDeep }}
                   >
                     {stat.value}
                   </span>
@@ -358,13 +361,13 @@ function PriorityBanner() {
     <section
       ref={ref}
       className="relative py-32 md:py-48 overflow-hidden"
-      style={{ backgroundColor: palette.burgundy }}
+      style={{ backgroundColor: palette.lilacDeep }}
     >
       {/* Background Pattern */}
       <div
         className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L55 30 L30 55 L5 30 Z' fill='none' stroke='%23FAF7F2' stroke-width='0.5'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L55 30 L30 55 L5 30 Z' fill='none' stroke='%23FFF8F0' stroke-width='0.5'/%3E%3C/svg%3E")`,
           backgroundSize: "60px 60px",
         }}
       />
@@ -372,14 +375,14 @@ function PriorityBanner() {
       {/* Decorative Elements */}
       <motion.div
         className="absolute top-1/2 left-0 w-32 md:w-48 h-px"
-        style={{ backgroundColor: palette.gold }}
+        style={{ backgroundColor: palette.lilacLight }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1.5 }}
       />
       <motion.div
         className="absolute top-1/2 right-0 w-32 md:w-48 h-px"
-        style={{ backgroundColor: palette.gold }}
+        style={{ backgroundColor: palette.lilacLight }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1.5 }}
@@ -394,9 +397,9 @@ function PriorityBanner() {
           {/* Quote Mark */}
           <span
             className="block font-serif text-[8rem] md:text-[12rem] leading-none -mb-16 md:-mb-24 opacity-20"
-            style={{ color: palette.gold }}
+            style={{ color: palette.lilacLight }}
           >
-            "
+            &ldquo;
           </span>
 
           {/* Main Text */}
@@ -406,7 +409,7 @@ function PriorityBanner() {
           >
             Клиентите с предварителни заявки
             <br />
-            <span className="italic" style={{ color: palette.goldLight }}>
+            <span className="italic" style={{ color: palette.roseLight }}>
               се обслужват с приоритет
             </span>
           </h2>
@@ -416,15 +419,15 @@ function PriorityBanner() {
             className="text-lg md:text-xl font-light max-w-2xl mx-auto mb-12"
             style={{ color: palette.cream + "bb" }}
           >
-            Направете заявка до 12 февруари и получете персонализирана консултация
-            за перфектния подарък
+            Направете заявка до 5 март и получете персонализирана консултация
+            за перфектния пролетен букет
           </p>
 
           {/* CTA */}
           <motion.a
             href={`tel:${LOCATIONS.varna.phone.replace(/\s/g, "")}`}
             className="inline-flex items-center gap-4 px-12 py-6 text-xl font-medium transition-all duration-500 hover:scale-105"
-            style={{ backgroundColor: palette.cream, color: palette.burgundy }}
+            style={{ backgroundColor: palette.cream, color: palette.lilacDeep }}
             whileHover={{ boxShadow: `0 20px 40px ${palette.ink}40` }}
           >
             <Phone className="w-6 h-6" />
@@ -446,15 +449,15 @@ function OfferingsSection() {
 
   const offerings = [
     {
-      title: "Premium Рози",
-      description: "Дълги стъбла от плантациите на Еквадор. Директен внос, без посредници.",
-      image: "/images/valentine/valentine-bouquet-delivery-new.png",
+      title: "Пролетни Букети",
+      description: "Свежи лалета, фрезии, зюмбюли и нарциси от Нидерландия. Директен внос, без посредници.",
+      image: "/images/march8/march8-bouquet.png",
       span: "lg:col-span-1",
     },
     {
       title: "Букети по Поръчка",
-      description: "Уникални композиции, създадени специално за вашия любим човек.",
-      image: "/images/valentine/valentine-florist-workspace-new.png",
+      description: "Уникални композиции с пролетни цветя и рози от Еквадор, създадени специално за нея.",
+      image: "/images/march8/march8-spring-setting.png",
       span: "lg:col-span-1",
     },
   ];
@@ -475,7 +478,7 @@ function OfferingsSection() {
         >
           <span
             className="inline-block text-[10px] tracking-[0.4em] uppercase mb-6"
-            style={{ color: palette.gold }}
+            style={{ color: palette.lilac }}
           >
             Нашето Предложение
           </span>
@@ -483,7 +486,7 @@ function OfferingsSection() {
             className="font-serif text-4xl md:text-5xl lg:text-6xl"
             style={{ color: palette.ink }}
           >
-            Всичко за <span className="italic" style={{ color: palette.burgundy }}>любовта</span>
+            Всичко за <span className="italic" style={{ color: palette.lilacDeep }}>нея</span>
           </h2>
         </motion.div>
 
@@ -529,7 +532,7 @@ function OfferingsSection() {
                 {/* Hover Border */}
                 <div
                   className="absolute inset-0 border-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{ borderColor: palette.gold }}
+                  style={{ borderColor: palette.lilac }}
                 />
               </div>
             </motion.div>
@@ -550,7 +553,7 @@ function ProcessSection() {
 
   const steps = [
     { number: "01", title: "Обадете се", icon: Phone },
-    { number: "02", title: "Консултация", icon: Heart },
+    { number: "02", title: "Консултация", icon: Flower2 },
     { number: "03", title: "Поръчка", icon: Sparkles },
     { number: "04", title: "Получаване", icon: MapPin },
   ];
@@ -570,7 +573,7 @@ function ProcessSection() {
         >
           <span
             className="inline-block text-[10px] tracking-[0.4em] uppercase mb-6"
-            style={{ color: palette.gold }}
+            style={{ color: palette.lilac }}
           >
             Как работи
           </span>
@@ -578,7 +581,7 @@ function ProcessSection() {
             className="font-serif text-4xl md:text-5xl"
             style={{ color: palette.ink }}
           >
-            Четири <span className="italic" style={{ color: palette.burgundy }}>лесни</span> стъпки
+            Четири <span className="italic" style={{ color: palette.lilacDeep }}>лесни</span> стъпки
           </h2>
         </motion.div>
 
@@ -596,7 +599,7 @@ function ProcessSection() {
               {index < steps.length - 1 && (
                 <div
                   className="hidden md:block absolute top-12 left-1/2 w-full h-px"
-                  style={{ backgroundColor: palette.goldLight }}
+                  style={{ backgroundColor: palette.roseLight }}
                 />
               )}
 
@@ -604,18 +607,18 @@ function ProcessSection() {
               <motion.div
                 className="relative z-10 w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: palette.creamDark }}
-                whileHover={{ scale: 1.1, backgroundColor: palette.burgundy }}
+                whileHover={{ scale: 1.1, backgroundColor: palette.lilacDeep }}
               >
                 <step.icon
                   className="w-8 h-8 transition-colors duration-300"
-                  style={{ color: palette.burgundy }}
+                  style={{ color: palette.lilacDeep }}
                 />
               </motion.div>
 
               {/* Number */}
               <span
                 className="block text-xs tracking-[0.2em] uppercase mb-2"
-                style={{ color: palette.gold }}
+                style={{ color: palette.lilac }}
               >
                 Стъпка {step.number}
               </span>
@@ -652,8 +655,8 @@ function FinalCTASection() {
       {/* Background Image */}
       <div className="absolute inset-0 opacity-20">
         <Image
-          src="/images/valentine/valentine-romantic-setting-new.png"
-          alt="Романтична обстановка"
+          src="/images/march8/march8-spring-setting.png"
+          alt="Пролетна обстановка с цветя"
           fill
           className="object-cover"
         />
@@ -673,7 +676,7 @@ function FinalCTASection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1 }}
         >
-          {/* Decorative Hearts */}
+          {/* Decorative Flowers */}
           <motion.div
             className="flex justify-center gap-4 mb-8"
             initial={{ opacity: 0, scale: 0.5 }}
@@ -681,10 +684,10 @@ function FinalCTASection() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             {[0, 1, 2].map((i) => (
-              <Heart
+              <Flower2
                 key={i}
                 className="w-4 h-4 fill-current"
-                style={{ color: palette.gold, opacity: 0.3 + i * 0.2 }}
+                style={{ color: palette.lilacLight, opacity: 0.3 + i * 0.2 }}
               />
             ))}
           </motion.div>
@@ -696,8 +699,8 @@ function FinalCTASection() {
           >
             Направете заявка
             <br />
-            <span className="italic" style={{ color: palette.gold }}>
-              до 12 февруари
+            <span className="italic" style={{ color: palette.lilacLight }}>
+              до 5 март
             </span>
           </h2>
 
@@ -706,7 +709,7 @@ function FinalCTASection() {
             className="text-lg md:text-xl font-light mb-16 max-w-xl mx-auto"
             style={{ color: palette.cream + "99" }}
           >
-            За гарантирано приоритетно обслужване и най-красивите рози от Еквадор
+            За гарантирано приоритетно обслужване и най-свежите пролетни букети
           </p>
 
           {/* Phone Button */}
@@ -714,7 +717,7 @@ function FinalCTASection() {
             <motion.a
               href={`tel:${LOCATIONS.varna.phone.replace(/\s/g, "")}`}
               className="inline-flex items-center justify-center gap-4 px-12 py-6 text-xl font-medium"
-              style={{ backgroundColor: palette.burgundy, color: palette.cream }}
+              style={{ backgroundColor: palette.lilacDeep, color: palette.cream }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -731,7 +734,7 @@ function FinalCTASection() {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <div className="flex items-center justify-center gap-2 mb-3">
-              <MapPin className="w-4 h-4" style={{ color: palette.gold }} />
+              <MapPin className="w-4 h-4" style={{ color: palette.lilacLight }} />
               <span
                 className="text-lg font-medium"
                 style={{ color: palette.cream }}
@@ -762,7 +765,7 @@ function FinalCTASection() {
             transition={{ delay: 1.2 }}
           >
             <div className="flex items-center justify-center gap-3">
-              <Clock className="w-4 h-4" style={{ color: palette.gold }} />
+              <Clock className="w-4 h-4" style={{ color: palette.lilacLight }} />
               <span
                 className="text-sm font-light"
                 style={{ color: palette.cream + "77" }}
@@ -800,23 +803,23 @@ function UrgencyBar() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           className="fixed bottom-0 left-0 right-0 z-50 py-4"
-          style={{ backgroundColor: palette.burgundy }}
+          style={{ backgroundColor: palette.lilacDeep }}
         >
           <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p
               className="text-sm md:text-base font-light text-center sm:text-left"
               style={{ color: palette.cream }}
             >
-              <span className="hidden sm:inline">🌹</span> Заявка до{" "}
-              <span className="font-semibold" style={{ color: palette.goldLight }}>
-                12 февруари
+              <span className="hidden sm:inline">🌷</span> Заявка до{" "}
+              <span className="font-semibold" style={{ color: palette.roseLight }}>
+                5 март
               </span>{" "}
               = приоритетно обслужване
             </p>
             <a
               href={`tel:${LOCATIONS.varna.phone.replace(/\s/g, "")}`}
               className="inline-flex items-center gap-2 px-6 py-2 text-sm font-medium shrink-0"
-              style={{ backgroundColor: palette.cream, color: palette.burgundy }}
+              style={{ backgroundColor: palette.cream, color: palette.lilacDeep }}
             >
               <Phone className="w-4 h-4" />
               <span>{LOCATIONS.varna.phone}</span>
@@ -832,10 +835,10 @@ function UrgencyBar() {
 // MAIN PAGE
 // ============================================
 
-export default function ValentinePage() {
+export default function March8Page() {
   return (
     <main className="overflow-hidden">
-      <FloatingHearts />
+      <FloatingFlowers />
       <HeroSection />
       <SplitEditorialSection />
       <PriorityBanner />
