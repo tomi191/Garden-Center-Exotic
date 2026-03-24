@@ -38,6 +38,8 @@ interface Arrival {
   created_at: string;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function FreshArrivalsPage() {
   const { data: arrivals } = await supabaseAdmin
     .from("fresh_arrivals")

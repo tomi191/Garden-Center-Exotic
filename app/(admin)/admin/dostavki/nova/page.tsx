@@ -210,7 +210,7 @@ export default function NovaDostavkaPage() {
   }
 
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "";
-  const arrivalUrl = `${siteUrl}/dostavki/${publishedSlug}`;
+  const arrivalUrl = `${siteUrl}/sveji-dostavki/${publishedSlug}`;
   const shareText = `\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435 \u043E\u0442 ${COUNTRY_NAMES[country] || country}! \u0412\u0438\u0436: ${arrivalUrl}`;
 
   // Success screen after publish
