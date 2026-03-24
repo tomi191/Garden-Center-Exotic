@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { b2bAuthOptions } from "@/lib/b2b-auth";
 import { supabaseAdmin } from "@/lib/supabase";
-import { resend, FROM_EMAIL, ADMIN_EMAIL, getOrderConfirmationEmail } from "@/lib/resend";
+import { resend, FROM_EMAIL, OWNER_EMAIL, getOrderConfirmationEmail } from "@/lib/resend";
 
 // GET - List B2B orders
 // For admin: all orders
@@ -200,7 +200,7 @@ export async function POST(request: NextRequest) {
         // Send copy to admin
         await resend.emails.send({
           from: FROM_EMAIL,
-          to: ADMIN_EMAIL,
+          to: OWNER_EMAIL,
           subject: `[Копие] ${emailContent.subject}`,
           html: emailContent.html,
         });

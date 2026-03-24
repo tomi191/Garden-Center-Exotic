@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { hashPassword } from "@/lib/b2b-auth";
 import { z } from "zod";
-import { resend, FROM_EMAIL, ADMIN_EMAIL, getB2BRegistrationEmail } from "@/lib/resend";
+import { resend, FROM_EMAIL, OWNER_EMAIL, getB2BRegistrationEmail } from "@/lib/resend";
 
 // Validation schema
 const registerSchema = z.object({
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
       const emailContent = getB2BRegistrationEmail(data.company_name, data.mol);
       await resend.emails.send({
         from: FROM_EMAIL,
-        to: ADMIN_EMAIL,
+        to: OWNER_EMAIL,
         subject: emailContent.subject,
         html: emailContent.html,
       });

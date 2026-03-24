@@ -22,12 +22,10 @@ export const resend = {
   },
 };
 
-export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "contact@exoticflowers.bg";
-export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "exoticbg@abv.bg";
-export const ADMIN_EMAILS = [
-  "exoticbg@abv.bg",
-  "contact@exoticflowers.bg",
-];
+// System notification sender (Resend requires verified domain)
+export const FROM_EMAIL = "Градински Център Екзотик <noreply@exoticflowers.bg>";
+// Owner's primary email - all notifications go here
+export const OWNER_EMAIL = "exoticbg@abv.bg";
 
 // Email Templates
 

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { supabaseAdmin } from "@/lib/supabase";
-import { resend, FROM_EMAIL, ADMIN_EMAILS } from "@/lib/resend";
+import { resend, FROM_EMAIL, OWNER_EMAIL } from "@/lib/resend";
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     try {
       await resend.emails.send({
         from: FROM_EMAIL,
-        to: ADMIN_EMAILS,
+        to: OWNER_EMAIL,
         replyTo: data.email,
         subject: `Ново запитване: ${inquiryLabel} от ${data.name}`,
         html: `

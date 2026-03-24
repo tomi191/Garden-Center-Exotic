@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabase";
-import { resend } from "@/lib/resend";
-
-const REPLY_FROM = "contact@exoticflowers.bg";
+import { resend, FROM_EMAIL, OWNER_EMAIL } from "@/lib/resend";
 
 // PATCH - Update message status or reply
 export async function PATCH(
@@ -43,9 +41,9 @@ export async function PATCH(
         // Send reply email to customer
         try {
           await resend.emails.send({
-            from: REPLY_FROM,
+            from: FROM_EMAIL,
             to: message.email,
-            replyTo: REPLY_FROM,
+            replyTo: OWNER_EMAIL,
             subject: `Отговор на вашето запитване - Градински Център Екзотик`,
             html: `
               <!DOCTYPE html>
