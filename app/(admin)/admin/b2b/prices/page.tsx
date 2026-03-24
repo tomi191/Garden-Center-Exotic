@@ -153,7 +153,7 @@ export default function B2BPricesPage() {
   if (loading) {
     return (
       <div className="p-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-[var(--color-primary)]" />
+        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[var(--color-primary)]" />
         <p className="text-gray-500">Зареждане...</p>
       </div>
     );
@@ -162,7 +162,7 @@ export default function B2BPricesPage() {
   return (
     <div className="p-4 md:p-6 lg:p-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-3">
         <div className="flex items-center gap-4">
           <Link href="/admin/b2b">
             <Button variant="outline" size="sm">
@@ -171,7 +171,7 @@ export default function B2BPricesPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-sm sm:text-base font-semibold text-gray-900">B2B Ценоразпис</h1>
+            <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">B2B Ценоразпис</h1>
             <p className="text-gray-500 text-sm">
               {productsWithB2BPrice} от {products.length} продукта с B2B цени
             </p>
@@ -207,7 +207,7 @@ export default function B2BPricesPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-3">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />

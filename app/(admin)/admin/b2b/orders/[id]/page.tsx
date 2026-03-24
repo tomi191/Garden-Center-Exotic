@@ -174,7 +174,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
   if (loading) {
     return (
       <div className="p-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-[var(--color-primary)]" />
+        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[var(--color-primary)]" />
         <p className="text-gray-500">Зареждане...</p>
       </div>
     );
@@ -196,7 +196,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
           </Button>
         </Link>
         <div>
-          <h1 className="text-sm sm:text-base font-semibold text-gray-900">
+          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
             Заявка {order.order_number}
           </h1>
           <p className="text-gray-500">
@@ -213,7 +213,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
       {/* Status Progress */}
       {!isCancelled && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 mb-3">
           <div className="flex items-center justify-between">
             {statusSteps.map((step, index) => {
               const Icon = step.icon;
@@ -248,7 +248,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
       {/* Cancelled Banner */}
       {isCancelled && (
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center gap-3">
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-3 flex items-center gap-3">
           <XCircle className="w-6 h-6 text-red-600" />
           <div>
             <p className="font-semibold text-red-800">Заявката е отказана</p>
@@ -261,12 +261,12 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
         </div>
       )}
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-3">
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-3">
           {/* Order Items */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
               <ShoppingBag className="w-5 h-5 text-[var(--color-primary)]" />
               Артикули ({order.items?.length || 0})
             </h2>
@@ -292,7 +292,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-gray-900 truncate">{item.product_name}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-[11px] text-gray-400">
                       {item.quantity} x {item.unit_price.toFixed(2)} {item.price_unit || "лв"}
                     </p>
                   </div>
@@ -319,7 +319,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
           {/* Company Info */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[var(--color-primary)]" />
               Информация за клиента
             </h2>
@@ -327,7 +327,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               <div className="flex items-start gap-3">
                 <Building2 className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Компания</p>
+                  <p className="text-[11px] text-gray-400">Компания</p>
                   <Link href={`/admin/b2b/${order.company?.id}`} className="font-medium text-[var(--color-primary)] hover:underline">
                     {order.company?.company_name}
                   </Link>
@@ -336,7 +336,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Имейл</p>
+                  <p className="text-[11px] text-gray-400">Имейл</p>
                   <a href={`mailto:${order.company?.email}`} className="font-medium hover:underline">
                     {order.company?.email}
                   </a>
@@ -345,7 +345,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Телефон</p>
+                  <p className="text-[11px] text-gray-400">Телефон</p>
                   <a href={`tel:${order.company?.phone}`} className="font-medium">
                     {order.company?.phone}
                   </a>
@@ -355,7 +355,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
-                    <p className="text-sm text-gray-500">Адрес</p>
+                    <p className="text-[11px] text-gray-400">Адрес</p>
                     <p className="font-medium">
                       {order.company.address}{order.company.city && `, ${order.company.city}`}
                     </p>
@@ -367,10 +367,10 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
           {/* Notes */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">Бележки</h2>
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2">Бележки</h2>
             {order.notes && (
               <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-500 mb-1">От клиента:</p>
+                <p className="text-[11px] text-gray-400 mb-1">От клиента:</p>
                 <p className="text-gray-700">{order.notes}</p>
               </div>
             )}
@@ -406,9 +406,9 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Sidebar - Actions */}
-        <div className="space-y-6">
+        <div className="space-y-3">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">Действия</h2>
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2">Действия</h2>
 
             {!isCancelled && (
               <div className="space-y-3">
@@ -485,7 +485,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
           {/* Timeline */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
               <Calendar className="w-5 h-5 text-[var(--color-primary)]" />
               История
             </h2>

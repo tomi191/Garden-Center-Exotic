@@ -176,7 +176,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
   if (loading) {
     return (
       <div className="p-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-[var(--color-primary)]" />
+        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[var(--color-primary)]" />
         <p className="text-gray-500">Зареждане...</p>
       </div>
     );
@@ -195,17 +195,17 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
           </Button>
         </Link>
         <div>
-          <h1 className="text-sm sm:text-base font-semibold text-gray-900">{company.company_name}</h1>
+          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">{company.company_name}</h1>
           <p className="text-gray-500">ЕИК: {company.eik}</p>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-3">
         {/* Main Info */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-3">
           {/* Company Details */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[var(--color-primary)]" />
               Информация за фирмата
             </h2>
@@ -213,14 +213,14 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <User className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">МОЛ</p>
+                  <p className="text-[11px] text-gray-400">МОЛ</p>
                   <p className="font-medium">{company.mol}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Имейл</p>
+                  <p className="text-[11px] text-gray-400">Имейл</p>
                   <a href={`mailto:${company.email}`} className="font-medium text-[var(--color-primary)] hover:underline">
                     {company.email}
                   </a>
@@ -229,7 +229,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Телефон</p>
+                  <p className="text-[11px] text-gray-400">Телефон</p>
                   <a href={`tel:${company.phone}`} className="font-medium">
                     {company.phone}
                   </a>
@@ -238,7 +238,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Адрес</p>
+                  <p className="text-[11px] text-gray-400">Адрес</p>
                   <p className="font-medium">
                     {company.address || "-"}{company.city && `, ${company.city}`}
                   </p>
@@ -247,7 +247,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <Calendar className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Дата на регистрация</p>
+                  <p className="text-[11px] text-gray-400">Дата на регистрация</p>
                   <p className="font-medium">
                     {new Date(company.created_at).toLocaleDateString("bg-BG", {
                       day: "numeric",
@@ -262,7 +262,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
 
           {/* Notes */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">Вътрешни бележки</h2>
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2">Вътрешни бележки</h2>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -273,19 +273,19 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
         </div>
 
         {/* Sidebar - Actions */}
-        <div className="space-y-6">
+        <div className="space-y-3">
           {/* Status Card */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">Статус</h2>
+            <h2 className="text-[11px] font-medium text-gray-400 mb-2">Статус</h2>
 
-            <div className={`p-4 rounded-xl mb-6 ${
+            <div className={`p-4 rounded-xl mb-3 ${
               company.status === "pending" ? "bg-yellow-50" :
               company.status === "approved" ? "bg-green-50" :
               company.status === "rejected" ? "bg-red-50" : "bg-gray-50"
             }`}>
               <div className="flex items-center gap-3">
                 {company.status === "pending" && <Clock className="w-6 h-6 text-yellow-600" />}
-                {company.status === "approved" && <CheckCircle className="w-6 h-6 text-green-600" />}
+                {company.status === "approved" && <CheckCircle className="w-4 h-4 text-green-600" />}
                 {company.status === "rejected" && <XCircle className="w-6 h-6 text-red-600" />}
                 {company.status === "suspended" && <AlertCircle className="w-6 h-6 text-gray-600" />}
                 <div>
@@ -296,7 +296,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
                     {company.status === "suspended" && "Спряна"}
                   </p>
                   {company.approved_at && (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-[11px] text-gray-400">
                       на {new Date(company.approved_at).toLocaleDateString("bg-BG")}
                     </p>
                   )}
@@ -352,7 +352,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
 
             {/* Current Settings */}
             {company.status === "approved" && (
-              <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-xl mb-6">
+              <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-xl mb-3">
                 <div className="flex items-center gap-2">
                   <Percent className="w-4 h-4 text-gray-400" />
                   <div>

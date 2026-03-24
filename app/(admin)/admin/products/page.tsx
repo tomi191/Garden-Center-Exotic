@@ -16,11 +16,11 @@ export default async function AdminProductsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)]">
+          <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)]">
             Управление на Продукти
           </h1>
           <p className="text-[var(--color-gray-600)] mt-1">

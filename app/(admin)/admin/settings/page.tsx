@@ -118,13 +118,13 @@ export default function SettingsPage() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
         <div className="flex items-center gap-4">
-          <div className="p-3 bg-purple-100 rounded-xl text-purple-600">
+          <div className="p-1.5 bg-purple-100 rounded-xl text-purple-600">
             <Settings className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-sm sm:text-base font-semibold text-gray-900">
+            <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
               Настройки на сайта
             </h1>
             <p className="text-gray-500 text-sm mt-0.5">
@@ -164,17 +164,17 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-3">
         {/* Visibility Settings */}
         <Card className="border-0 shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-amber-100 rounded-lg text-amber-600">
+          <CardContent className="p-3">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-1.5 bg-amber-100 rounded-lg text-amber-600">
                 <Eye className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 text-gray-900">Видимост</h2>
-                <p className="text-sm text-gray-500">Контролирайте какво виждат клиентите</p>
+                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">Видимост</h2>
+                <p className="text-[11px] text-gray-400">Контролирайте какво виждат клиентите</p>
               </div>
             </div>
 
@@ -191,7 +191,7 @@ export default function SettingsPage() {
                     <p className="font-semibold text-gray-900">
                       {settings.hidePrices ? "Цените са СКРИТИ" : "Цените са ВИДИМИ"}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-[11px] text-gray-400">
                       {settings.hidePrices
                         ? "Клиентите виждат 'Свържете се с нас' вместо цени"
                         : "Всички цени се показват в каталога"}
@@ -218,14 +218,14 @@ export default function SettingsPage() {
 
         {/* Currency Settings */}
         <Card className="border-0 shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+          <CardContent className="p-3">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-1.5 bg-blue-100 rounded-lg text-blue-600">
                 <DollarSign className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 text-gray-900">Валута</h2>
-                <p className="text-sm text-gray-500">Настройки на валутния курс</p>
+                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">Валута</h2>
+                <p className="text-[11px] text-gray-400">Настройки на валутния курс</p>
               </div>
             </div>
 
@@ -253,18 +253,18 @@ export default function SettingsPage() {
 
         {/* Contact Info */}
         <Card className="border-0 shadow-sm lg:col-span-2">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-green-100 rounded-lg text-green-600">
+          <CardContent className="p-3">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-1.5 bg-green-100 rounded-lg text-green-600">
                 <Store className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 text-gray-900">Контакти на магазина</h2>
-                <p className="text-sm text-gray-500">Информация за връзка с клиенти</p>
+                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">Контакти на магазина</h2>
+                <p className="text-[11px] text-gray-400">Информация за връзка с клиенти</p>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Телефон

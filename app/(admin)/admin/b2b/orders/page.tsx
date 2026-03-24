@@ -111,7 +111,7 @@ export default function AdminB2BOrdersPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-3">
+          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900 flex items-center gap-3">
             <ShoppingBag className="w-7 h-7 text-[var(--color-primary)]" />
             B2B Заявки
           </h1>
@@ -168,7 +168,7 @@ export default function AdminB2BOrdersPage() {
       </div>
 
       {/* Search & Filter */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-3">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -203,12 +203,12 @@ export default function AdminB2BOrdersPage() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         {loading ? (
           <div className="p-12 text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-[var(--color-primary)] border-t-transparent rounded-full mx-auto mb-4" />
+            <div className="animate-spin w-8 h-8 border-2 border-[var(--color-primary)] border-t-transparent rounded-full mx-auto mb-2" />
             <p className="text-gray-500">Зареждане...</p>
           </div>
         ) : filteredOrders.length === 0 ? (
           <div className="p-12 text-center">
-            <ShoppingBag className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <ShoppingBag className="w-12 h-12 text-gray-300 mx-auto mb-2" />
             <p className="text-gray-500">Няма намерени заявки</p>
           </div>
         ) : (
@@ -254,11 +254,11 @@ export default function AdminB2BOrdersPage() {
                       <td className="px-6 py-4">
                         <div>
                           <p className="font-medium text-gray-900">{order.company?.company_name}</p>
-                          <p className="text-sm text-gray-500">{order.company?.email}</p>
+                          <p className="text-[11px] text-gray-400">{order.company?.email}</p>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-sm text-gray-600">
+                        <span className="text-[11px] text-gray-500">
                           {order.items?.length || 0} артикула
                         </span>
                       </td>
@@ -277,7 +277,7 @@ export default function AdminB2BOrdersPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <p className="text-sm text-gray-500">
+                        <p className="text-[11px] text-gray-400">
                           {new Date(order.created_at).toLocaleDateString("bg-BG")}
                         </p>
                       </td>

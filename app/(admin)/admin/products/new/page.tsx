@@ -7,7 +7,7 @@ export const metadata = {
 export default function NewProductPage() {
   return (
     <div>
-      <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)] mb-6">
+      <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)] mb-3">
         Добави Нов Продукт
       </h1>
       <ProductForm mode="create" />

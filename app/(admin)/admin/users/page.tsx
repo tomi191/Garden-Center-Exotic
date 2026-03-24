@@ -125,15 +125,15 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-4">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Users className="w-6 h-6 text-blue-600" />
+          <div className="p-1.5 bg-blue-100 rounded-lg">
+            <Users className="w-4 h-4 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)]">
+            <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)]">
               Управление на потребители
             </h1>
             <p className="text-[var(--color-gray-600)] mt-0.5">
@@ -164,7 +164,7 @@ export default function AdminUsersPage() {
       {showForm && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500">
+            <h2 className="text-[11px] font-medium text-gray-400">
               Нов потребител
             </h2>
             <button
@@ -177,7 +177,7 @@ export default function AdminUsersPage() {
               <X className="w-4 h-4 text-[var(--color-gray-600)]" />
             </button>
           </div>
-          <form onSubmit={handleSubmit} className="p-6">
+          <form onSubmit={handleSubmit} className="p-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
                 label="Име"
@@ -245,7 +245,7 @@ export default function AdminUsersPage() {
         </div>
       ) : users.length === 0 ? (
         <div className="text-center py-12">
-          <Users className="w-12 h-12 mx-auto text-[var(--color-gray-600)] opacity-30 mb-4" />
+          <Users className="w-12 h-12 mx-auto text-[var(--color-gray-600)] opacity-30 mb-2" />
           <p className="text-[var(--color-gray-600)]">Все още няма потребители</p>
         </div>
       ) : (

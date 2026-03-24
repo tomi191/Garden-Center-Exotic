@@ -8,8 +8,8 @@ export const metadata = {
 export default function StockPage() {
   return (
     <div>
-      <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)] mb-6 flex items-center gap-3">
-        <div className="p-2 bg-amber-100 rounded-lg text-amber-600">
+      <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)] mb-3 flex items-center gap-3">
+        <div className="p-1.5 bg-amber-100 rounded-lg text-amber-600">
           <Warehouse className="w-6 h-6" />
         </div>
         Управление на склада

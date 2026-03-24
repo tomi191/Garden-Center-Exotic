@@ -158,11 +158,11 @@ export default function MessagesPage() {
   const newCount = messages.filter((m) => m.status === "new").length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-sm sm:text-base font-semibold text-gray-900">
+          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
             Съобщения
             {newCount > 0 && (
               <span className="ml-2 px-2.5 py-0.5 bg-blue-500 text-white text-sm rounded-full">
@@ -186,7 +186,7 @@ export default function MessagesPage() {
           <button
             key={f.value}
             onClick={() => { setFilter(f.value); setLoading(true); }}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-2.5 py-1.5 rounded-lg text-[11px] font-medium transition-colors ${
               filter === f.value
                 ? "bg-[var(--color-primary)] text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -241,7 +241,7 @@ export default function MessagesPage() {
                         {st.label}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500 truncate">{msg.message}</p>
+                    <p className="text-[11px] text-gray-400 truncate">{msg.message}</p>
                   </div>
 
                   <div className="hidden sm:flex items-center gap-3 text-xs text-gray-400">
@@ -270,7 +270,7 @@ export default function MessagesPage() {
                 {isExpanded && (
                   <div className="px-4 pb-4 border-t border-gray-100 pt-4">
                     {/* Contact info */}
-                    <div className="flex flex-wrap gap-4 mb-4 text-sm">
+                    <div className="flex flex-wrap gap-4 mb-2 text-sm">
                       <a href={`mailto:${msg.email}`} className="text-blue-600 hover:underline">
                         {msg.email}
                       </a>
@@ -286,13 +286,13 @@ export default function MessagesPage() {
                     </div>
 
                     {/* Full message */}
-                    <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                    <div className="bg-gray-50 rounded-lg p-4 mb-2">
                       <p className="text-gray-700 whitespace-pre-wrap">{msg.message}</p>
                     </div>
 
                     {/* Previous reply */}
                     {msg.admin_reply && (
-                      <div className="bg-green-50 rounded-lg p-4 mb-4 border-l-4 border-green-400">
+                      <div className="bg-green-50 rounded-lg p-4 mb-2 border-l-4 border-green-400">
                         <p className="text-xs text-green-600 font-medium mb-2">
                           Отговор от {msg.replied_by} • {msg.replied_at && new Date(msg.replied_at).toLocaleString("bg-BG")}
                         </p>

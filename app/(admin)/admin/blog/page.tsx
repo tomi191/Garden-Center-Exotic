@@ -98,11 +98,11 @@ export default function AdminBlogPage() {
   const draftCount = posts.filter((p) => p.status === "draft").length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)]">
+          <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)]">
             Блог Управление
           </h1>
           <p className="text-[var(--color-gray-600)] mt-1">
@@ -157,7 +157,7 @@ export default function AdminBlogPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-12">
-          <BookOpen className="w-12 h-12 mx-auto text-[var(--color-gray-600)] opacity-30 mb-4" />
+          <BookOpen className="w-12 h-12 mx-auto text-[var(--color-gray-600)] opacity-30 mb-2" />
           <p className="text-[var(--color-gray-600)]">
             {search ? "Няма намерени статии" : "Все още няма статии"}
           </p>

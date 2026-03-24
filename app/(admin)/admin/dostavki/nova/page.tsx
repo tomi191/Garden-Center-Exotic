@@ -217,7 +217,7 @@ export default function NovaDostavkaPage() {
   if (published) {
     return (
       <div className="p-3 max-w-lg mx-auto">
-        <div className="text-center py-12 space-y-6">
+        <div className="text-center py-12 space-y-3">
           {/* Success icon */}
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
             <Check className="w-10 h-10 text-green-600" />
