@@ -173,7 +173,7 @@ export default function SettingsPage() {
                 <Eye className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">Видимост</h2>
+                <h2 className="text-[11px] font-medium text-gray-400">Видимост</h2>
                 <p className="text-[11px] text-gray-400">Контролирайте какво виждат клиентите</p>
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function SettingsPage() {
                 <DollarSign className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">Валута</h2>
+                <h2 className="text-[11px] font-medium text-gray-400">Валута</h2>
                 <p className="text-[11px] text-gray-400">Настройки на валутния курс</p>
               </div>
             </div>
@@ -259,7 +259,7 @@ export default function SettingsPage() {
                 <Store className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">Контакти на магазина</h2>
+                <h2 className="text-[11px] font-medium text-gray-400">Контакти на магазина</h2>
                 <p className="text-[11px] text-gray-400">Информация за връзка с клиенти</p>
               </div>
             </div>

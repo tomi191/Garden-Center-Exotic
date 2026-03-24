@@ -138,7 +138,7 @@ export default function ProfilePage() {
                 <User className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">
+                <h2 className="text-[11px] font-medium text-gray-400">
                   Профилна информация
                 </h2>
                 <p className="text-[11px] text-gray-400">
@@ -206,7 +206,7 @@ export default function ProfilePage() {
                 <Lock className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">
+                <h2 className="text-[11px] font-medium text-gray-400">
                   Смяна на парола
                 </h2>
                 <p className="text-[11px] text-gray-400">

@@ -137,7 +137,7 @@ export default function BlogPostGeneratorPage() {
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Left - Form */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 space-y-3">
-          <h2 className="text-[11px] font-medium text-gray-400 text-gray-900 flex items-center gap-2">
+          <h2 className="text-[11px] font-medium text-gray-400 flex items-center gap-2">
             <FileText className="w-5 h-5 text-purple-500" />
             Настройки
           </h2>
@@ -272,7 +272,7 @@ export default function BlogPostGeneratorPage() {
         {/* Right - Output */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 flex flex-col">
           <div className="flex items-center justify-between mb-2">
-            <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">
+            <h2 className="text-[11px] font-medium text-gray-400">
               Генериран текст
             </h2>
             {generatedContent && (
