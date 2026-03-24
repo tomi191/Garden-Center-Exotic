@@ -234,7 +234,7 @@ export default async function AdminDashboard() {
       {/* Recent Messages */}
       <Card padding="none" className="overflow-hidden">
         <div className="p-3 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="font-bold text-sm text-gray-900 flex items-center gap-1.5">
+          <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 flex items-center gap-1.5">
             <Mail className="w-4 h-4 text-blue-600" />
             Последни запитвания
           </h2>
@@ -296,7 +296,7 @@ export default async function AdminDashboard() {
       {/* Recent Products */}
       <Card padding="none" className="overflow-hidden">
         <div className="p-3 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="font-bold text-sm text-gray-900 flex items-center gap-1.5">
+          <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 flex items-center gap-1.5">
             <Leaf className="w-4 h-4 text-green-600" />
             Последно добавени
           </h2>
@@ -363,7 +363,7 @@ export default async function AdminDashboard() {
       {/* Category Distribution */}
       <Card padding="none" className="overflow-hidden">
         <div className="p-3 border-b border-gray-100">
-          <h2 className="font-bold text-sm text-gray-900">Категории</h2>
+          <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500">Категории</h2>
         </div>
         <div className="p-3 space-y-2.5">
           {Object.keys(categoryStats).length === 0 ? (
