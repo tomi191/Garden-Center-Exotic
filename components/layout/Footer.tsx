@@ -279,21 +279,28 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* Bottom Bar */}
+      {/* SEO + Human footer text */}
       <div className="border-t border-white/10">
         <Container>
-          <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-white/40 text-xs">
-              © {currentYear} {SITE_CONFIG.nameBg}
+          <div className="py-6 space-y-4">
+            <p className="text-white/50 text-xs leading-relaxed max-w-2xl">
+              {SITE_CONFIG.nameBg} — директен вносител на премиум рози от Еквадор, орхидеи, лалета и екзотични цветя от 1998 г.
+              Доставка на свежи цветя и саксийни растения за Варна, Нова Загора и цяла България.
+              Търговия на едро за флористи, хотели и ресторанти.
             </p>
-            <div className="flex items-center gap-4 text-xs">
-              <Link href="/privacy" className="text-white/40 hover:text-white/70 transition-colors">
-                Поверителност
-              </Link>
-              <span className="text-white/20">•</span>
-              <Link href="/terms" className="text-white/40 hover:text-white/70 transition-colors">
-                Условия
-              </Link>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <p className="text-white/30 text-[11px]">
+                © {currentYear} {SITE_CONFIG.nameBg}. Всички права запазени.
+              </p>
+              <div className="flex items-center gap-4 text-[11px]">
+                <Link href="/privacy" className="text-white/30 hover:text-white/60 transition-colors">
+                  Поверителност
+                </Link>
+                <span className="text-white/15">•</span>
+                <Link href="/terms" className="text-white/30 hover:text-white/60 transition-colors">
+                  Общи условия
+                </Link>
+              </div>
             </div>
           </div>
         </Container>
