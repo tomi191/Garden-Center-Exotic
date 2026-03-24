@@ -35,7 +35,7 @@ function ShellInner({ user, children }: AdminShellProps) {
   useEffect(() => { setProfileOpen(false); }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#f0f0f0]">
+    <div data-admin className="min-h-screen bg-[#f0f0f0]">
       <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="lg:pl-72 min-h-screen flex flex-col pb-[52px] lg:pb-0">
