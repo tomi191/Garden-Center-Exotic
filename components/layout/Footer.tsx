@@ -8,10 +8,10 @@ import { LOCATIONS, SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 
 const footerLinks = {
   navigation: [
-    { label: "Начало", href: "/" },
     { label: "Продукти", href: "/produkti" },
     { label: "Услуги", href: "/uslugi" },
     { label: "За нас", href: "/za-nas" },
+    { label: "Блог", href: "/blog" },
   ],
   services: [
     { label: "Отрязани цветя", href: "/produkti/ryazan-tsvyat" },

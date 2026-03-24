@@ -17,7 +17,7 @@ export function Header() {
   const pathname = usePathname();
 
   // Pages with dark hero backgrounds that need white logo at top
-  const hasHero = pathname === "/" || pathname === "/den-na-zhenata";
+  const hasHero = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
