@@ -15,7 +15,8 @@ import {
   Warehouse,
   BookOpen,
   Building2,
-  ShoppingBag
+  ShoppingBag,
+  MessageSquare
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +25,11 @@ const navItems = [
     title: "Табло",
     href: "/admin",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Съобщения",
+    href: "/admin/messages",
+    icon: MessageSquare,
   },
   {
     title: "Заявки",

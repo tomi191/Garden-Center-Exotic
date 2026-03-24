@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { supabaseAdmin } from "@/lib/supabase";
 import { resend, FROM_EMAIL, ADMIN_EMAIL } from "@/lib/resend";
 
 const contactSchema = z.object({
@@ -32,6 +33,23 @@ export async function POST(request: NextRequest) {
     const locationLabel = locationLabels[data.location] || data.location;
     const inquiryLabel = inquiryLabels[data.inquiryType] || data.inquiryType;
 
+    // Save to database
+    const { error: dbError } = await supabaseAdmin
+      .from("contact_messages")
+      .insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || null,
+        location: data.location,
+        inquiry_type: data.inquiryType,
+        message: data.message,
+        status: "new",
+      });
+
+    if (dbError) {
+      console.error("Failed to save contact message:", dbError);
+    }
+
     // Send email notification to admin
     try {
       await resend.emails.send({
@@ -53,6 +71,7 @@ export async function POST(request: NextRequest) {
               .info { background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border-left: 4px solid #D4A853; }
               .message-box { background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border: 1px solid #e5e7eb; }
               .label { color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+              .btn { display: inline-block; background: #D4A853; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-weight: 600; }
               .footer { text-align: center; padding: 16px; color: #999; font-size: 11px; }
             </style>
           </head>
@@ -81,8 +100,8 @@ export async function POST(request: NextRequest) {
                   <div class="label">Съобщение</div>
                   <p style="margin:8px 0 0;white-space:pre-wrap">${data.message}</p>
                 </div>
-                <p style="font-size:12px;color:#999;text-align:center;margin-top:20px">
-                  Можете да отговорите директно на този имейл.
+                <p style="text-align:center;margin-top:20px;">
+                  <a href="https://www.exoticflowers.bg/admin/messages" class="btn">Виж в админа</a>
                 </p>
               </div>
               <div class="footer">
@@ -95,7 +114,6 @@ export async function POST(request: NextRequest) {
       });
     } catch (emailError) {
       console.error("Failed to send contact email:", emailError);
-      // Don't fail the request if email fails - data is still received
     }
 
     return NextResponse.json({
