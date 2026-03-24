@@ -162,7 +162,7 @@ export default function MessagesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
+          <h1 className="text-sm font-semibold hidden sm:block text-gray-900">
             Съобщения
             {newCount > 0 && (
               <span className="ml-2 px-2.5 py-0.5 bg-blue-500 text-white text-sm rounded-full">
@@ -186,7 +186,7 @@ export default function MessagesPage() {
           <button
             key={f.value}
             onClick={() => { setFilter(f.value); setLoading(true); }}
-            className={`px-2.5 py-1.5 rounded-lg text-[11px] font-medium transition-colors ${
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               filter === f.value
                 ? "bg-[var(--color-primary)] text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -241,7 +241,7 @@ export default function MessagesPage() {
                         {st.label}
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-400 truncate">{msg.message}</p>
+                    <p className="text-xs text-gray-400 truncate">{msg.message}</p>
                   </div>
 
                   <div className="hidden sm:flex items-center gap-3 text-xs text-gray-400">

@@ -119,7 +119,7 @@ export default function ProfilePage() {
             <Shield className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
+            <h1 className="text-sm font-semibold hidden sm:block text-gray-900">
               Профил
             </h1>
             <p className="text-gray-500 text-sm mt-0.5">
@@ -138,10 +138,10 @@ export default function ProfilePage() {
                 <User className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400">
+                <h2 className="text-xs font-medium text-gray-400">
                   Профилна информация
                 </h2>
-                <p className="text-[11px] text-gray-400">
+                <p className="text-xs text-gray-400">
                   Обновете вашето име и данни
                 </p>
               </div>
@@ -206,10 +206,10 @@ export default function ProfilePage() {
                 <Lock className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400">
+                <h2 className="text-xs font-medium text-gray-400">
                   Смяна на парола
                 </h2>
-                <p className="text-[11px] text-gray-400">
+                <p className="text-xs text-gray-400">
                   Променете паролата си за достъп
                 </p>
               </div>

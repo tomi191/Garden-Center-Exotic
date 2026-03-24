@@ -70,12 +70,12 @@ export default function AdminDostavkiPage() {
     <div className="space-y-4 p-3 sm:p-0">
       {/* Header */}
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)]">
+        <h1 className="text-sm font-semibold hidden sm:block text-[var(--color-foreground)]">
           {"\u0421\u0432\u0435\u0436\u0438 \u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0438"}
         </h1>
         <Link href="/admin/dostavki/nova">
           <Button
-            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white min-h-[36px] px-3 text-[11px] rounded-xl"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white min-h-[36px] px-3 text-xs rounded-xl"
           >
             <Plus className="w-5 h-5" />
             {"\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435"}
@@ -116,7 +116,7 @@ export default function AdminDostavkiPage() {
             {"\u041D\u044F\u043C\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438. \u0414\u043E\u0431\u0430\u0432\u0435\u0442\u0435 \u043F\u044A\u0440\u0432\u0430\u0442\u0430!"}
           </p>
           <Link href="/admin/dostavki/nova">
-            <Button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white min-h-[36px] px-4 text-[11px] rounded-xl mx-auto">
+            <Button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white min-h-[36px] px-4 text-xs rounded-xl mx-auto">
               <Plus className="w-5 h-5" />
               {"\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435"}
             </Button>

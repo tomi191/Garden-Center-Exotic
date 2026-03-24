@@ -196,7 +196,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
           </Button>
         </Link>
         <div>
-          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
+          <h1 className="text-sm font-semibold hidden sm:block text-gray-900">
             Заявка {order.order_number}
           </h1>
           <p className="text-gray-500">
@@ -266,7 +266,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
         <div className="lg:col-span-2 space-y-3">
           {/* Order Items */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
+            <h2 className="text-xs font-medium text-gray-400 mb-2 flex items-center gap-2">
               <ShoppingBag className="w-5 h-5 text-[var(--color-primary)]" />
               Артикули ({order.items?.length || 0})
             </h2>
@@ -292,7 +292,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-gray-900 truncate">{item.product_name}</p>
-                    <p className="text-[11px] text-gray-400">
+                    <p className="text-xs text-gray-400">
                       {item.quantity} x {item.unit_price.toFixed(2)} {item.price_unit || "лв"}
                     </p>
                   </div>
@@ -319,7 +319,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
           {/* Company Info */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
+            <h2 className="text-xs font-medium text-gray-400 mb-2 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[var(--color-primary)]" />
               Информация за клиента
             </h2>
@@ -327,7 +327,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               <div className="flex items-start gap-3">
                 <Building2 className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-[11px] text-gray-400">Компания</p>
+                  <p className="text-xs text-gray-400">Компания</p>
                   <Link href={`/admin/b2b/${order.company?.id}`} className="font-medium text-[var(--color-primary)] hover:underline">
                     {order.company?.company_name}
                   </Link>
@@ -336,7 +336,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-[11px] text-gray-400">Имейл</p>
+                  <p className="text-xs text-gray-400">Имейл</p>
                   <a href={`mailto:${order.company?.email}`} className="font-medium hover:underline">
                     {order.company?.email}
                   </a>
@@ -345,7 +345,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
-                  <p className="text-[11px] text-gray-400">Телефон</p>
+                  <p className="text-xs text-gray-400">Телефон</p>
                   <a href={`tel:${order.company?.phone}`} className="font-medium">
                     {order.company?.phone}
                   </a>
@@ -355,7 +355,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
-                    <p className="text-[11px] text-gray-400">Адрес</p>
+                    <p className="text-xs text-gray-400">Адрес</p>
                     <p className="font-medium">
                       {order.company.address}{order.company.city && `, ${order.company.city}`}
                     </p>
@@ -367,10 +367,10 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
           {/* Notes */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-[11px] font-medium text-gray-400 mb-2">Бележки</h2>
+            <h2 className="text-xs font-medium text-gray-400 mb-2">Бележки</h2>
             {order.notes && (
               <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-                <p className="text-[11px] text-gray-400 mb-1">От клиента:</p>
+                <p className="text-xs text-gray-400 mb-1">От клиента:</p>
                 <p className="text-gray-700">{order.notes}</p>
               </div>
             )}
@@ -408,7 +408,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
         {/* Sidebar - Actions */}
         <div className="space-y-3">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-[11px] font-medium text-gray-400 mb-2">Действия</h2>
+            <h2 className="text-xs font-medium text-gray-400 mb-2">Действия</h2>
 
             {!isCancelled && (
               <div className="space-y-3">
@@ -485,7 +485,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
 
           {/* Timeline */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-[11px] font-medium text-gray-400 mb-2 flex items-center gap-2">
+            <h2 className="text-xs font-medium text-gray-400 mb-2 flex items-center gap-2">
               <Calendar className="w-5 h-5 text-[var(--color-primary)]" />
               История
             </h2>

@@ -111,7 +111,7 @@ export default function AdminB2BOrdersPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900 flex items-center gap-3">
+          <h1 className="text-sm font-semibold hidden sm:block text-gray-900 flex items-center gap-3">
             <ShoppingBag className="w-7 h-7 text-[var(--color-primary)]" />
             B2B Заявки
           </h1>
@@ -254,11 +254,11 @@ export default function AdminB2BOrdersPage() {
                       <td className="px-6 py-2.5">
                         <div>
                           <p className="font-medium text-gray-900">{order.company?.company_name}</p>
-                          <p className="text-[11px] text-gray-400">{order.company?.email}</p>
+                          <p className="text-xs text-gray-400">{order.company?.email}</p>
                         </div>
                       </td>
                       <td className="px-6 py-2.5">
-                        <span className="text-[11px] text-gray-500">
+                        <span className="text-xs text-gray-500">
                           {order.items?.length || 0} артикула
                         </span>
                       </td>
@@ -277,7 +277,7 @@ export default function AdminB2BOrdersPage() {
                         </span>
                       </td>
                       <td className="px-6 py-2.5">
-                        <p className="text-[11px] text-gray-400">
+                        <p className="text-xs text-gray-400">
                           {new Date(order.created_at).toLocaleDateString("bg-BG")}
                         </p>
                       </td>

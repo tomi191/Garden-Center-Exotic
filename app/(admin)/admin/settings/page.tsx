@@ -124,7 +124,7 @@ export default function SettingsPage() {
             <Settings className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">
+            <h1 className="text-sm font-semibold hidden sm:block text-gray-900">
               Настройки на сайта
             </h1>
             <p className="text-gray-500 text-sm mt-0.5">
@@ -173,8 +173,8 @@ export default function SettingsPage() {
                 <Eye className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400">Видимост</h2>
-                <p className="text-[11px] text-gray-400">Контролирайте какво виждат клиентите</p>
+                <h2 className="text-xs font-medium text-gray-400">Видимост</h2>
+                <p className="text-xs text-gray-400">Контролирайте какво виждат клиентите</p>
               </div>
             </div>
 
@@ -191,7 +191,7 @@ export default function SettingsPage() {
                     <p className="font-semibold text-gray-900">
                       {settings.hidePrices ? "Цените са СКРИТИ" : "Цените са ВИДИМИ"}
                     </p>
-                    <p className="text-[11px] text-gray-400">
+                    <p className="text-xs text-gray-400">
                       {settings.hidePrices
                         ? "Клиентите виждат 'Свържете се с нас' вместо цени"
                         : "Всички цени се показват в каталога"}
@@ -224,8 +224,8 @@ export default function SettingsPage() {
                 <DollarSign className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400">Валута</h2>
-                <p className="text-[11px] text-gray-400">Настройки на валутния курс</p>
+                <h2 className="text-xs font-medium text-gray-400">Валута</h2>
+                <p className="text-xs text-gray-400">Настройки на валутния курс</p>
               </div>
             </div>
 
@@ -259,8 +259,8 @@ export default function SettingsPage() {
                 <Store className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-[11px] font-medium text-gray-400">Контакти на магазина</h2>
-                <p className="text-[11px] text-gray-400">Информация за връзка с клиенти</p>
+                <h2 className="text-xs font-medium text-gray-400">Контакти на магазина</h2>
+                <p className="text-xs text-gray-400">Информация за връзка с клиенти</p>
               </div>
             </div>
 

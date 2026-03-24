@@ -171,7 +171,7 @@ export default function B2BPricesPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900">B2B Ценоразпис</h1>
+            <h1 className="text-sm font-semibold hidden sm:block text-gray-900">B2B Ценоразпис</h1>
             <p className="text-gray-500 text-sm">
               {productsWithB2BPrice} от {products.length} продукта с B2B цени
             </p>

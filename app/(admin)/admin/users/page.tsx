@@ -133,7 +133,7 @@ export default function AdminUsersPage() {
             <Users className="w-4 h-4 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-[13px] font-semibold hidden sm:block text-[var(--color-foreground)]">
+            <h1 className="text-sm font-semibold hidden sm:block text-[var(--color-foreground)]">
               Управление на потребители
             </h1>
             <p className="text-[var(--color-gray-600)] mt-0.5">
@@ -164,7 +164,7 @@ export default function AdminUsersPage() {
       {showForm && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="flex items-center justify-between px-3 py-2.5 border-b border-gray-100">
-            <h2 className="text-[11px] font-medium text-gray-400">
+            <h2 className="text-xs font-medium text-gray-400">
               Нов потребител
             </h2>
             <button

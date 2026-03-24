@@ -79,7 +79,7 @@ export default function AdminB2BPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900 flex items-center gap-3">
+          <h1 className="text-sm font-semibold hidden sm:block text-gray-900 flex items-center gap-3">
             <Building2 className="w-7 h-7 text-[var(--color-primary)]" />
             B2B Компании
           </h1>
@@ -132,8 +132,8 @@ export default function AdminB2BPage() {
                   <Icon className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <p className="text-[13px] font-semibold hidden sm:block">{count}</p>
-                  <p className="text-[11px] text-gray-400">{config.label}</p>
+                  <p className="text-sm font-semibold hidden sm:block">{count}</p>
+                  <p className="text-xs text-gray-400">{config.label}</p>
                 </div>
               </div>
             </button>
@@ -222,7 +222,7 @@ export default function AdminB2BPage() {
                       <td className="px-6 py-2.5">
                         <div>
                           <p className="font-medium text-gray-900">{company.company_name}</p>
-                          <p className="text-[11px] text-gray-400">МОЛ: {company.mol}</p>
+                          <p className="text-xs text-gray-400">МОЛ: {company.mol}</p>
                         </div>
                       </td>
                       <td className="px-6 py-2.5">
@@ -233,7 +233,7 @@ export default function AdminB2BPage() {
                       <td className="px-6 py-2.5">
                         <div>
                           <p className="text-sm text-gray-900">{company.email}</p>
-                          <p className="text-[11px] text-gray-400">{company.phone}</p>
+                          <p className="text-xs text-gray-400">{company.phone}</p>
                         </div>
                       </td>
                       <td className="px-6 py-2.5">
@@ -252,7 +252,7 @@ export default function AdminB2BPage() {
                         )}
                       </td>
                       <td className="px-6 py-2.5">
-                        <p className="text-[11px] text-gray-400">
+                        <p className="text-xs text-gray-400">
                           {new Date(company.created_at).toLocaleDateString("bg-BG")}
                         </p>
                       </td>

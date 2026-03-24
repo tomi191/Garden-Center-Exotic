@@ -306,7 +306,7 @@ export default function NovaDostavkaPage() {
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-[13px] font-semibold text-[var(--color-foreground)]">
+        <h1 className="text-sm font-semibold text-[var(--color-foreground)]">
           {"\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435"}
         </h1>
       </div>
@@ -327,7 +327,7 @@ export default function NovaDostavkaPage() {
                   : "border-[var(--color-border)] bg-white hover:border-gray-300"
               }`}
             >
-              <span className="text-[15px] leading-none">{c.flag}</span>
+              <span className="text-sm leading-none">{c.flag}</span>
               <span className="font-medium text-sm">{c.name}</span>
             </button>
           ))}
@@ -343,7 +343,7 @@ export default function NovaDostavkaPage() {
           type="date"
           value={arrivalDate}
           onChange={(e) => setArrivalDate(e.target.value)}
-          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] min-h-[36px] text-[13px] focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all"
+          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] min-h-[36px] text-sm focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all"
         />
       </div>
 
@@ -353,7 +353,7 @@ export default function NovaDostavkaPage() {
         value={title}
         onChange={(e) => handleTitleChange(e.target.value)}
         placeholder={"\u041D\u0430\u043F\u0440. \u0421\u0432\u0435\u0436\u0438 \u0446\u0432\u0435\u0442\u044F \u043E\u0442 \u0415\u043A\u0432\u0430\u0434\u043E\u0440"}
-        className="min-h-[36px] text-[13px]"
+        className="min-h-[36px] text-sm"
       />
 
       {/* Description */}
@@ -366,7 +366,7 @@ export default function NovaDostavkaPage() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder={"\u0414\u043E\u0431\u0430\u0432\u0435\u0442\u0435 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u0435..."}
           rows={2}
-          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] text-[13px] resize-none focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all placeholder:text-[var(--color-gray-400)]"
+          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] text-sm resize-none focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all placeholder:text-[var(--color-gray-400)]"
         />
       </div>
 

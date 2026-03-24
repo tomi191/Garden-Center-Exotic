@@ -73,7 +73,7 @@ export default async function AdminDashboard() {
           { href: "/admin/dostavki", n: arrivalsCount || 0, label: "Доставки", color: "text-purple-600", warn: null },
         ].map((s) => (
           <Link key={s.href} href={s.href} className="bg-white rounded-lg p-2 hover:bg-gray-50 active:bg-gray-100 transition-colors">
-            <p className={`text-[15px] font-bold ${s.color} leading-none`}>{s.n}</p>
+            <p className={`text-sm font-bold ${s.color} leading-none`}>{s.n}</p>
             <p className="text-[10px] text-gray-400 mt-0.5">{s.label}</p>
             {s.warn && <p className="text-[9px] text-red-500 font-medium">{s.warn}</p>}
           </Link>
@@ -90,7 +90,7 @@ export default async function AdminDashboard() {
           <Link
             key={a.href}
             href={a.href}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#1a1a1a] text-white text-[11px] font-medium whitespace-nowrap flex-shrink-0 hover:bg-[#333] active:bg-[#444] transition-colors"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#1a1a1a] text-white text-xs font-medium whitespace-nowrap flex-shrink-0 hover:bg-[#333] active:bg-[#444] transition-colors"
           >
             <a.icon className="w-3 h-3" />
             {a.label}
@@ -101,7 +101,7 @@ export default async function AdminDashboard() {
       {/* Messages */}
       <section className="bg-white rounded-lg overflow-hidden">
         <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100">
-          <span className="text-[11px] text-gray-400 font-medium flex items-center gap-1">
+          <span className="text-xs text-gray-400 font-medium flex items-center gap-1">
             <Mail className="w-3 h-3" /> Запитвания
           </span>
           <Link href="/admin/messages" className="text-[10px] text-blue-600 font-medium flex items-center gap-0.5">
@@ -109,7 +109,7 @@ export default async function AdminDashboard() {
           </Link>
         </div>
         {!recentMessages || recentMessages.length === 0 ? (
-          <p className="text-[11px] text-gray-300 text-center py-3">Няма запитвания</p>
+          <p className="text-xs text-gray-300 text-center py-3">Няма запитвания</p>
         ) : (
           <div className="divide-y divide-gray-50">
             {recentMessages.map((msg: { id: string; name: string; message: string; status: string; created_at: string }) => (
@@ -117,10 +117,10 @@ export default async function AdminDashboard() {
                 <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${msg.status === "new" ? "bg-blue-500" : msg.status === "replied" ? "bg-green-400" : "bg-gray-200"}`} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-1">
-                    <span className="text-[12px] font-medium text-gray-800 truncate">{msg.name}</span>
+                    <span className="text-xs font-medium text-gray-800 truncate">{msg.name}</span>
                     <span className="text-[9px] text-gray-300 flex-shrink-0">{timeAgo(msg.created_at)}</span>
                   </div>
-                  <p className="text-[11px] text-gray-400 truncate">{msg.message}</p>
+                  <p className="text-xs text-gray-400 truncate">{msg.message}</p>
                 </div>
               </Link>
             ))}
@@ -131,7 +131,7 @@ export default async function AdminDashboard() {
       {/* Products — tight grid */}
       <section className="bg-white rounded-lg overflow-hidden">
         <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100">
-          <span className="text-[11px] text-gray-400 font-medium flex items-center gap-1">
+          <span className="text-xs text-gray-400 font-medium flex items-center gap-1">
             <Leaf className="w-3 h-3" /> Продукти
           </span>
           <Link href="/admin/products" className="text-[10px] text-blue-600 font-medium flex items-center gap-0.5">
@@ -139,7 +139,7 @@ export default async function AdminDashboard() {
           </Link>
         </div>
         {!recentProducts || recentProducts.length === 0 ? (
-          <p className="text-[11px] text-gray-300 text-center py-3">Няма продукти</p>
+          <p className="text-xs text-gray-300 text-center py-3">Няма продукти</p>
         ) : (
           <div className="grid grid-cols-3 gap-px bg-gray-100">
             {recentProducts.map((p: { id: string; name: string; image: string; price: number; inStock: boolean }) => (
@@ -164,7 +164,7 @@ export default async function AdminDashboard() {
 
       {/* Categories — mini bars */}
       <section className="bg-white rounded-lg p-3">
-        <span className="text-[11px] text-gray-400 font-medium">Категории</span>
+        <span className="text-xs text-gray-400 font-medium">Категории</span>
         <div className="mt-2 space-y-1.5">
           {Object.entries(categoryStats).sort((a, b) => (b[1] as number) - (a[1] as number)).map(([cat, count]) => (
             <div key={cat} className="flex items-center gap-2">
