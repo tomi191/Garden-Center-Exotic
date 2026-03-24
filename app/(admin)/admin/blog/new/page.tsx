@@ -177,7 +177,7 @@ export default function NewBlogPostPage() {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)]">
+            <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)]">
               Нова статия
             </h1>
             <p className="text-sm text-[var(--color-gray-600)]">
@@ -193,7 +193,7 @@ export default function NewBlogPostPage() {
           <div className="bg-white rounded-xl border border-[var(--color-border)] p-6 space-y-4">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="w-5 h-5 text-[var(--color-secondary)]" />
-              <h2 className="font-bold text-lg">AI Генератор</h2>
+              <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500">AI Генератор</h2>
             </div>
 
             <div>
@@ -298,7 +298,7 @@ export default function NewBlogPostPage() {
         <div className="lg:col-span-3 space-y-4">
           {/* Post fields */}
           <div className="bg-white rounded-xl border border-[var(--color-border)] p-6 space-y-4">
-            <h2 className="font-bold text-lg">Данни за статията</h2>
+            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500">Данни за статията</h2>
 
             <div>
               <label className="block text-sm font-medium mb-1.5">Заглавие *</label>

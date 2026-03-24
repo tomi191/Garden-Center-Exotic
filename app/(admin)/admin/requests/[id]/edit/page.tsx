@@ -39,7 +39,7 @@ export default async function EditRequestPage({ params }: EditRequestPageProps) 
 
   return (
     <div>
-      <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)] mb-6 flex items-center gap-3">
+      <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)] mb-6 flex items-center gap-3">
         <div className="p-2 bg-purple-100 rounded-lg text-purple-600">
           <ClipboardList className="w-6 h-6" />
         </div>

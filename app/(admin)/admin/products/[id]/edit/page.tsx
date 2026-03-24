@@ -36,7 +36,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
 
   return (
     <div>
-      <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)] mb-6">
+      <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)] mb-6">
         Редактирай Продукт
       </h1>
       <ProductForm

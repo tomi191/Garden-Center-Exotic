@@ -162,7 +162,7 @@ export default function MessagesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-base sm:text-lg font-bold text-gray-900">
+          <h1 className="text-sm sm:text-base font-semibold text-gray-900">
             Съобщения
             {newCount > 0 && (
               <span className="ml-2 px-2.5 py-0.5 bg-blue-500 text-white text-sm rounded-full">

@@ -123,7 +123,7 @@ export default function BlogPostGeneratorPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+        <h1 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-3">
           <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
@@ -137,7 +137,7 @@ export default function BlogPostGeneratorPage() {
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Left - Form */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 space-y-6">
-          <h2 className="font-semibold text-lg text-gray-900 flex items-center gap-2">
+          <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 text-gray-900 flex items-center gap-2">
             <FileText className="w-5 h-5 text-purple-500" />
             Настройки
           </h2>
@@ -272,7 +272,7 @@ export default function BlogPostGeneratorPage() {
         {/* Right - Output */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 flex flex-col">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-lg text-gray-900">
+            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 text-gray-900">
               Генериран текст
             </h2>
             {generatedContent && (

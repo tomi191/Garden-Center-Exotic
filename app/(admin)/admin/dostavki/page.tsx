@@ -70,7 +70,7 @@ export default function AdminDostavkiPage() {
     <div className="space-y-4 p-3 sm:p-0">
       {/* Header */}
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)]">
+        <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)]">
           {"\u0421\u0432\u0435\u0436\u0438 \u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0438"}
         </h1>
         <Link href="/admin/dostavki/nova">

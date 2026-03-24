@@ -102,7 +102,7 @@ export default function AdminBlogPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)]">
+          <h1 className="text-sm sm:text-base font-semibold text-[var(--color-foreground)]">
             Блог Управление
           </h1>
           <p className="text-[var(--color-gray-600)] mt-1">

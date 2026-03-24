@@ -111,7 +111,7 @@ export default function AdminB2BOrdersPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-3">
+          <h1 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-3">
             <ShoppingBag className="w-7 h-7 text-[var(--color-primary)]" />
             B2B Заявки
           </h1>
@@ -158,7 +158,7 @@ export default function AdminB2BOrdersPage() {
                   <Icon className="w-4 h-4" />
                 </div>
                 <div className="text-left">
-                  <p className="text-xl font-bold">{count}</p>
+                  <p className="text-sm font-bold">{count}</p>
                   <p className="text-xs text-gray-500">{config.label}</p>
                 </div>
               </div>

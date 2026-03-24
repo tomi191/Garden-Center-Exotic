@@ -224,7 +224,7 @@ export default function NovaDostavkaPage() {
           </div>
 
           <div>
-            <h1 className="text-lg font-bold text-[var(--color-foreground)]">
+            <h1 className="text-sm font-semibold text-[var(--color-foreground)]">
               {"\u041F\u0443\u0431\u043B\u0438\u043A\u0443\u0432\u0430\u043D\u043E!"}
             </h1>
             <p className="text-[var(--color-gray-600)] mt-2">
@@ -242,13 +242,13 @@ export default function NovaDostavkaPage() {
                 href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(arrivalUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#1877F2] text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#1877F2] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
               >
                 f
               </a>
               <a
                 href={`viber://forward?text=${encodeURIComponent(shareText)}`}
-                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#7360F2] text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#7360F2] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
               >
                 V
               </a>
@@ -256,7 +256,7 @@ export default function NovaDostavkaPage() {
                 href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#25D366] text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#25D366] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
               >
                 W
               </a>

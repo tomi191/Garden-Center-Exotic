@@ -195,7 +195,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
           </Button>
         </Link>
         <div>
-          <h1 className="text-base sm:text-lg font-bold text-gray-900">{company.company_name}</h1>
+          <h1 className="text-sm sm:text-base font-semibold text-gray-900">{company.company_name}</h1>
           <p className="text-gray-500">ЕИК: {company.eik}</p>
         </div>
       </div>
@@ -205,7 +205,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
         <div className="lg:col-span-2 space-y-6">
           {/* Company Details */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[var(--color-primary)]" />
               Информация за фирмата
             </h2>
@@ -262,7 +262,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
 
           {/* Notes */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="font-semibold text-lg mb-4">Вътрешни бележки</h2>
+            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">Вътрешни бележки</h2>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -276,7 +276,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
         <div className="space-y-6">
           {/* Status Card */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="font-semibold text-lg mb-4">Статус</h2>
+            <h2 className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">Статус</h2>
 
             <div className={`p-4 rounded-xl mb-6 ${
               company.status === "pending" ? "bg-yellow-50" :
