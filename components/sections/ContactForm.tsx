@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Send, CheckCircle2, Loader2 } from "lucide-react";
+import { Send, CheckCircle2, Loader2, Phone, MessageCircle, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { TextArea } from "@/components/ui/TextArea";
 import { Select } from "@/components/ui/Select";
@@ -24,6 +24,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -40,14 +41,31 @@ export function ContactForm() {
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form data:", data);
-    
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    reset();
-    setTimeout(() => setIsSuccess(false), 5000);
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Грешка при изпращане");
+      }
+
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 8000);
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error ? err.message : "Грешка при изпращане. Моля, опитайте отново."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const locationOptions = [
@@ -64,6 +82,31 @@ export function ContactForm() {
 
   return (
     <div className="relative">
+      {/* Quick contact options */}
+      <div className="flex flex-wrap gap-3 mb-6">
+        <a
+          href="tel:+359895670370"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/20 rounded-xl text-sm font-medium text-[var(--color-primary)] transition-colors"
+        >
+          <Phone className="w-4 h-4" />
+          089 567 0370
+        </a>
+        <a
+          href="viber://chat?number=%2B359895670370"
+          className="flex items-center gap-2 px-4 py-2.5 bg-purple-50 hover:bg-purple-100 rounded-xl text-sm font-medium text-purple-700 transition-colors"
+        >
+          <MessageCircle className="w-4 h-4" />
+          Viber
+        </a>
+        <a
+          href="mailto:exoticbg@abv.bg"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[var(--color-secondary)]/10 hover:bg-[var(--color-secondary)]/20 rounded-xl text-sm font-medium text-[var(--color-secondary-dark)] transition-colors"
+        >
+          <Send className="w-4 h-4" />
+          exoticbg@abv.bg
+        </a>
+      </div>
+
       {isSuccess && (
         <div className="mb-8 p-6 bg-green-50 border border-green-100 rounded-2xl flex items-start gap-4 animate-in fade-in slide-in-from-top-4">
           <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 text-green-600">
@@ -73,6 +116,18 @@ export function ContactForm() {
             <h4 className="font-bold text-green-900 text-lg mb-1">Успешно изпратено!</h4>
             <p className="text-green-700">
               Благодарим ви за запитването. Ще се свържем с вас в рамките на 24 часа.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-red-700 text-sm">{errorMessage}</p>
+            <p className="text-red-500 text-xs mt-1">
+              Можете да ни се обадите директно на <a href="tel:+359895670370" className="underline font-medium">089 567 0370</a>
             </p>
           </div>
         </div>
