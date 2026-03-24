@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabase";
+import { generateSlug } from "@/lib/content-engine/utils/slug-generator";
 
 // GET - List arrivals (public for published, all for authenticated)
 export async function GET(request: NextRequest) {
@@ -53,14 +54,9 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    // Auto-generate slug from title
+    // Auto-generate slug from title (Cyrillic → Latin transliteration)
     const slug =
-      body.title
-        .toLowerCase()
-        .replace(/[^a-zа-яёіїє0-9\s-]/gi, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-")
-        .trim() +
+      generateSlug(body.title) +
       "-" +
       Date.now();
 

@@ -51,7 +51,8 @@ async function getArrival(slug: string): Promise<Arrival | null> {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const arrival = await getArrival(slug);
 
   if (!arrival) {
@@ -85,7 +86,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArrivalDetailPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const arrival = await getArrival(slug);
 
   if (!arrival) {
