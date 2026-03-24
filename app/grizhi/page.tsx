@@ -10,6 +10,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/sections/CTASection";
 import { Card, CardContent } from "@/components/ui/Card";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Грижи за Растенията | Наръчник",
@@ -65,6 +66,7 @@ const tips = [
 export default function PlantCarePage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Грижи за Растенията", href: "/grizhi" }]} />
       {/* Hero Section - consistent with other pages */}
       <section className="relative min-h-[70vh] flex items-center">
         {/* Full Screen Background Image */}

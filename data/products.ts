@@ -39,7 +39,7 @@ export const products: Product[] = [
     origin: "Колумбия",
     price: 4.20,
     priceUnit: "лв/стрък",
-    description: "Елегантни бели рози от колумбийски ферми. Идеални за сватби и специални събития.",
+    description: "Елегантни бели рози от колумбийски ферми. Идеални за специални поводи и подаръци.",
     image: "/images/products/rose-white-colombia.jpg",
     inStock: true,
     featured: true,

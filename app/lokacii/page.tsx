@@ -6,7 +6,8 @@ import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Map } from "@/components/ui/Map";
-import { LOCATIONS } from "@/lib/constants";
+import { LOCATIONS, SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Локации",
@@ -17,6 +18,71 @@ export const metadata: Metadata = {
 export default function LocationsPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Локации", href: "/lokacii" }]} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": ["FlowerShop", "GardenStore"],
+              "@id": `${SITE_CONFIG.url}/#varna-location`,
+              name: `${SITE_CONFIG.nameBg} - Варна`,
+              url: `${SITE_CONFIG.url}/lokacii`,
+              telephone: LOCATIONS.varna.phone,
+              email: LOCATIONS.varna.email,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: LOCATIONS.varna.address,
+                addressLocality: "Варна",
+                postalCode: LOCATIONS.varna.postalCode,
+                addressCountry: "BG",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: LOCATIONS.varna.coordinates.lat,
+                longitude: LOCATIONS.varna.coordinates.lng,
+              },
+              openingHoursSpecification: [{
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "09:00",
+                closes: "18:00",
+              }],
+              parentOrganization: { "@id": `${SITE_CONFIG.url}/#organization` },
+              sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": ["FlowerShop", "GardenStore"],
+              "@id": `${SITE_CONFIG.url}/#nova-zagora-location`,
+              name: `${SITE_CONFIG.nameBg} - Нова Загора`,
+              url: `${SITE_CONFIG.url}/lokacii`,
+              telephone: LOCATIONS.novaZagora.phone,
+              email: LOCATIONS.novaZagora.email,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: LOCATIONS.novaZagora.address,
+                addressLocality: "Нова Загора",
+                postalCode: LOCATIONS.novaZagora.postalCode,
+                addressCountry: "BG",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: LOCATIONS.novaZagora.coordinates.lat,
+                longitude: LOCATIONS.novaZagora.coordinates.lng,
+              },
+              openingHoursSpecification: [{
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "09:00",
+                closes: "18:00",
+              }],
+              parentOrganization: { "@id": `${SITE_CONFIG.url}/#organization` },
+            },
+          ]),
+        }}
+      />
       {/* Hero Section - consistent with other pages */}
       <section className="relative min-h-[70vh] flex items-center">
         {/* Full Screen Background Image */}

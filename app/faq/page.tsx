@@ -5,6 +5,7 @@ import { Accordion, AccordionItem } from "@/components/ui/Accordion";
 import { PageHero } from "@/components/sections/PageHero";
 import { CTASection } from "@/components/sections/CTASection";
 import { faqData } from "@/data/faq";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Често Задавани Въпроси (FAQ)",
@@ -24,6 +25,7 @@ const categories = [
 export default function FAQPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Често Задавани Въпроси", href: "/faq" }]} />
       <PageHero
         title="Често Задавани Въпроси"
         description="Намерете отговори на най-често срещаните въпроси. Ако не намерите това, което търсите, не се колебайте да се свържете с нас."

@@ -77,7 +77,6 @@ export const SOCIAL_LINKS = {
 
 export const NAV_LINKS = [
   { href: "/", label: "Начало" },
-  { href: "/den-na-zhenata", label: "8-ми Март 🌷" },
   { href: "/za-nas", label: "За Нас" },
   { href: "/produkti", label: "Продукти" },
   { href: "/uslugi", label: "Услуги" },
@@ -176,13 +175,6 @@ export const SERVICES = [
     description: "Индивидуални букети за всеки повод - рождени дни, годишнини, корпоративни подаръци",
     priceRange: "25 - 200+ лв",
     icon: "Flower2",
-  },
-  {
-    slug: "svatbi",
-    name: "Сватбена декорация",
-    description: "Цялостна флорална декорация - булчински букети, арки, маси. Резервация 2-3 месеца предварително",
-    priceRange: "По оферта",
-    icon: "Heart",
   },
   {
     slug: "dostavka",

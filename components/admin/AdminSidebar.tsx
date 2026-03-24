@@ -13,7 +13,7 @@ import {
   ExternalLink,
   ClipboardList,
   Warehouse,
-  Sparkles,
+  BookOpen,
   Building2,
   ShoppingBag
 } from "lucide-react";
@@ -56,9 +56,9 @@ const navItems = [
     icon: PlusCircle,
   },
   {
-    title: "AI Блог Генератор",
-    href: "/admin/blog-post-generator",
-    icon: Sparkles,
+    title: "Блог",
+    href: "/admin/blog",
+    icon: BookOpen,
   },
   {
     title: "Настройки",

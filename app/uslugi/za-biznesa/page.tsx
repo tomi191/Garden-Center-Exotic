@@ -70,7 +70,7 @@ export default function B2BPage() {
             Растете с нас
           </h1>
           <p className="text-xl text-white/80 mb-10 leading-relaxed">
-            Превърнете пространството си в преживяване. Специални условия за хотели, ресторанти, офиси и организатори на събития.
+            Превърнете пространството си в преживяване. Специални условия за хотели, ресторанти, офиси и бизнес клиенти.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/kontakti">

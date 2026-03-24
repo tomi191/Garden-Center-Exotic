@@ -5,7 +5,7 @@ import "./globals.css";
 import { ConditionalLayout } from "@/components/layout/ConditionalLayout";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SettingsProvider } from "@/components/providers/SettingsProvider";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, LOCATIONS, SOCIAL_LINKS } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
@@ -13,7 +13,6 @@ import { ThemeProvider } from "next-themes";
 
 import { BackgroundAtmosphere } from "@/components/layout/BackgroundAtmosphere";
 import { BotanicalBranding } from "@/components/layout/BotanicalBranding";
-import { March8FAB } from "@/components/march8/March8FAB";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -46,7 +45,6 @@ export const metadata: Metadata = {
     "екзотични цветя",
     "рози Еквадор",
     "орхидеи",
-    "сватбена декорация",
     "корпоративни цветя",
   ],
   authors: [{ name: SITE_CONFIG.name }],
@@ -99,9 +97,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "G-JTL50Q3BJG",
-  },
+  // Google Search Console verification should be added here when available
+  // verification: { google: "your-search-console-token" },
 };
 
 export default function RootLayout({
@@ -125,6 +122,57 @@ export default function RootLayout({
         `}
       </Script>
       <body className="antialiased font-sans">
+        {/* Global Schema.org: WebSite + Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": `${SITE_CONFIG.url}/#website`,
+                name: SITE_CONFIG.nameBg,
+                alternateName: SITE_CONFIG.name,
+                url: SITE_CONFIG.url,
+                inLanguage: "bg",
+                publisher: { "@id": `${SITE_CONFIG.url}/#organization` },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "@id": `${SITE_CONFIG.url}/#organization`,
+                name: SITE_CONFIG.nameBg,
+                alternateName: SITE_CONFIG.name,
+                url: SITE_CONFIG.url,
+                logo: {
+                  "@type": "ImageObject",
+                  url: `${SITE_CONFIG.url}/images/logos/exotic-logo.jpg`,
+                },
+                foundingDate: "1998",
+                sameAs: [
+                  SOCIAL_LINKS.facebook,
+                  SOCIAL_LINKS.instagram,
+                ],
+                contactPoint: [
+                  {
+                    "@type": "ContactPoint",
+                    telephone: `+359${LOCATIONS.varna.phone.replace(/\s/g, "").replace(/^0/, "")}`,
+                    contactType: "customer service",
+                    areaServed: "BG",
+                    availableLanguage: "Bulgarian",
+                  },
+                  {
+                    "@type": "ContactPoint",
+                    telephone: `+359${LOCATIONS.novaZagora.phone.replace(/\s/g, "").replace(/^0/, "")}`,
+                    contactType: "customer service",
+                    areaServed: "BG",
+                    availableLanguage: "Bulgarian",
+                  },
+                ],
+              },
+            ]),
+          }}
+        />
         <BackgroundAtmosphere />
         <BotanicalBranding />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
@@ -144,7 +192,6 @@ export default function RootLayout({
             </SmoothScrollProvider>
           </SettingsProvider>
         </ThemeProvider>
-        <March8FAB />
         <Analytics />
         <SpeedInsights />
       </body>

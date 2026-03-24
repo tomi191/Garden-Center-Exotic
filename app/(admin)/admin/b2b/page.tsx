@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Building2, Clock, CheckCircle, XCircle, AlertCircle, Eye, Search, Filter } from "lucide-react";
+import { Building2, Clock, CheckCircle, XCircle, AlertCircle, Eye, Search, Filter, Package, FileText } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { B2BCompany } from "@/types";
 
@@ -88,14 +88,28 @@ export default function AdminB2BPage() {
           </p>
         </div>
 
-        {pendingCount > 0 && (
-          <div className="flex items-center gap-2 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-xl">
-            <Clock className="w-5 h-5 text-yellow-600" />
-            <span className="font-medium text-yellow-800">
-              {pendingCount} чакащи заявки
-            </span>
-          </div>
-        )}
+        <div className="flex items-center gap-3 flex-wrap">
+          {pendingCount > 0 && (
+            <div className="flex items-center gap-2 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-xl">
+              <Clock className="w-5 h-5 text-yellow-600" />
+              <span className="font-medium text-yellow-800">
+                {pendingCount} чакащи заявки
+              </span>
+            </div>
+          )}
+          <Link href="/admin/b2b/orders">
+            <Button variant="outline" size="sm" className="gap-2">
+              <Package className="w-4 h-4" />
+              Заявки
+            </Button>
+          </Link>
+          <Link href="/admin/b2b/prices">
+            <Button variant="outline" size="sm" className="gap-2">
+              <FileText className="w-4 h-4" />
+              Ценоразпис
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Stats Cards */}

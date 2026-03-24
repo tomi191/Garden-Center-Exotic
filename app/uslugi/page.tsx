@@ -5,10 +5,12 @@ import { ArrowRight, Sparkles, Building2, Flower, Phone } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ServiceShowcase } from "@/components/sections/ServiceShowcase";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Услуги | Градински Център Екзотик",
-  description: "Професионални решения за озеленяване, доставка на цветя и събития.",
+  description: "Професионални решения за озеленяване, доставка на цветя и B2B партньорства.",
 };
 
 const mainServices = [
@@ -45,6 +47,30 @@ const mainServices = [
 export default function ServicesPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Услуги", href: "/uslugi" }]} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            provider: { "@id": `${SITE_CONFIG.url}/#organization` },
+            areaServed: { "@type": "Country", name: "Bulgaria" },
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Услуги на Градински Център Екзотик",
+              itemListElement: [
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Букети и аранжировки", description: "Индивидуални букети за всеки повод" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Озеленяване", description: "Професионално озеленяване на офиси и градини" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Експрес доставка", description: "Доставка до 3 часа, безплатна над 50 лв" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Цветен абонамент", description: "Седмична смяна на свежи цветя за офиси и хотели" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Озеленяване", description: "Професионално озеленяване на офиси и градини" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Търговия на едро", description: "B2B за флористи, хотели и дистрибутори" } },
+              ],
+            },
+          }),
+        }}
+      />
       {/* Hero Section - consistent with other pages */}
       <section className="relative min-h-[70vh] flex items-center">
         {/* Full Screen Background Image */}

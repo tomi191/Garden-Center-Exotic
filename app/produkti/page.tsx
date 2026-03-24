@@ -7,6 +7,7 @@ import { ProductGallery } from "@/components/sections/ProductGallery";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import { getProducts } from "@/lib/products";
 import { products as staticProducts } from "@/data/products";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Продукти | Екзотик",
@@ -24,6 +25,7 @@ export default async function ProductsPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Продукти", href: "/produkti" }]} />
       {/* Hero Section - like Za-nas page */}
       <section className="relative min-h-[70vh] flex items-center">
         {/* Full Screen Background Image */}

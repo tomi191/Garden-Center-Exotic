@@ -9,12 +9,13 @@ import { B2BCTA } from "@/components/sections/B2BCTA";
 import { getFeaturedProducts } from "@/lib/products";
 import { products as staticProducts } from "@/data/products";
 import { SITE_CONFIG, LOCATIONS } from "@/lib/constants";
+import { supabaseAdmin } from "@/lib/supabase";
 
 // JSON-LD Structured Data for LocalBusiness
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": SITE_CONFIG.url,
+  "@type": ["FlowerShop", "GardenStore"],
+  "@id": `${SITE_CONFIG.url}/#business`,
   name: SITE_CONFIG.nameBg,
   alternateName: SITE_CONFIG.name,
   description: SITE_CONFIG.description,
@@ -52,12 +53,6 @@ const jsonLd = {
       opens: "09:00",
       closes: "18:00",
     },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "09:00",
-      closes: "16:00",
-    },
   ],
   aggregateRating: {
     "@type": "AggregateRating",
@@ -86,8 +81,8 @@ const jsonLd = {
       },
       {
         "@type": "OfferCatalog",
-        name: "Сватбена декорация",
-        description: "Професионална флорална декорация за сватби и събития",
+        name: "Озеленяване",
+        description: "Професионално озеленяване на офиси, хотели и градини",
       },
     ],
   },
@@ -107,6 +102,18 @@ export default async function HomePage() {
     featuredProducts = staticProducts.filter(p => p.featured).slice(0, 8);
   }
 
+  // Fetch latest blog posts for SSR
+  let blogPosts: { id: string; title: string; slug: string; excerpt: string; category: string; image: string; reading_time: number; published_at: string | null; created_at: string }[] = [];
+  try {
+    const { data } = await supabaseAdmin
+      .from("blog_posts")
+      .select("id, title, slug, excerpt, category, image, reading_time, published_at, created_at")
+      .eq("status", "published")
+      .order("published_at", { ascending: false })
+      .limit(3);
+    if (data) blogPosts = data;
+  } catch {}
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -118,7 +125,7 @@ export default async function HomePage() {
       <TrustSignals />
       <FeaturedProducts products={featuredProducts} />
       <ServiceShowcase />
-      <LatestBlogPosts />
+      <LatestBlogPosts initialPosts={blogPosts} />
       <Testimonials />
       <InstagramFeed />
       <B2BCTA />

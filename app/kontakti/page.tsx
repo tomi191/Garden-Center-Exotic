@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { LOCATIONS, SOCIAL_LINKS } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Контакти | Екзотик",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Контакти", href: "/kontakti" }]} />
       {/* Hero Section - consistent with other pages */}
       <section className="relative min-h-[70vh] flex items-center">
         {/* Full Screen Background Image */}

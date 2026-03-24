@@ -5,10 +5,9 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import {
   Search, Filter, Package, ShoppingCart, Plus, Minus, Check,
-  Truck, Percent, ChevronDown, X
+  Truck, X
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 
 interface Product {
@@ -23,6 +22,8 @@ interface Product {
   image: string;
   inStock: boolean;
   characteristics?: string[];
+  b2b_price?: number | null;
+  b2b_category?: string | null;
 }
 
 interface CartItem {
@@ -35,6 +36,13 @@ const categoryNames: Record<string, string> = {
   "saksiyni-rasteniya": "Саксийни растения",
   "sezonni-tsvetya": "Сезонни цветя",
   "hrasti-darveta": "Храсти и дървета",
+};
+
+const b2bCategoryNames: Record<string, string> = {
+  "saksiya": "Саксия",
+  "ryazan-tsvyat": "Рязан цвят",
+  "kashpi": "Кашпи",
+  "pochva": "Почва",
 };
 
 const originNames: Record<string, string> = {
@@ -52,13 +60,11 @@ export default function B2BCatalogPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("all");
-  const [origin, setOrigin] = useState("all");
+  const [b2bCategory, setB2bCategory] = useState("all");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
 
   const user = session?.user as { discount_percent?: number; tier?: string };
-  const discountPercent = user?.discount_percent || 0;
 
   useEffect(() => {
     fetchProducts();
@@ -78,16 +84,22 @@ export default function B2BCatalogPage() {
     }
   };
 
-  const filteredProducts = products.filter((product) => {
+  // Only show products with B2B prices set
+  const b2bProducts = products.filter((p) => p.b2b_price !== null && p.b2b_price !== undefined);
+
+  const filteredProducts = b2bProducts.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = category === "all" || product.category === category;
-    const matchesOrigin = origin === "all" || product.origin === origin;
-    return matchesSearch && matchesCategory && matchesOrigin;
+    const matchesCategory = b2bCategory === "all" || product.b2b_category === b2bCategory;
+    return matchesSearch && matchesCategory;
   });
 
-  const getDiscountedPrice = (price: number) => {
-    return price * (1 - discountPercent / 100);
+  // Get B2B price (manual price set by admin)
+  const getB2BPrice = (product: Product) => {
+    return product.b2b_price || product.price;
   };
+
+  // Get available B2B categories from products
+  const availableB2bCategories = [...new Set(b2bProducts.map((p) => p.b2b_category).filter(Boolean))];
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -122,17 +134,14 @@ export default function B2BCatalogPage() {
 
   const getCartTotal = () => {
     return cart.reduce((total, item) => {
-      const discountedPrice = getDiscountedPrice(item.product.price);
-      return total + discountedPrice * item.quantity;
+      const b2bPrice = getB2BPrice(item.product);
+      return total + b2bPrice * item.quantity;
     }, 0);
   };
 
   const getCartItemCount = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
   };
-
-  const categories = [...new Set(products.map((p) => p.category))];
-  const origins = [...new Set(products.map((p) => p.origin))];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -141,7 +150,7 @@ export default function B2BCatalogPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">B2B Каталог</h1>
           <p className="text-gray-500 mt-1">
-            Всички цени са с {discountPercent}% отстъпка за вашето ниво
+            {b2bProducts.length} продукта с B2B цени
           </p>
         </div>
 
@@ -160,15 +169,15 @@ export default function B2BCatalogPage() {
         </Button>
       </div>
 
-      {/* Discount Banner */}
+      {/* Tier Banner */}
       <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 mb-8 text-white">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-              <Percent className="w-6 h-6" />
+              <Package className="w-6 h-6" />
             </div>
             <div>
-              <p className="font-semibold text-lg">Вашата отстъпка: {discountPercent}%</p>
+              <p className="font-semibold text-lg">B2B Партньор</p>
               <p className="text-white/80 text-sm">
                 Ниво: {user?.tier?.toUpperCase() || "Silver"}
               </p>
@@ -196,33 +205,22 @@ export default function B2BCatalogPage() {
             />
           </div>
 
-          {/* Category Filter */}
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[var(--color-primary)]/20 min-w-[180px]"
-          >
-            <option value="all">Всички категории</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {categoryNames[cat] || cat}
-              </option>
-            ))}
-          </select>
-
-          {/* Origin Filter */}
-          <select
-            value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
-            className="px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[var(--color-primary)]/20 min-w-[150px]"
-          >
-            <option value="all">Всички произходи</option>
-            {origins.map((org) => (
-              <option key={org} value={org}>
-                {originNames[org] || org}
-              </option>
-            ))}
-          </select>
+          {/* B2B Category Filter */}
+          <div className="flex items-center gap-2">
+            <Filter className="w-5 h-5 text-gray-400" />
+            <select
+              value={b2bCategory}
+              onChange={(e) => setB2bCategory(e.target.value)}
+              className="px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[var(--color-primary)]/20 min-w-[180px]"
+            >
+              <option value="all">Всички категории</option>
+              {availableB2bCategories.map((cat) => (
+                <option key={cat} value={cat as string}>
+                  {b2bCategoryNames[cat as string] || cat}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -240,8 +238,8 @@ export default function B2BCatalogPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product) => {
-            const originalPrice = product.price;
-            const discountedPrice = getDiscountedPrice(originalPrice);
+            const b2bPrice = getB2BPrice(product);
+            const retailPrice = product.price;
             const cartItem = cart.find((item) => item.product.id === product.id);
 
             return (
@@ -257,9 +255,9 @@ export default function B2BCatalogPage() {
                     fill
                     className="object-cover"
                   />
-                  {discountPercent > 0 && (
-                    <div className="absolute top-2 left-2 px-2 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
-                      -{discountPercent}%
+                  {product.b2b_category && (
+                    <div className="absolute top-2 left-2 px-2 py-1 bg-[var(--color-primary)] text-white text-xs font-semibold rounded-full">
+                      {b2bCategoryNames[product.b2b_category] || product.b2b_category}
                     </div>
                   )}
                   <div className="absolute top-2 right-2 px-2 py-1 bg-white/90 text-xs font-medium rounded-full">
@@ -269,7 +267,7 @@ export default function B2BCatalogPage() {
 
                 {/* Content */}
                 <div className="p-4">
-                  <p className="text-xs text-[var(--color-primary)] font-medium mb-1">
+                  <p className="text-xs text-gray-500 font-medium mb-1">
                     {categoryNames[product.category] || product.category}
                   </p>
                   <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
@@ -279,11 +277,11 @@ export default function B2BCatalogPage() {
                   {/* Prices */}
                   <div className="flex items-baseline gap-2 mb-4">
                     <span className="text-xl font-bold text-[var(--color-primary)]">
-                      {discountedPrice.toFixed(2)} лв
+                      {b2bPrice.toFixed(2)} лв
                     </span>
-                    {discountPercent > 0 && (
+                    {b2bPrice < retailPrice && (
                       <span className="text-sm text-gray-400 line-through">
-                        {originalPrice.toFixed(2)} лв
+                        {retailPrice.toFixed(2)} лв
                       </span>
                     )}
                     <span className="text-xs text-gray-500">/{product.priceUnit?.replace("лв/", "")}</span>
@@ -354,7 +352,7 @@ export default function B2BCatalogPage() {
               ) : (
                 <div className="space-y-4">
                   {cart.map((item) => {
-                    const discountedPrice = getDiscountedPrice(item.product.price);
+                    const b2bPrice = getB2BPrice(item.product);
                     return (
                       <div
                         key={item.product.id}
@@ -373,7 +371,7 @@ export default function B2BCatalogPage() {
                             {item.product.name}
                           </h4>
                           <p className="text-sm text-[var(--color-primary)] font-semibold">
-                            {discountedPrice.toFixed(2)} лв
+                            {b2bPrice.toFixed(2)} лв
                           </p>
                           <div className="flex items-center gap-2 mt-1">
                             <button
@@ -430,7 +428,7 @@ export default function B2BCatalogPage() {
                             product_image: item.product.image,
                             price_unit: item.product.priceUnit,
                             quantity: item.quantity,
-                            unit_price: getDiscountedPrice(item.product.price),
+                            unit_price: getB2BPrice(item.product),
                           })),
                         }),
                       });

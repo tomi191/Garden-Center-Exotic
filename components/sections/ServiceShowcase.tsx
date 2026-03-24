@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Truck, Users, Heart, Gift, Sparkles } from "lucide-react";
+import { Truck, Users, Leaf, Gift, Sparkles } from "lucide-react";
 import { Container, Section } from "@/components/ui/Container";
 import { Card, CardContent } from "@/components/ui/Card";
 
@@ -33,22 +33,22 @@ const serviceDetails = [
     image: "/images/services/bouquets.png",
   },
   {
-    icon: Heart,
-    title: "Сватби и Събития",
-    description: "Цялостна флорална декорация за вашите най-важни моменти",
+    icon: Leaf,
+    title: "Озеленяване",
+    description: "Професионално озеленяване на офиси, хотели и градини с експертна консултация",
     examples: [
-      "Булчински букети",
-      "Декорация на маси и арки",
-      "Корпоративни събития",
+      "Офис и хотел растения",
+      "Градински проекти",
+      "Поддръжка на зеленина",
     ],
     pricing: "При запитване",
     gradient: "from-amber-500 to-yellow-600",
-    image: "/images/services/weddings.png",
+    image: "/images/services/consultations.png",
   },
   {
     icon: Users,
     title: "B2B Партньорства",
-    description: "Едрови доставки за цветарски магазини и организатори на събития",
+    description: "Едрови доставки за цветарски магазини и бизнес клиенти",
     examples: [
       "Директен внос от борсата",
       "Преференциални цени",
@@ -105,7 +105,7 @@ export function ServiceShowcase() {
             Повече от просто <span className="italic text-[var(--color-primary)]">цветя</span>
           </h2>
           <p className="text-sm md:text-base text-[var(--color-gray-600)] leading-relaxed">
-            От индивидуални букети до цялостна сватбена декорация. {new Date().getFullYear() - 1998}+ години опит във флористиката.
+            От индивидуални букети до професионално озеленяване. {new Date().getFullYear() - 1998}+ години опит във флористиката.
           </p>
         </motion.div>
 

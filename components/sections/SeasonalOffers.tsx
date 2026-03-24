@@ -19,10 +19,10 @@ const seasonalOffers = [
   },
   {
     icon: Crown,
-    title: "Сватбен Сезон",
-    subtitle: "Ранно записване",
+    title: "Летни Колекции",
+    subtitle: "Сезонни цветя",
     date: "Май - Септември",
-    description: "Безплатна консултация за сватбена декорация.",
+    description: "Богата палитра от летни цветя и градински растения.",
     color: "bg-amber-50 text-amber-900",
     iconColor: "text-amber-600",
     available: true,
@@ -49,7 +49,7 @@ export function SeasonalOffers() {
       <Container className="relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16 px-4">
           <span className="text-[var(--color-secondary)] font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3 block">
-            Календар на събитията
+            Сезонен календар
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-[var(--color-primary-dark)] mb-3 md:mb-6">
             Сезонни Колекции

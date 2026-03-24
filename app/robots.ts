@@ -13,25 +13,14 @@ export default function robots(): MetadataRoute.Robots {
           "/api/",
           "/admin/",
           "/admin",
+          "/b2b/katalog",
+          "/b2b/zayavki",
+          "/b2b/login",
           "/_next/",
           "/static/",
-          "/*.json$",
-          "/*_buildManifest.js$",
-          "/*_middlewareManifest.js$",
-          "/*_ssgManifest.js$",
         ],
-      },
-      // Block specific bots that might overload the server
-      {
-        userAgent: "AhrefsBot",
-        disallow: "/",
-      },
-      {
-        userAgent: "SemrushBot",
-        disallow: "/",
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
   };
 }
