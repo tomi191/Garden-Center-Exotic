@@ -278,14 +278,14 @@ export default function NovaDostavkaPage() {
               href={arrivalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full min-h-[48px] px-6 rounded-xl border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-medium hover:bg-[var(--color-primary-light)] transition-colors"
+              className="flex items-center justify-center gap-2 w-full min-h-[36px] px-3 rounded-xl border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-medium hover:bg-[var(--color-primary-light)] transition-colors"
             >
               <ExternalLink className="w-5 h-5" />
               {"\u0412\u0438\u0436 \u043D\u0430 \u0441\u0430\u0439\u0442\u0430 \u2192"}
             </a>
             <button
               onClick={resetForm}
-              className="flex items-center justify-center gap-2 w-full min-h-[48px] px-6 rounded-xl bg-[var(--color-primary)] text-white font-medium hover:bg-[var(--color-primary-dark)] transition-colors"
+              className="flex items-center justify-center gap-2 w-full min-h-[36px] px-3 rounded-xl bg-[var(--color-primary)] text-white font-medium hover:bg-[var(--color-primary-dark)] transition-colors"
             >
               <Plus className="w-5 h-5" />
               {"\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435"}
@@ -306,7 +306,7 @@ export default function NovaDostavkaPage() {
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-base font-bold text-[var(--color-foreground)]">
+        <h1 className="text-[13px] font-semibold text-[var(--color-foreground)]">
           {"\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435"}
         </h1>
       </div>
@@ -321,13 +321,13 @@ export default function NovaDostavkaPage() {
             <button
               key={c.value}
               onClick={() => handleCountrySelect(c.value)}
-              className={`flex items-center gap-2 p-3 rounded-xl border-2 text-left min-h-[52px] transition-all ${
+              className={`flex items-center gap-2 p-3 rounded-xl border-2 text-left min-h-[36px] transition-all ${
                 country === c.value
                   ? "border-[var(--color-primary)] bg-[var(--color-primary-light)]"
                   : "border-[var(--color-border)] bg-white hover:border-gray-300"
               }`}
             >
-              <span className="text-lg leading-none">{c.flag}</span>
+              <span className="text-[15px] leading-none">{c.flag}</span>
               <span className="font-medium text-sm">{c.name}</span>
             </button>
           ))}
@@ -343,7 +343,7 @@ export default function NovaDostavkaPage() {
           type="date"
           value={arrivalDate}
           onChange={(e) => setArrivalDate(e.target.value)}
-          className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] min-h-[48px] text-base focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all"
+          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] min-h-[36px] text-[13px] focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all"
         />
       </div>
 
@@ -353,7 +353,7 @@ export default function NovaDostavkaPage() {
         value={title}
         onChange={(e) => handleTitleChange(e.target.value)}
         placeholder={"\u041D\u0430\u043F\u0440. \u0421\u0432\u0435\u0436\u0438 \u0446\u0432\u0435\u0442\u044F \u043E\u0442 \u0415\u043A\u0432\u0430\u0434\u043E\u0440"}
-        className="min-h-[48px] text-base"
+        className="min-h-[36px] text-[13px]"
       />
 
       {/* Description */}
@@ -366,7 +366,7 @@ export default function NovaDostavkaPage() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder={"\u0414\u043E\u0431\u0430\u0432\u0435\u0442\u0435 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u0435..."}
           rows={2}
-          className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] text-base resize-none focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all placeholder:text-[var(--color-gray-400)]"
+          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-[var(--color-border)] text-[var(--color-foreground)] text-[13px] resize-none focus:outline-none focus:border-[var(--color-primary)]/50 focus:ring-2 focus:ring-[var(--color-primary)]/10 transition-all placeholder:text-[var(--color-gray-400)]"
         />
       </div>
 
@@ -468,7 +468,7 @@ export default function NovaDostavkaPage() {
         <button
           onClick={() => handleSave("draft")}
           disabled={saving || !country || !title.trim()}
-          className="w-full h-12 rounded-xl border-2 border-[var(--color-border)] text-[var(--color-gray-600)] font-medium text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+          className="w-full h-9 rounded-xl border-2 border-[var(--color-border)] text-[var(--color-gray-600)] font-medium text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
         >
           <Save className="w-4 h-4" />
           {"\u0417\u0430\u043F\u0430\u0437\u0438 \u043A\u0430\u0442\u043E \u0447\u0435\u0440\u043D\u043E\u0432\u0430"}

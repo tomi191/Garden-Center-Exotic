@@ -113,7 +113,7 @@ export default function ProfilePage() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-gray-100">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-emerald-100 rounded-xl text-emerald-600">
             <Shield className="w-6 h-6" />

@@ -109,7 +109,7 @@ export default async function AdminDashboard() {
           </Link>
         </div>
         {!recentMessages || recentMessages.length === 0 ? (
-          <p className="text-[11px] text-gray-300 text-center py-6">Няма запитвания</p>
+          <p className="text-[11px] text-gray-300 text-center py-3">Няма запитвания</p>
         ) : (
           <div className="divide-y divide-gray-50">
             {recentMessages.map((msg: { id: string; name: string; message: string; status: string; created_at: string }) => (
@@ -139,7 +139,7 @@ export default async function AdminDashboard() {
           </Link>
         </div>
         {!recentProducts || recentProducts.length === 0 ? (
-          <p className="text-[11px] text-gray-300 text-center py-6">Няма продукти</p>
+          <p className="text-[11px] text-gray-300 text-center py-3">Няма продукти</p>
         ) : (
           <div className="grid grid-cols-3 gap-px bg-gray-100">
             {recentProducts.map((p: { id: string; name: string; image: string; price: number; inStock: boolean }) => (

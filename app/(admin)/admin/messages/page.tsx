@@ -204,7 +204,7 @@ export default function MessagesPage() {
         </div>
       ) : messages.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
-          <Mail className="w-12 h-12 mx-auto mb-3 opacity-40" />
+          <Mail className="w-12 h-9 mx-auto mb-3 opacity-40" />
           <p>Няма съобщения</p>
         </div>
       ) : (

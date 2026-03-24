@@ -118,7 +118,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-gray-100">
         <div className="flex items-center gap-4">
           <div className="p-1.5 bg-purple-100 rounded-xl text-purple-600">
             <Settings className="w-6 h-6" />

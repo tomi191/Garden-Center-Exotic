@@ -157,7 +157,7 @@ export default function AdminBlogPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-12">
-          <BookOpen className="w-12 h-12 mx-auto text-[var(--color-gray-600)] opacity-30 mb-2" />
+          <BookOpen className="w-12 h-9 mx-auto text-[var(--color-gray-600)] opacity-30 mb-2" />
           <p className="text-[var(--color-gray-600)]">
             {search ? "Няма намерени статии" : "Все още няма статии"}
           </p>
@@ -177,7 +177,7 @@ export default function AdminBlogPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[var(--color-border)] bg-gray-50/50">
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-[var(--color-gray-600)] uppercase tracking-wider">
+                  <th className="text-left px-3 py-3 text-xs font-semibold text-[var(--color-gray-600)] uppercase tracking-wider">
                     Заглавие
                   </th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-[var(--color-gray-600)] uppercase tracking-wider">
@@ -192,7 +192,7 @@ export default function AdminBlogPage() {
                   <th className="text-left px-4 py-3 text-xs font-semibold text-[var(--color-gray-600)] uppercase tracking-wider">
                     Дата
                   </th>
-                  <th className="text-right px-6 py-3 text-xs font-semibold text-[var(--color-gray-600)] uppercase tracking-wider">
+                  <th className="text-right px-3 py-3 text-xs font-semibold text-[var(--color-gray-600)] uppercase tracking-wider">
                     Действия
                   </th>
                 </tr>
@@ -200,7 +200,7 @@ export default function AdminBlogPage() {
               <tbody className="divide-y divide-[var(--color-border)]">
                 {filtered.map((post) => (
                   <tr key={post.id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-2.5">
                       <div className="flex items-center gap-2">
                         {post.featured && (
                           <Star className="w-4 h-4 text-[var(--color-secondary)] fill-current flex-shrink-0" />
@@ -215,12 +215,12 @@ export default function AdminBlogPage() {
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-2.5">
                       <span className="inline-block px-2.5 py-1 bg-[var(--color-primary-light)] text-[var(--color-primary)] text-xs font-medium rounded-full">
                         {post.category}
                       </span>
                     </td>
-                    <td className="px-4 py-4 text-center">
+                    <td className="px-4 py-2.5 text-center">
                       <span
                         className={`inline-block px-2.5 py-1 text-xs font-medium rounded-full ${
                           post.status === "published"
@@ -231,16 +231,16 @@ export default function AdminBlogPage() {
                         {post.status === "published" ? "Публикувана" : "Чернова"}
                       </span>
                     </td>
-                    <td className="px-4 py-4 text-center text-sm text-[var(--color-gray-600)]">
+                    <td className="px-4 py-2.5 text-center text-sm text-[var(--color-gray-600)]">
                       {post.word_count}
                     </td>
-                    <td className="px-4 py-4 text-sm text-[var(--color-gray-600)]">
+                    <td className="px-4 py-2.5 text-sm text-[var(--color-gray-600)]">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(post.created_at).toLocaleDateString("bg-BG")}
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-2.5">
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => toggleStatus(post)}

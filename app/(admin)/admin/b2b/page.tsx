@@ -180,7 +180,7 @@ export default function AdminB2BPage() {
           </div>
         ) : filteredCompanies.length === 0 ? (
           <div className="p-12 text-center">
-            <Building2 className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+            <Building2 className="w-12 h-9 text-gray-300 mx-auto mb-2" />
             <p className="text-gray-500">Няма намерени компании</p>
           </div>
         ) : (
@@ -188,25 +188,25 @@ export default function AdminB2BPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Фирма
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     ЕИК
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Контакт
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Статус
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Ниво
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Дата
                   </th>
-                  <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Действия
                   </th>
                 </tr>
@@ -219,30 +219,30 @@ export default function AdminB2BPage() {
 
                   return (
                     <tr key={company.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <div>
                           <p className="font-medium text-gray-900">{company.company_name}</p>
                           <p className="text-[11px] text-gray-400">МОЛ: {company.mol}</p>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <code className="text-sm bg-gray-100 px-2 py-1 rounded">
                           {company.eik}
                         </code>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <div>
                           <p className="text-sm text-gray-900">{company.email}</p>
                           <p className="text-[11px] text-gray-400">{company.phone}</p>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${statusInfo.color}`}>
                           <StatusIcon className="w-3.5 h-3.5" />
                           {statusInfo.label}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         {tierInfo ? (
                           <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${tierInfo.color}`}>
                             {tierInfo.label} ({company.discount_percent}%)
@@ -251,12 +251,12 @@ export default function AdminB2BPage() {
                           <span className="text-gray-400 text-sm">-</span>
                         )}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <p className="text-[11px] text-gray-400">
                           {new Date(company.created_at).toLocaleDateString("bg-BG")}
                         </p>
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-6 py-2.5 text-right">
                         <Link href={`/admin/b2b/${company.id}`}>
                           <Button variant="outline" size="sm">
                             <Eye className="w-4 h-4 mr-1" />

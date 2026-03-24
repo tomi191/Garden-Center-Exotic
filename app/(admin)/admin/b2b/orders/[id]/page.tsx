@@ -274,7 +274,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
               {order.items?.map((item) => (
                 <div key={item.id} className="py-3 flex items-center gap-4">
                   {/* Product Image */}
-                  <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                  <div className="w-14 h-9 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                     {item.product_image ? (
                       <Image
                         src={item.product_image}

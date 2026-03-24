@@ -124,7 +124,7 @@ export default function BlogPostGeneratorPage() {
       {/* Header */}
       <div>
         <h1 className="text-[13px] font-semibold hidden sm:block text-gray-900 flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           Blog Post Generator
@@ -136,7 +136,7 @@ export default function BlogPostGeneratorPage() {
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Left - Form */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 space-y-3">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 space-y-3">
           <h2 className="text-[11px] font-medium text-gray-400 text-gray-900 flex items-center gap-2">
             <FileText className="w-5 h-5 text-purple-500" />
             Настройки
@@ -249,7 +249,7 @@ export default function BlogPostGeneratorPage() {
           <button
             onClick={isGenerating ? handleStop : handleGenerate}
             disabled={!topic.trim() && !isGenerating}
-            className={`w-full py-4 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${
+            className={`w-full py-2.5 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${
               isGenerating
                 ? "bg-red-500 hover:bg-red-600"
                 : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -270,7 +270,7 @@ export default function BlogPostGeneratorPage() {
         </div>
 
         {/* Right - Output */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 flex flex-col">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 flex flex-col">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-[11px] font-medium text-gray-400 text-gray-900">
               Генериран текст
@@ -309,7 +309,7 @@ export default function BlogPostGeneratorPage() {
             ) : (
               <div className="h-full flex items-center justify-center text-gray-400">
                 <div className="text-center">
-                  <Sparkles className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                  <Sparkles className="w-12 h-9 mx-auto mb-3 opacity-50" />
                   <p>Генерираният текст ще се появи тук</p>
                 </div>
               </div>

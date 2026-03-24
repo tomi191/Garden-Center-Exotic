@@ -208,7 +208,7 @@ export default function AdminB2BOrdersPage() {
           </div>
         ) : filteredOrders.length === 0 ? (
           <div className="p-12 text-center">
-            <ShoppingBag className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+            <ShoppingBag className="w-12 h-9 text-gray-300 mx-auto mb-2" />
             <p className="text-gray-500">Няма намерени заявки</p>
           </div>
         ) : (
@@ -216,25 +216,25 @@ export default function AdminB2BOrdersPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Номер
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Компания
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Артикули
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Сума
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Статус
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Дата
                   </th>
-                  <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-2.5 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Действия
                   </th>
                 </tr>
@@ -246,23 +246,23 @@ export default function AdminB2BOrdersPage() {
 
                   return (
                     <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
                           {order.order_number}
                         </code>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <div>
                           <p className="font-medium text-gray-900">{order.company?.company_name}</p>
                           <p className="text-[11px] text-gray-400">{order.company?.email}</p>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <span className="text-[11px] text-gray-500">
                           {order.items?.length || 0} артикула
                         </span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <div>
                           <p className="font-semibold text-gray-900">{order.total_amount?.toFixed(2)} лв</p>
                           {order.discount_percent > 0 && (
@@ -270,18 +270,18 @@ export default function AdminB2BOrdersPage() {
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${statusInfo.color}`}>
                           <StatusIcon className="w-3.5 h-3.5" />
                           {statusInfo.label}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-2.5">
                         <p className="text-[11px] text-gray-400">
                           {new Date(order.created_at).toLocaleDateString("bg-BG")}
                         </p>
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-6 py-2.5 text-right">
                         <Link href={`/admin/b2b/orders/${order.id}`}>
                           <Button variant="outline" size="sm">
                             <Eye className="w-4 h-4 mr-1" />

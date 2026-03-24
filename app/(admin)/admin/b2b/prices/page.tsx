@@ -279,7 +279,7 @@ export default function B2BPricesPage() {
                   >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                        <div className="w-12 h-9 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                           {product.image ? (
                             <Image
                               src={product.image}
@@ -371,7 +371,7 @@ export default function B2BPricesPage() {
           <Button
             onClick={saveAllChanges}
             disabled={saving}
-            className="rounded-full w-14 h-14 shadow-lg"
+            className="rounded-full w-14 h-9 shadow-lg"
           >
             {saving ? (
               <Loader2 className="w-6 h-6 animate-spin" />
