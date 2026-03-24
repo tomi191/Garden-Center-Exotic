@@ -22,8 +22,12 @@ export const resend = {
   },
 };
 
-export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "noreply@exoticflowers.bg";
-export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@exoticflowers.bg";
+export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "contact@exoticflowers.bg";
+export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "exoticbg@abv.bg";
+export const ADMIN_EMAILS = [
+  "exoticbg@abv.bg",
+  "contact@exoticflowers.bg",
+];
 
 // Email Templates
 
