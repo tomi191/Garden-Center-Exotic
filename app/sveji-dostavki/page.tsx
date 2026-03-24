@@ -40,7 +40,7 @@ interface Arrival {
 
 export default async function FreshArrivalsPage() {
   const { data: arrivals } = await supabaseAdmin
-    .from("arrivals")
+    .from("fresh_arrivals")
     .select("*")
     .eq("status", "published")
     .order("arrival_date", { ascending: false });

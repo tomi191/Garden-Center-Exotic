@@ -41,7 +41,7 @@ interface Arrival {
 
 async function getArrival(slug: string): Promise<Arrival | null> {
   const { data } = await supabaseAdmin
-    .from("arrivals")
+    .from("fresh_arrivals")
     .select("*")
     .eq("slug", slug)
     .eq("status", "published")

@@ -12,7 +12,7 @@ export async function GET(
     const { id } = await params;
 
     const { data: arrival, error } = await supabaseAdmin
-      .from("arrivals")
+      .from("fresh_arrivals")
       .select("*")
       .eq("id", id)
       .single();
@@ -56,7 +56,7 @@ export async function PATCH(
     // If publishing and published_at is not already set, set it now
     if (body.status === "published") {
       const { data: existing } = await supabaseAdmin
-        .from("arrivals")
+        .from("fresh_arrivals")
         .select("published_at")
         .eq("id", id)
         .single();
@@ -67,7 +67,7 @@ export async function PATCH(
     }
 
     const { data: arrival, error } = await supabaseAdmin
-      .from("arrivals")
+      .from("fresh_arrivals")
       .update(updateData)
       .eq("id", id)
       .select()
@@ -112,7 +112,7 @@ export async function DELETE(
     const { id } = await params;
 
     const { data: existing } = await supabaseAdmin
-      .from("arrivals")
+      .from("fresh_arrivals")
       .select("id")
       .eq("id", id)
       .single();
@@ -125,7 +125,7 @@ export async function DELETE(
     }
 
     const { error } = await supabaseAdmin
-      .from("arrivals")
+      .from("fresh_arrivals")
       .delete()
       .eq("id", id);
 

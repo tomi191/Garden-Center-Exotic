@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status");
 
-    let query = supabaseAdmin.from("arrivals").select("*");
+    let query = supabaseAdmin.from("fresh_arrivals").select("*");
 
     if (session?.user) {
       // Authenticated: return all, with optional status filter
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     const isPublished = body.status === "published";
 
     const { data: arrival, error } = await supabaseAdmin
-      .from("arrivals")
+      .from("fresh_arrivals")
       .insert({
         title: body.title,
         slug,
