@@ -107,7 +107,7 @@ export default function AdminB2BOrdersPage() {
   const pendingCount = orders.filter((o) => o.status === "pending").length;
 
   return (
-    <div className="p-6 md:p-8">
+    <div className="p-2 md:p-4">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>

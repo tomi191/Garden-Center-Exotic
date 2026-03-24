@@ -111,7 +111,7 @@ export default function AdminDostavkiPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-16">
-          <Package className="w-16 h-16 mx-auto text-[var(--color-gray-600)] opacity-30 mb-2" />
+          <Package className="w-8 h-8 mx-auto text-[var(--color-gray-600)] opacity-30 mb-2" />
           <p className="text-sm text-[var(--color-gray-600)] mb-2">
             {"\u041D\u044F\u043C\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438. \u0414\u043E\u0431\u0430\u0432\u0435\u0442\u0435 \u043F\u044A\u0440\u0432\u0430\u0442\u0430!"}
           </p>

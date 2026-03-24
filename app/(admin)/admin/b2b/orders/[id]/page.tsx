@@ -186,7 +186,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
   const isCancelled = order.status === "cancelled";
 
   return (
-    <div className="p-6 md:p-8 max-w-6xl mx-auto">
+    <div className="p-2 md:p-4 max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex items-center gap-4 mb-8">
         <Link href="/admin/b2b/orders">

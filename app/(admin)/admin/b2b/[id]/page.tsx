@@ -185,7 +185,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
   if (!company) return null;
 
   return (
-    <div className="p-6 md:p-8 max-w-5xl mx-auto">
+    <div className="p-2 md:p-4 max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex items-center gap-4 mb-8">
         <Link href="/admin/b2b">
