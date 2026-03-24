@@ -6,6 +6,7 @@ import { LatestBlogPosts } from "@/components/sections/LatestBlogPosts";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { B2BCTA } from "@/components/sections/B2BCTA";
+import { FreshArrivalsPreview } from "@/components/sections/FreshArrivalsPreview";
 import { getFeaturedProducts } from "@/lib/products";
 import { products as staticProducts } from "@/data/products";
 import { SITE_CONFIG, LOCATIONS } from "@/lib/constants";
@@ -123,6 +124,7 @@ export default async function HomePage() {
       />
       <Hero />
       <TrustSignals />
+      <FreshArrivalsPreview />
       <FeaturedProducts products={featuredProducts} />
       <ServiceShowcase />
       <LatestBlogPosts initialPosts={blogPosts} />

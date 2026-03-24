@@ -10,10 +10,12 @@ import {
   BookOpen,
   Users,
   Settings,
+  Truck,
 } from "lucide-react";
 
 export const ADMIN_NAV_ITEMS = [
   { title: "Табло", href: "/admin", icon: LayoutDashboard },
+  { title: "Доставки", href: "/admin/dostavki", icon: Truck },
   { title: "Съобщения", href: "/admin/messages", icon: MessageSquare },
   { title: "Заявки", href: "/admin/requests", icon: ClipboardList },
   { title: "Склад", href: "/admin/stock", icon: Warehouse },

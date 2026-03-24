@@ -9,8 +9,8 @@ import { LOCATIONS, SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 const footerLinks = {
   navigation: [
     { label: "Продукти", href: "/produkti" },
+    { label: "Свежи Доставки", href: "/sveji-dostavki" },
     { label: "Услуги", href: "/uslugi" },
-    { label: "За нас", href: "/za-nas" },
     { label: "Блог", href: "/blog" },
   ],
   services: [

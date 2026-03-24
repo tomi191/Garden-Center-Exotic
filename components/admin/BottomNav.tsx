@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, MessageSquare, Package, MoreHorizontal, X, ClipboardList, Warehouse, Building2, ShoppingBag, PlusCircle, BookOpen, Users, Settings } from "lucide-react";
+import { LayoutDashboard, MessageSquare, Package, Truck, MoreHorizontal, X, ClipboardList, Warehouse, Building2, ShoppingBag, PlusCircle, BookOpen, Users, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
 const primaryTabs = [
   { href: "/admin", icon: LayoutDashboard, label: "Табло" },
+  { href: "/admin/dostavki", icon: Truck, label: "Доставки" },
   { href: "/admin/messages", icon: MessageSquare, label: "Съобщения", badge: true },
-  { href: "/admin/products", icon: Package, label: "Продукти" },
 ];
 
 const moreItems = [
+  { href: "/admin/products", icon: Package, label: "Продукти" },
   { href: "/admin/requests", icon: ClipboardList, label: "Заявки" },
   { href: "/admin/stock", icon: Warehouse, label: "Склад" },
   { href: "/admin/b2b", icon: Building2, label: "B2B Компании" },

@@ -78,6 +78,7 @@ export const SOCIAL_LINKS = {
 export const NAV_LINKS = [
   { href: "/za-nas", label: "За Нас" },
   { href: "/produkti", label: "Продукти" },
+  { href: "/sveji-dostavki", label: "Свежи Доставки" },
   { href: "/uslugi", label: "Услуги" },
   { href: "/grizhi", label: "Грижи за Растенията" },
   { href: "/blog", label: "Блог" },

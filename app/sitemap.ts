@@ -64,6 +64,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.75,
     },
     {
+      url: `${baseUrl}/sveji-dostavki`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    {
       url: `${baseUrl}/faq`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -131,5 +137,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("Error fetching blog posts for sitemap:", error);
   }
 
-  return [...staticPages, ...categoryPages, ...productPages, ...blogPages];
+  // Fresh arrivals from database
+  let arrivalPages: MetadataRoute.Sitemap = [];
+  try {
+    const { data: arrivals } = await supabaseAdmin
+      .from("fresh_arrivals")
+      .select("slug, published_at, updated_at")
+      .eq("status", "published");
+
+    if (arrivals) {
+      arrivalPages = arrivals.map((arrival) => ({
+        url: `${baseUrl}/sveji-dostavki/${arrival.slug}`,
+        lastModified: arrival.updated_at || arrival.published_at || now,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      }));
+    }
+  } catch (error) {
+    console.error("Error fetching arrivals for sitemap:", error);
+  }
+
+  return [...staticPages, ...categoryPages, ...productPages, ...blogPages, ...arrivalPages];
 }
