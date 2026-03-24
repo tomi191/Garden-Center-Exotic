@@ -13,16 +13,12 @@ export async function GET(request: NextRequest) {
 
     let query = supabaseAdmin.from("fresh_arrivals").select("*");
 
-    if (session?.user) {
-      // Authenticated: return all, with optional status filter
-      if (status && status !== "all") {
-        query = query.eq("status", status);
-      }
-      query = query.order("created_at", { ascending: false });
-    } else {
-      // Public: only published
-      query = query.eq("status", "published").order("arrival_date", { ascending: false });
+    // Filter by status if provided
+    if (status && status !== "all") {
+      query = query.eq("status", status);
     }
+
+    query = query.order("arrival_date", { ascending: false });
 
     const { data: arrivals, error } = await query;
 

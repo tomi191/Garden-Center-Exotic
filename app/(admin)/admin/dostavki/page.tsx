@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Package, Calendar, Pencil, Loader2 } from "lucide-react";
+import { Plus, Package, Calendar, Pencil, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 
@@ -43,7 +43,8 @@ export default function AdminDostavkiPage() {
   async function fetchArrivals() {
     setLoading(true);
     try {
-      const res = await fetch("/api/arrivals");
+      const statusParam = filter === "all" ? "" : `?status=${filter}`;
+      const res = await fetch(`/api/arrivals${statusParam}`);
       if (res.ok) {
         const data = await res.json();
         setArrivals(data);
@@ -178,8 +179,31 @@ export default function AdminDostavkiPage() {
                   </div>
                 </div>
 
-                {/* Edit arrow */}
-                <Pencil className="w-5 h-5 text-[var(--color-gray-600)] flex-shrink-0" />
+                {/* Actions */}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (confirm("Сигурни ли сте, че искате да изтриете тази доставка?")) {
+                        fetch(`/api/arrivals/${arrival.id}`, { method: "DELETE" })
+                          .then((r) => {
+                            if (r.ok) {
+                              setArrivals((prev) => prev.filter((a) => a.id !== arrival.id));
+                              toast.success("Изтрито");
+                            } else {
+                              toast.error("Грешка при изтриване");
+                            }
+                          });
+                      }
+                    }}
+                    className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    aria-label="Изтрий доставка"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                  <Pencil className="w-5 h-5 text-[var(--color-gray-600)]" />
+                </div>
               </div>
             </Link>
           ))}
