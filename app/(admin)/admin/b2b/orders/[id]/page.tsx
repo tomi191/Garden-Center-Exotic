@@ -196,7 +196,7 @@ export default function AdminB2BOrderDetailPage({ params }: { params: Promise<{ 
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-base sm:text-lg font-bold text-gray-900">
             Заявка {order.order_number}
           </h1>
           <p className="text-gray-500">

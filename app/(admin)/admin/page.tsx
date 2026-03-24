@@ -140,7 +140,7 @@ export default async function AdminDashboard() {
               <div className="flex items-center gap-2">
                 <Package className="w-4 h-4 text-green-600 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-2xl font-bold text-gray-900 leading-tight">
+                  <p className="text-lg font-bold text-gray-900 leading-tight">
                     {totalProducts || 0}
                   </p>
                   <p className="text-xs text-gray-500 truncate">Продукти</p>
@@ -157,7 +157,7 @@ export default async function AdminDashboard() {
                 <MessageSquare className="w-4 h-4 text-blue-600 flex-shrink-0" />
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <p className="text-2xl font-bold text-gray-900 leading-tight">
+                    <p className="text-lg font-bold text-gray-900 leading-tight">
                       {messagesTotal}
                     </p>
                     {messagesTotal > 0 && (
@@ -179,7 +179,7 @@ export default async function AdminDashboard() {
               <div className="flex items-center gap-2">
                 <ClipboardList className="w-4 h-4 text-amber-600 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-2xl font-bold text-gray-900 leading-tight">
+                  <p className="text-lg font-bold text-gray-900 leading-tight">
                     {pendingRequests || 0}
                   </p>
                   <p className="text-xs text-gray-500 truncate">Заявки</p>
@@ -195,7 +195,7 @@ export default async function AdminDashboard() {
               <div className="flex items-center gap-2">
                 <Building2 className="w-4 h-4 text-purple-600 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-2xl font-bold text-gray-900 leading-tight">
+                  <p className="text-lg font-bold text-gray-900 leading-tight">
                     {b2bTotal}
                   </p>
                   <p className="text-xs text-gray-500 truncate">B2B</p>

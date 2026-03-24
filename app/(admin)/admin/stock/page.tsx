@@ -8,7 +8,7 @@ export const metadata = {
 export default function StockPage() {
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[var(--color-foreground)] mb-6 flex items-center gap-3">
+      <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)] mb-6 flex items-center gap-3">
         <div className="p-2 bg-amber-100 rounded-lg text-amber-600">
           <Warehouse className="w-6 h-6" />
         </div>

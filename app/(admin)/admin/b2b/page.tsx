@@ -79,7 +79,7 @@ export default function AdminB2BPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+          <h1 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-3">
             <Building2 className="w-7 h-7 text-[var(--color-primary)]" />
             B2B Компании
           </h1>
@@ -132,7 +132,7 @@ export default function AdminB2BPage() {
                   <Icon className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <p className="text-2xl font-bold">{count}</p>
+                  <p className="text-base sm:text-lg font-bold">{count}</p>
                   <p className="text-sm text-gray-500">{config.label}</p>
                 </div>
               </div>

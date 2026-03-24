@@ -195,7 +195,7 @@ export default function AdminB2BDetailPage({ params }: { params: Promise<{ id: s
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{company.company_name}</h1>
+          <h1 className="text-base sm:text-lg font-bold text-gray-900">{company.company_name}</h1>
           <p className="text-gray-500">ЕИК: {company.eik}</p>
         </div>
       </div>

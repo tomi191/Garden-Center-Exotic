@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const primaryTabs = [
   { href: "/admin", icon: LayoutDashboard, label: "Табло" },
-  { href: "/admin/dostavki", icon: Truck, label: "Доставки" },
+  { href: "/admin/dostavki", icon: Truck, label: "Зареждане" },
   { href: "/admin/messages", icon: MessageSquare, label: "Съобщения", badge: true },
 ];
 

@@ -119,7 +119,7 @@ export default function ProfilePage() {
             <Shield className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="font-serif text-2xl font-bold text-gray-900">
+            <h1 className="font-serif text-base sm:text-lg font-bold text-gray-900">
               Профил
             </h1>
             <p className="text-gray-500 text-sm mt-0.5">

@@ -20,7 +20,7 @@ export default async function AdminProductsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[var(--color-foreground)]">
+          <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)]">
             Управление на Продукти
           </h1>
           <p className="text-[var(--color-gray-600)] mt-1">

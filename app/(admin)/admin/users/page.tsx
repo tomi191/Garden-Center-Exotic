@@ -133,7 +133,7 @@ export default function AdminUsersPage() {
             <Users className="w-6 h-6 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-[var(--color-foreground)]">
+            <h1 className="text-base sm:text-lg font-bold text-[var(--color-foreground)]">
               Управление на потребители
             </h1>
             <p className="text-[var(--color-gray-600)] mt-0.5">

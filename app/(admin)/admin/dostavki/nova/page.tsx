@@ -224,7 +224,7 @@ export default function NovaDostavkaPage() {
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold text-[var(--color-foreground)]">
+            <h1 className="text-lg font-bold text-[var(--color-foreground)]">
               {"\u041F\u0443\u0431\u043B\u0438\u043A\u0443\u0432\u0430\u043D\u043E!"}
             </h1>
             <p className="text-[var(--color-gray-600)] mt-2">
@@ -242,13 +242,13 @@ export default function NovaDostavkaPage() {
                 href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(arrivalUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-14 h-14 rounded-xl bg-[#1877F2] text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#1877F2] text-white text-lg font-bold hover:opacity-90 transition-opacity"
               >
                 f
               </a>
               <a
                 href={`viber://forward?text=${encodeURIComponent(shareText)}`}
-                className="flex items-center justify-center w-14 h-14 rounded-xl bg-[#7360F2] text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#7360F2] text-white text-lg font-bold hover:opacity-90 transition-opacity"
               >
                 V
               </a>
@@ -256,7 +256,7 @@ export default function NovaDostavkaPage() {
                 href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-14 h-14 rounded-xl bg-[#25D366] text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#25D366] text-white text-lg font-bold hover:opacity-90 transition-opacity"
               >
                 W
               </a>
@@ -265,7 +265,7 @@ export default function NovaDostavkaPage() {
                   navigator.clipboard.writeText(arrivalUrl);
                   toast.success("\u041B\u0438\u043D\u043A\u044A\u0442 \u0435 \u043A\u043E\u043F\u0438\u0440\u0430\u043D");
                 }}
-                className="flex items-center justify-center w-14 h-14 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
               >
                 <Copy className="w-5 h-5" />
               </button>
@@ -306,7 +306,7 @@ export default function NovaDostavkaPage() {
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-xl font-bold text-[var(--color-foreground)]">
+        <h1 className="text-base font-bold text-[var(--color-foreground)]">
           {"\u041D\u043E\u0432\u043E \u0437\u0430\u0440\u0435\u0436\u0434\u0430\u043D\u0435"}
         </h1>
       </div>
@@ -327,7 +327,7 @@ export default function NovaDostavkaPage() {
                   : "border-[var(--color-border)] bg-white hover:border-gray-300"
               }`}
             >
-              <span className="text-2xl leading-none">{c.flag}</span>
+              <span className="text-lg leading-none">{c.flag}</span>
               <span className="font-medium text-sm">{c.name}</span>
             </button>
           ))}
@@ -444,7 +444,7 @@ export default function NovaDostavkaPage() {
         <button
           onClick={() => handleSave("published")}
           disabled={saving || !country || !title.trim()}
-          className="w-full h-14 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-base flex items-center justify-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+          className="w-full h-11 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
         >
           {saving && !uploading ? (
             <>

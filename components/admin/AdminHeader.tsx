@@ -36,13 +36,13 @@ export function AdminHeader({ user }: AdminHeaderProps) {
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100">
-      <div className="flex items-center justify-between h-11 md:h-14 px-3 md:px-8">
+      <div className="flex items-center justify-between h-10 md:h-14 px-3 md:px-8">
         {/* Left: page title */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {currentPage && (
             <>
-              <currentPage.icon className="w-4 h-4 text-[var(--color-primary)] hidden sm:block" />
-              <h1 className="text-sm font-semibold text-gray-800">{currentPage.title}</h1>
+              <currentPage.icon className="w-3.5 h-3.5 text-[var(--color-primary)]" />
+              <h1 className="text-xs font-semibold text-gray-700">{currentPage.title}</h1>
             </>
           )}
         </div>
